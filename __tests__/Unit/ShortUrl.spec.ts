@@ -26,11 +26,17 @@ describe('Shortened url', () => {
 		expect(result).toBe(`${process.env.DOMAIN_URL}/${code}`);
 	});
 
-	test('Should return the original url', () => {
+	test('Should return null if non-existent code is passed', () => {
+		const code = 'error';
+		const result = shortUrl.findRegistry(code);
+		expect(result).toBeNull();
+	});
+
+	test('Should return short url registry', () => {
 		const url = 'teste';
 		const code = '12345';
-		const result = shortUrl.returnOriginalUrl(code);
-		expect(result).toBe(url);
+		const result = shortUrl.findRegistry(code);
+		expect(result?.url).toBe(url);
 	});
 
 	test('Should add new hit', () => {
@@ -41,16 +47,5 @@ describe('Shortened url', () => {
 		const id = '1';
 		const data = { hits: 2 };
 		expect(() => shortUrl.updateHits(id, data)).not.toThrow();
-	});
-
-	test('Should return url infos', () => {
-		const code = '12345';
-		const document = shortUrl.findUrlInfos(code);
-		expect(document).toEqual({
-			code: '12345',
-			hits: 0,
-			id: '1',
-			url: 'teste',
-		});
 	});
 });
