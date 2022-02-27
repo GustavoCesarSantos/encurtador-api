@@ -17,6 +17,7 @@
 
 ## Para fazer
 
+[] Criar um README
 [] Criar CRUD da short url
 [] Módulo "short url owner"
 [] Criar/cadastrar short url sem ter dono cadastrado na aplicação (short url without owner)
