@@ -14,3 +14,10 @@
 ### "Dono" da url original acessa as infos da url encurtada GET dominio/code/stats
 
 [x] Retornar url infos
+
+## Para fazer
+
+[] Criar CRUD da short url
+[] Módulo "short url owner"
+[] Criar/cadastrar short url sem ter dono cadastrado na aplicação (short url without owner)
+[] Gerar QR Code para a short url

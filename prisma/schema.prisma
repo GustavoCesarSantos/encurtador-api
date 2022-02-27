@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ShortUrls {
+  id        Int      @id @default(autoincrement())
+  uuid      Int
+  url       String   @db.VarChar(255)
+  code      String   @db.VarChar(5)
+  hits      Int?
+  createdat DateTime @default(now()) @db.Timestamp(6)
+  ownerid   Int
+  Owners    Owners   @relation(fields: [ownerid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Owners {
+  id        Int         @id @default(autoincrement())
+  email     String      @db.VarChar(255)
+  createdat DateTime @default(now()) @db.Timestamp(6)
+  ShortUrls ShortUrls[]
+}
