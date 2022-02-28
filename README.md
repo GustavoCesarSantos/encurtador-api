@@ -6,7 +6,7 @@
 [![made-with-ts](https://img.shields.io/badge/made%20with-TS-%232596be)](https://www.typescriptlang.org/)
 
 <h4 align="center"> 
-	🚧  Projeto: 🚀 em construção...  🚧
+	🚧  Status: 🚀 em construção...  🚧
 </h4>
 
 ### Pré-requisitos
@@ -26,7 +26,7 @@ $ npm run dev
 ```
 ### 🛠 Tecnologias
 
-As seguintes ferramentas foram usadas na construção do projeto:
+As seguintes ferramentas são usadas na construção do projeto:
 
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
