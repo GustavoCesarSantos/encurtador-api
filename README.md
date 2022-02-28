@@ -6,7 +6,7 @@
 [![made-with-ts](https://img.shields.io/badge/made%20with-TS-%232596be)](https://www.typescriptlang.org/)
 
 <h4 align="center"> 
-	🚧  Status: 🚀 em construção...  🚧
+	🚧  Status: 🔨 em construção...  🚧
 </h4>
 
 ### Pré-requisitos
@@ -15,7 +15,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-### Rodando o Back End (servidor)
+### 💻 Rodando o Back End (servidor)
 
 ```bash
 # Instale as dependências
@@ -33,7 +33,7 @@ As seguintes ferramentas são usadas na construção do projeto:
 - [Jest](https://jestjs.io/pt-BR/)
 - [Prisma](https://www.prisma.io/)
 
-### Autor
+### 👷 Autor
 ---
 
 <b>Gustavo Cesar Santos</b>
