@@ -1,4 +1,6 @@
+<p align="center">
 # Curtinhas
+</p>
 
 ## Encurtador de urls
 
