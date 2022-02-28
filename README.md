@@ -2,6 +2,7 @@
 
 <p align="center"> Encurtador de urls </p>
 
+![Bower](https://img.shields.io/bower/l/mi)
 [![GitHub issues](https://img.shields.io/github/issues/GustavoCesarSantos/encurtador-api)](https://github.com/GustavoCesarSantos/encurtador-api/issues)
 [![made-with-ts](https://img.shields.io/badge/made%20with-TS-%232596be)](https://www.typescriptlang.org/)
 
@@ -42,3 +43,8 @@ As seguintes ferramentas são usadas na construção do projeto:
 
 [![Linkedin Badge](https://img.shields.io/badge/-Gustavo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/gustavo-cesar-b793ba167/)](https://www.linkedin.com/in/gustavo-cesar-b793ba167/) 
 [![Gmail Badge](https://img.shields.io/badge/-gustavocs789@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gustavocs789@gmail.com)](mailto:gustavocs789@gmail.com)
+
+### License
+---
+
+Licensed under the [MIT License](./LICENSE.md).
