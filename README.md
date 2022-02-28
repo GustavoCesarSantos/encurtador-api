@@ -10,6 +10,7 @@
 </h4>
 
 ### Pré-requisitos
+---
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
@@ -25,6 +26,7 @@ $ npm install
 $ npm run dev
 ```
 ### 🛠 Tecnologias
+---
 
 As seguintes ferramentas são usadas na construção do projeto:
 
