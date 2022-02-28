@@ -32,3 +32,11 @@ As seguintes ferramentas são usadas na construção do projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Jest](https://jestjs.io/pt-BR/)
 - [Prisma](https://www.prisma.io/)
+
+### Autor
+---
+
+<b>Gustavo Cesar Santos</b>
+
+[![Linkedin Badge](https://img.shields.io/badge/-Gustavo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/gustavo-cesar-b793ba167/)](https://www.linkedin.com/in/gustavo-cesar-b793ba167/) 
+[![Gmail Badge](https://img.shields.io/badge/-gustavocs789@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gustavocs789@gmail.com)](mailto:tgmarinho@gmail.com)
