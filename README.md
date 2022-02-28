@@ -1,4 +1,4 @@
-<h1 align="center"> Curtinhas </h1>
+<h1 align="center"> ✂️ Curtinhas </h1>
 
 <p align="center"> Encurtador de urls </p>
 
