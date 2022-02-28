@@ -24,3 +24,11 @@ $ npm install
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
 ```
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [Prisma](https://www.prisma.io/)
