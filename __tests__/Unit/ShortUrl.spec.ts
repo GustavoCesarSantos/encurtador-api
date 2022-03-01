@@ -3,7 +3,7 @@ import { ShortUrl } from '@/shortUrls/shortUrl';
 let shortUrl: ShortUrl;
 
 const makeSut = (): ShortUrl => {
-	return new ShortUrl();
+	return new ShortUrl({ url: 'teste', code: 'teste' });
 };
 
 describe('Short url', () => {
