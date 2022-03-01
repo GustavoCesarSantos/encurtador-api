@@ -17,8 +17,9 @@
 
 ## Para fazer
 
-[] Criar um README
+[x] Criar um README
+[] Criar módulo "short url"
 [] Criar CRUD da short url
-[] Módulo "short url owner"
+[] Criar módulo "short url owner"
 [] Criar/cadastrar short url sem ter dono cadastrado na aplicação (short url without owner)
 [] Gerar QR Code para a short url
