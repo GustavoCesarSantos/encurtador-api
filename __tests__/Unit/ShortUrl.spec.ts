@@ -1,4 +1,4 @@
-import { ShortUrl } from '../../src/ShortUrl';
+import { ShortUrl } from '@/shortUrls/ShortUrl';
 
 let shortUrl: ShortUrl;
 
