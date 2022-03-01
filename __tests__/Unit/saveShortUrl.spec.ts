@@ -11,7 +11,9 @@ describe('Save short url', () => {
 		saveShortUrl = makeSut();
 	});
 
-	test('Should save short url', () => {
-		expect(() => saveShortUrl.execute()).not.toThrow();
+	test('Should save short url schema', () => {
+		const url = 'http://teste.com.br';
+		const code = '12345';
+		expect(() => saveShortUrl.execute(url, code)).not.toThrow();
 	});
 });
