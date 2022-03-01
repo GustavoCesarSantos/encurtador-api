@@ -1,4 +1,4 @@
-import { ShortUrl } from '@/shortUrls/ShortUrl';
+import { ShortUrl } from '@/shortUrls/shortUrl';
 
 let shortUrl: ShortUrl;
 
@@ -6,7 +6,7 @@ const makeSut = (): ShortUrl => {
 	return new ShortUrl();
 };
 
-describe('Shortened url', () => {
+describe('Short url', () => {
 	beforeEach(() => {
 		shortUrl = makeSut();
 	});
