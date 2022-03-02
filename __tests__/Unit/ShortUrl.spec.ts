@@ -15,11 +15,6 @@ describe('Short url', () => {
 		expect(shortUrl.generateCode()).toHaveLength(5);
 	});
 
-	test('Should save original url in database', () => {
-		const url = 'teste';
-		expect(() => shortUrl.save(url)).not.toThrow();
-	});
-
 	test('Should return a valid shortened url', () => {
 		const code = shortUrl.generateCode();
 		const result = shortUrl.returnShortUrl(code);

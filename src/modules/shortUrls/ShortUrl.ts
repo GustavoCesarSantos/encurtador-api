@@ -52,13 +52,6 @@ export class ShortUrl {
 		return randomUUID().slice(0, 5);
 	}
 
-	public save(url: string): void {
-		const id = randomUUID();
-		const code = this.generateCode();
-		const hits = 0;
-		this.shortUrls.push({ id, url, code, hits });
-	}
-
 	public returnShortUrl(code: string): string {
 		return `${process.env.DOMAIN_URL}/${code}`;
 	}
