@@ -1,12 +1,3 @@
-// /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-// export = {
-// 	preset: 'ts-jest',
-// 	testEnvironment: 'node',
-// 	moduleNameMapper: {
-// 		'@/(.*)': '<rootDir>/src/modules/$1',
-// 	},
-// };
-
 module.exports = {
 	transform: {
 		'^.+\\.ts?$': 'ts-jest',
