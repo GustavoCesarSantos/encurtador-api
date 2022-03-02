@@ -11,12 +11,8 @@ describe('Short url', () => {
 		shortUrl = makeSut();
 	});
 
-	test('Should generate a code with five characters long', () => {
-		expect(shortUrl.generateCode()).toHaveLength(5);
-	});
-
 	test('Should return a valid shortened url', () => {
-		const code = shortUrl.generateCode();
+		const code = '12345';
 		const result = shortUrl.returnShortUrl(code);
 		expect(result).toBe(`${process.env.DOMAIN_URL}/${code}`);
 	});
