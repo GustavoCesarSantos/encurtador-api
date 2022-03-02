@@ -10,7 +10,22 @@ type ShortUrlSchema = {
 	hits: number;
 };
 
+type ShortUrlConstructor = {
+	uuid?: string;
+	url: string;
+	code: string;
+	hits?: number;
+	ownerid?: number;
+};
+
 export class ShortUrl {
+	private readonly uuid: string;
+	private readonly url: string;
+	private readonly code: string;
+	private readonly hits: number;
+	private readonly ownerid: number;
+	private createdat!: Date;
+
 	private shortUrls: ShortUrlSchema[] = [
 		{
 			id: '1',
@@ -20,15 +35,21 @@ export class ShortUrl {
 		},
 	];
 
-	public generateCode() {
-		return randomUUID().slice(0, 5);
+	constructor(props: ShortUrlConstructor) {
+		this.uuid = props.uuid ?? randomUUID();
+		this.url = props.url;
+		this.code = props.code;
+		this.hits = props.hits ?? 0;
+		this.ownerid = props.ownerid ?? 0;
+		this.uuid = undefined ?? randomUUID();
 	}
 
-	public save(url: string): void {
-		const id = randomUUID();
-		const code = this.generateCode();
-		const hits = 0;
-		this.shortUrls.push({ id, url, code, hits });
+	setCreatedDate() {
+		this.createdat = new Date();
+	}
+
+	public generateCode() {
+		return randomUUID().slice(0, 5);
 	}
 
 	public returnShortUrl(code: string): string {

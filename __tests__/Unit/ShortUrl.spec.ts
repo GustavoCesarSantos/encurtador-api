@@ -1,23 +1,18 @@
-import { ShortUrl } from '@/shortUrls/ShortUrl';
+import { ShortUrl } from '@/shortUrls/shortUrl';
 
 let shortUrl: ShortUrl;
 
 const makeSut = (): ShortUrl => {
-	return new ShortUrl();
+	return new ShortUrl({ url: 'teste', code: 'teste' });
 };
 
-describe('Shortened url', () => {
+describe('Short url', () => {
 	beforeEach(() => {
 		shortUrl = makeSut();
 	});
 
 	test('Should generate a code with five characters long', () => {
 		expect(shortUrl.generateCode()).toHaveLength(5);
-	});
-
-	test('Should save original url in database', () => {
-		const url = 'teste';
-		expect(() => shortUrl.save(url)).not.toThrow();
 	});
 
 	test('Should return a valid shortened url', () => {
