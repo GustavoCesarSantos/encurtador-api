@@ -5,6 +5,7 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"test": "jest --no-cache --runInBand",
+		"test:dev": "jest --no-cache --runInBand --watchAll",
 		"test:cov": "jest --no-cache --runInBand --coverage",
 		"test:staged": "jest --passWithNoTests --findRelatedTests",
 		"build": "rimraf ./dist && tsc",
