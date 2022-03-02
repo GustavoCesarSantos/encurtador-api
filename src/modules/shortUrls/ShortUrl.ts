@@ -48,10 +48,6 @@ export class ShortUrl {
 		this.createdat = new Date();
 	}
 
-	public generateCode() {
-		return randomUUID().slice(0, 5);
-	}
-
 	public returnShortUrl(code: string): string {
 		return `${process.env.DOMAIN_URL}/${code}`;
 	}
