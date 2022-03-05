@@ -10,6 +10,7 @@ export class FindShortUrl {
 
 	async execute(code: string): Promise<ShortUrl[]> {
 		const shortUrl = await this.shortUrlRepository.findOne(code);
+		if (!shortUrl) return [];
 		return [shortUrl];
 	}
 }
