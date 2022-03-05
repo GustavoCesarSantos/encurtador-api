@@ -3,6 +3,10 @@ import { FindShortUrl } from '@/shortUrls/useCases/findShortUrl';
 import { BaseRepository } from 'infra/db/baseRepository';
 
 let findShortUrl: FindShortUrl;
+const codeStub = {
+	default: 'test',
+	success: 'success',
+};
 
 class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {
@@ -36,20 +40,17 @@ describe('Find short url', () => {
 	});
 
 	test('Should return an array', async () => {
-		const code = 'test';
-		const result = await findShortUrl.execute(code);
+		const result = await findShortUrl.execute(codeStub.default);
 		expect(Array.isArray(result)).toBe(true);
 	});
 
 	test('Should return an empty array when the short url is not found', async () => {
-		const code = 'test';
-		const result = await findShortUrl.execute(code);
+		const result = await findShortUrl.execute(codeStub.default);
 		expect(result).toHaveLength(0);
 	});
 
 	test('Should return a short url array when the short url is found', async () => {
-		const code = 'success';
-		const result = await findShortUrl.execute(code);
+		const result = await findShortUrl.execute(codeStub.success);
 		expect(result).toHaveLength(1);
 		expect(result[0] instanceof ShortUrl).toBe(true);
 	});
