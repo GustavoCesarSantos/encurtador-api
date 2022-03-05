@@ -17,6 +17,6 @@ export class SaveShortUrl implements ISaveShortUrl {
 			url,
 			code,
 		});
-		return;
+		await this.shortUrlRepository.save(shortUrl);
 	}
 }
