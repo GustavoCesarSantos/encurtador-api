@@ -15,9 +15,6 @@ class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 		if (identifier === 'success') {
 			return new ShortUrl({ code: '12345', url: 'teste' });
 		}
-		if (identifier === 'error') {
-			return null;
-		}
 		return null;
 	}
 	update(): Promise<void> {
@@ -39,16 +36,21 @@ describe('Find short url', () => {
 	});
 
 	test('Should return an array', async () => {
-		const code = '12345';
+		const code = 'test';
 		const result = await findShortUrl.execute(code);
 		expect(Array.isArray(result)).toBe(true);
 	});
 
 	test('Should return an empty array when the short url is not found', async () => {
-		const code = '12345';
+		const code = 'test';
 		const result = await findShortUrl.execute(code);
 		expect(result).toHaveLength(0);
 	});
-});
 
-// caso ache, deve retornar entidade
+	test('Should return a short url array when the short url is found', async () => {
+		const code = 'success';
+		const result = await findShortUrl.execute(code);
+		expect(result).toHaveLength(1);
+		expect(result[0] instanceof ShortUrl).toBe(true);
+	});
+});
