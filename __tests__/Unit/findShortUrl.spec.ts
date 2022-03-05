@@ -4,15 +4,21 @@ import { BaseRepository } from 'infra/db/baseRepository';
 
 let findShortUrl: FindShortUrl;
 
-class ShortUrlRepositoryFakie implements BaseRepository<ShortUrl> {
+class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 	findMany(): Promise<ShortUrl[]> {
 		throw new Error('Method not implemented.');
 	}
-	async findOne(identifier: string): Promise<ShortUrl> {
-		return new ShortUrl({ code: '12345', url: 'teste' });
+	async findOne(identifier: string): Promise<ShortUrl | null> {
+		if (identifier === 'success') {
+			return new ShortUrl({ code: '12345', url: 'teste' });
+		}
+		if (identifier === 'error') {
+			return null;
+		}
+		return null;
 	}
 	update(): Promise<void> {
 		throw new Error('Method not implemented.');
@@ -23,8 +29,8 @@ class ShortUrlRepositoryFakie implements BaseRepository<ShortUrl> {
 }
 
 const makeSut = () => {
-	const shortUrlRepositoryFakie = new ShortUrlRepositoryFakie();
-	return new FindShortUrl(shortUrlRepositoryFakie);
+	const shortUrlRepositoryStub = new ShortUrlRepositoryStub();
+	return new FindShortUrl(shortUrlRepositoryStub);
 };
 
 describe('Find short url', () => {
@@ -32,12 +38,17 @@ describe('Find short url', () => {
 		findShortUrl = makeSut();
 	});
 
-	test('Should return a short url array when the short url is found', async () => {
+	test('Should return an array', async () => {
 		const code = '12345';
 		const result = await findShortUrl.execute(code);
 		expect(Array.isArray(result)).toBe(true);
 	});
+
+	test('Should return an empty array when the short url is not found', async () => {
+		const code = '12345';
+		const result = await findShortUrl.execute(code);
+		expect(result).toHaveLength(0);
+	});
 });
 
-// caso não ache, deve retornar array vazio
 // caso ache, deve retornar entidade
