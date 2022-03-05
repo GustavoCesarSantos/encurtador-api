@@ -1,9 +1,30 @@
+import { ShortUrl } from '@/shortUrls/shortUrl';
 import { ISaveShortUrl, SaveShortUrl } from '@/shortUrls/useCases/saveShortUrl';
+import { BaseRepository } from 'infra/db/baseRepository';
 
 let saveShortUrl: ISaveShortUrl;
 
+class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
+	async save(entity: ShortUrl): Promise<void> {
+		return;
+	}
+	findMany(): Promise<ShortUrl[]> {
+		throw new Error('Method not implemented.');
+	}
+	findOne(): Promise<ShortUrl> {
+		throw new Error('Method not implemented.');
+	}
+	update(): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+	delete(): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+}
+
 const makeSut = () => {
-	return new SaveShortUrl();
+	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
+	return new SaveShortUrl(shortUrlRepositoryDummie);
 };
 
 describe('Save short url', () => {
