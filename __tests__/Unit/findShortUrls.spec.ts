@@ -4,7 +4,7 @@ import { BaseRepository } from 'infra/db/baseRepository';
 
 let findShortUrls: FindShortUrls;
 
-class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
+class ShortUrlRepositoryFakie implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
@@ -24,8 +24,8 @@ class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 }
 
 const makeSut = () => {
-	const shortUrlRepositoryStub = new ShortUrlRepositoryStub();
-	return new FindShortUrls(shortUrlRepositoryStub);
+	const shortUrlRepositoryFakie = new ShortUrlRepositoryFakie();
+	return new FindShortUrls(shortUrlRepositoryFakie);
 };
 
 describe('Find short urls', () => {
