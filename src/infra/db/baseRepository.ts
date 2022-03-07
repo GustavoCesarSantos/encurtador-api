@@ -3,5 +3,5 @@ export interface BaseRepository<T> {
 	findMany(): Promise<T[]>;
 	findOne(identifier: string): Promise<T | null>;
 	update(): Promise<void>;
-	delete(): Promise<void>;
+	delete(uuid: string): Promise<void>;
 }
