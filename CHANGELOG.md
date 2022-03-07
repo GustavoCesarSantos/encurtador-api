@@ -8,3 +8,4 @@ tag: v1.1.0 - date: 01/03/2022 - description: Cria gerador de código de identif
 tag: v1.1.1 - date: 05/03/2022 - description: Cria repositórios para o módulo short url. - card: 9
 tag: v1.2.0 - date: 05/03/2022 - description: Adiciona repositório ao cadastro de url encurtada. - card: 10
 tag: v1.3.0 - date: 05/03/2022 - description: Cria retorno unitário de url encurtada. - card: 3
+tag: v1.4.0 - date: 06/03/2022 - description: Cria retorno de urls encurtadas. - card: 4
