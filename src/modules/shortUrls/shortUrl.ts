@@ -51,21 +51,4 @@ export class ShortUrl {
 	public returnShortUrl(code: string): string {
 		return `${process.env.DOMAIN_URL}/${code}`;
 	}
-
-	public findRegistry(code: string): ShortUrlSchema | null {
-		const shortUrl = this.shortUrls.find(
-			shortUrl => shortUrl.code === code,
-		);
-		if (!shortUrl) return null;
-		return shortUrl;
-	}
-
-	public addHit(): void {
-		this.shortUrls[0].hits++;
-	}
-
-	public updateHits(id: string, data: Pick<ShortUrlSchema, 'hits'>): void {
-		const document = this.shortUrls.find(document => document.id === id);
-		if (document) document.hits = data.hits;
-	}
 }
