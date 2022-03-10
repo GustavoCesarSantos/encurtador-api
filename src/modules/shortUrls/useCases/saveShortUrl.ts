@@ -2,7 +2,7 @@ import { ShortUrl } from '@/shortUrls/shortUrl';
 import { BaseRepository } from 'infra/db/baseRepository';
 
 export interface ISaveShortUrl {
-	execute(url: string, code: string): Promise<void>;
+	execute(url: string, code: string): Promise<void | Error>;
 }
 
 export class SaveShortUrl implements ISaveShortUrl {
@@ -12,11 +12,12 @@ export class SaveShortUrl implements ISaveShortUrl {
 		this.shortUrlRepository = shortUrlRepository;
 	}
 
-	async execute(url: string, code: string): Promise<void> {
-		const shortUrl = new ShortUrl({
+	async execute(url: string, code: string): Promise<void | Error> {
+		const shortUrlOrError = ShortUrl.create({
 			url,
 			code,
 		});
-		await this.shortUrlRepository.save(shortUrl);
+		if (shortUrlOrError instanceof Error) return shortUrlOrError;
+		await this.shortUrlRepository.save(shortUrlOrError);
 	}
 }
