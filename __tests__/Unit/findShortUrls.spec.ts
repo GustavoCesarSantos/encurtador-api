@@ -9,7 +9,8 @@ class ShortUrlRepositoryFakie implements BaseRepository<ShortUrl> {
 		throw new Error('Method not implemented.');
 	}
 	async findMany(): Promise<ShortUrl[]> {
-		const shortUrl = new ShortUrl({ code: '12345', url: 'teste' });
+		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
+		if (shortUrl instanceof Error) return [];
 		return [shortUrl];
 	}
 	async findOne(identifier: string): Promise<ShortUrl | null> {

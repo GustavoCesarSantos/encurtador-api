@@ -1,5 +1,6 @@
 import { ShortUrl } from '@/shortUrls/shortUrl';
 import { ISaveShortUrl, SaveShortUrl } from '@/shortUrls/useCases/saveShortUrl';
+import { MissingParams } from '../../src/helpers/errors/missingParams';
 import { BaseRepository } from 'infra/db/baseRepository';
 
 let saveShortUrl: ISaveShortUrl;
@@ -30,6 +31,20 @@ const makeSut = () => {
 describe('Save short url', () => {
 	beforeEach(() => {
 		saveShortUrl = makeSut();
+	});
+
+	test('Should return an error when the url is not passed', async () => {
+		const url = '';
+		const code = '12345';
+		const result = await saveShortUrl.execute(url, code);
+		expect(result).toEqual(new MissingParams('root url'));
+	});
+
+	test('Should return an error when the code is not passed', async () => {
+		const url = 'teste';
+		const code = '';
+		const result = await saveShortUrl.execute(url, code);
+		expect(result).toEqual(new MissingParams('code'));
 	});
 
 	test('Should save short url schema', () => {

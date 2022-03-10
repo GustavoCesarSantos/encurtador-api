@@ -1,19 +1,28 @@
 import { ShortUrl } from '@/shortUrls/shortUrl';
-
-let shortUrl: ShortUrl;
-
-const makeSut = (): ShortUrl => {
-	return new ShortUrl({ url: 'teste', code: 'teste' });
-};
+import { MissingParams } from '../../src/helpers/errors/missingParams';
 
 describe('Short url', () => {
-	beforeEach(() => {
-		shortUrl = makeSut();
+	test('Should return an error when the url is not passed', () => {
+		const props = { url: '', code: '12345' };
+		const result = ShortUrl.create(props);
+		expect(result).toEqual(new MissingParams('root url'));
 	});
 
-	test('Should return a valid shortened url', () => {
-		const code = '12345';
-		const result = shortUrl.returnShortUrl(code);
-		expect(result).toBe(`${process.env.DOMAIN_URL}/${code}`);
+	test('Should return an error when the code is not passed', () => {
+		const props = { url: 'teste', code: '' };
+		const result = ShortUrl.create(props);
+		expect(result).toEqual(new MissingParams('code'));
 	});
+
+	test('Should return a valid entity when all required params is passed', () => {
+		const props = { url: 'teste', code: '12345' };
+		const result = ShortUrl.create(props);
+		expect(result instanceof ShortUrl).toBe(true);
+	});
+
+	// test('Should return a valid shortened url', () => {
+	// 	const code = '12345';
+	// 	const result = shortUrl.returnShortUrl(code);
+	// 	expect(result).toBe(`${process.env.DOMAIN_URL}/${code}`);
+	// });
 });
