@@ -17,7 +17,9 @@ class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 	}
 	async findOne(identifier: string): Promise<ShortUrl | null> {
 		if (identifier === 'success') {
-			return new ShortUrl({ code: '12345', url: 'teste' });
+			const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
+			if (shortUrl instanceof Error) return null;
+			return shortUrl;
 		}
 		return null;
 	}
