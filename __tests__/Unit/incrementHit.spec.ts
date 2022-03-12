@@ -1,30 +1,9 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
-import { IncrementHit } from '@/shortUrls/useCases/incrementHit';
-import { BaseRepository } from 'infra/db/baseRepository';
+import { IIncrementHit, IncrementHit } from '@/shortUrls/useCases/incrementHit';
 
-let incrementHit: IncrementHit;
-
-class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
-	save(entity: ShortUrl): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	findMany(): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	findOne(identifier: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	async update(uuid: string, data: object): Promise<void> {
-		return;
-	}
-	delete(): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
+let incrementHit: IIncrementHit;
 
 const makeSut = () => {
-	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
-	return new IncrementHit(shortUrlRepositoryDummie);
+	return new IncrementHit();
 };
 
 describe('Increment hit', () => {
@@ -33,8 +12,8 @@ describe('Increment hit', () => {
 	});
 
 	test('Should increment hit property', async () => {
-		const uuid = '1';
-		const hit = 0;
-		expect(incrementHit.execute(uuid, hit)).resolves.not.toThrow();
+		const hit = 2;
+		const result = incrementHit.execute(hit);
+		expect(result).toEqual(3);
 	});
 });
