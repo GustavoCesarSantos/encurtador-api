@@ -12,3 +12,4 @@ tag: v1.4.0 - date: 06/03/2022 - description: Cria retorno de urls encurtadas. -
 tag: v1.5.0 - date: 07/03/2022 - description: Deleta url encurtada. - card: 5
 tag: v1.6.0 - date: 07/03/2022 - description: Incrementar propriedade hit ao acessar url encurtada. - card: 11
 tag: v1.4.1 - date: 10/03/2022 - description: Refatora entidade url encurtada. - card: 12
+tag: v1.4.2 - date: 12/03/2022 - description: Refatora caso de uso incrementar hit. - card: 13
