@@ -1,16 +1,9 @@
-import { BaseRepository } from 'infra/db/baseRepository';
-import { ShortUrl } from '../shortUrl';
+export interface IIncrementHit {
+	execute(hit: number): number;
+}
 
-export class IncrementHit {
-	private readonly shortUrlRepository: BaseRepository<ShortUrl>;
-
-	constructor(shortUrlRepository: BaseRepository<ShortUrl>) {
-		this.shortUrlRepository = shortUrlRepository;
-	}
-
-	async execute(uuid: string, hit: number): Promise<void> {
-		hit++;
-		const data = { hit };
-		await this.shortUrlRepository.update(uuid, data);
+export class IncrementHit implements IIncrementHit {
+	execute(hit: number): number {
+		return hit + 1;
 	}
 }
