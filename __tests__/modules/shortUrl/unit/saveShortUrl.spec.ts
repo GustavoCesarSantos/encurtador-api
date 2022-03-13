@@ -1,6 +1,6 @@
 import { ShortUrl } from '@/shortUrls/shortUrl';
 import { ISaveShortUrl, SaveShortUrl } from '@/shortUrls/useCases/saveShortUrl';
-import { MissingParams } from '../../src/helpers/errors/missingParams';
+import { MissingParams } from '../../../../src/helpers/errors/missingParams';
 import { BaseRepository } from 'infra/db/baseRepository';
 
 let saveShortUrl: ISaveShortUrl;
