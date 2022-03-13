@@ -1,6 +1,6 @@
 type propsList = {
 	propName: string;
-	value: string;
+	value: string | undefined | null;
 };
 
 type Result = {
