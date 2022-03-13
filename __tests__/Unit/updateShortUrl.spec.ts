@@ -7,7 +7,7 @@ import { BaseRepository } from 'infra/db/baseRepository';
 
 let updateShortUrl: IUpdateShortUrl;
 
-class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
+class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
@@ -26,8 +26,8 @@ class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 }
 
 const makeSut = () => {
-	const shortUrlRepositoryStub = new ShortUrlRepositoryStub();
-	return new UpdateShortUrl(shortUrlRepositoryStub);
+	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
+	return new UpdateShortUrl(shortUrlRepositoryDummie);
 };
 
 describe('Update short url', () => {
