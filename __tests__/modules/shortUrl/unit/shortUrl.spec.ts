@@ -1,5 +1,5 @@
 import { ShortUrl } from '@/shortUrls/shortUrl';
-import { MissingParams } from '../../src/helpers/errors/missingParams';
+import { MissingParams } from '../../../../src/helpers/errors/missingParams';
 
 describe('Short url', () => {
 	test('Should return an error when the url is not passed', () => {
