@@ -41,8 +41,4 @@ export class ShortUrl {
 	setCreatedDate() {
 		this.createdat = new Date();
 	}
-
-	// public returnShortUrl(code: string): string {
-	// 	return `${process.env.DOMAIN_URL}/${code}`;
-	// }
 }

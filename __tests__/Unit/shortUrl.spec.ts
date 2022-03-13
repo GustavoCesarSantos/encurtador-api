@@ -19,10 +19,4 @@ describe('Short url', () => {
 		const result = ShortUrl.create(props);
 		expect(result instanceof ShortUrl).toBe(true);
 	});
-
-	// test('Should return a valid shortened url', () => {
-	// 	const code = '12345';
-	// 	const result = shortUrl.returnShortUrl(code);
-	// 	expect(result).toBe(`${process.env.DOMAIN_URL}/${code}`);
-	// });
 });
