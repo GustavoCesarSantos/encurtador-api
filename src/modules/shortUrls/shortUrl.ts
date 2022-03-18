@@ -29,7 +29,7 @@ export class ShortUrl {
 		this.ownerid = props.ownerid ?? 0;
 	}
 
-	static create(props: ShortUrlConstructor) {
+	public static create(props: ShortUrlConstructor) {
 		const result = Guard.againstEmptyOrUndefined([
 			{ propName: 'root url', value: props.url },
 			{ propName: 'code', value: props.code },
@@ -38,7 +38,12 @@ export class ShortUrl {
 		return new ShortUrl(props);
 	}
 
-	setCreatedDate() {
+	public getCode(): string {
+		const code = this.code;
+		return code;
+	}
+
+	public setCreatedDate() {
 		this.createdat = new Date();
 	}
 }

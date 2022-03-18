@@ -16,3 +16,4 @@ tag: v1.4.2 - date: 12/03/2022 - description: Refatora caso de uso incrementar h
 tag: v1.5.0 - date: 13/03/2022 - description: Cria caso de uso atualizar schema da url encurtada. - card: 14
 tag: v1.6.0 - date: 13/03/2022 - description: Cria caso de uso returna url encurtada. - card: 15
 tag: v1.6.1 - date: 13/03/2022 - description: Cria teste unitario para o util guard. - card: 16
+tag: v1.6.2 - date: 18/03/2022 - description: Cria teste de integração do caso de uso salvar url encurtada. - card: 17
