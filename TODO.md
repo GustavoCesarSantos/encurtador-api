@@ -17,9 +17,24 @@
 
 ## Para fazer
 
+## Fase 1
+
 [x] Criar um README
-[] Criar módulo "short url"
-[] Criar CRUD da short url
-[] Criar módulo "short url owner"
-[] Criar/cadastrar short url sem ter dono cadastrado na aplicação (short url without owner)
+[x] Criar módulo "short url"
+[x] Criar CRUD da short url
+[] Criar testes de integração casos de uso - repositorios
+[] Criar controllers
+[] Criar testes de integração controllers - casos de uso
+[] Criar adaptador express
+[] Criar rotas
+
+## Fase 2
+
+[] Criar fila para salvar url encurtada
+[] Criar fila para atualizar hit da url encurtada
+[] Adicionar uso de case
 [] Gerar QR Code para a short url
+
+## Fase 3
+
+[] Criar módulo "short url owner"
