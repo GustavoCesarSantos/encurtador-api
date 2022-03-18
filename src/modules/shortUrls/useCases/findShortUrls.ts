@@ -1,4 +1,4 @@
-import { BaseRepository } from 'infra/db/baseRepository';
+import { BaseRepository } from '@infra/db/baseRepository';
 import { ShortUrl } from '../shortUrl';
 
 export class FindShortUrls {

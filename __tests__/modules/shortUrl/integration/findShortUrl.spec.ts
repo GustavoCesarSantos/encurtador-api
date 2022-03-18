@@ -1,5 +1,5 @@
-import { FindShortUrl } from '@/shortUrls/useCases/findShortUrl';
-import { ShortUrlRepository } from '../../../../src/infra/db/memory/shortUrlRepository';
+import { ShortUrlRepository } from '@infra/db/memory/shortUrlRepository';
+import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
 const shortUrlRepository = new ShortUrlRepository();
 

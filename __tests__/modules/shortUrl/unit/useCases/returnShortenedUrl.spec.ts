@@ -1,7 +1,7 @@
 import {
 	IReturnShortenedUrl,
 	ReturnShortenedUrl,
-} from '@/shortUrls/useCases/returnShortenedUrl';
+} from '@modules/shortUrls/useCases/returnShortenedUrl';
 
 let returnShortenedUrl: IReturnShortenedUrl;
 

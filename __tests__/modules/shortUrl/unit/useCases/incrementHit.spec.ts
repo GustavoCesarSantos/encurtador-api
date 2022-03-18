@@ -1,4 +1,7 @@
-import { IIncrementHit, IncrementHit } from '@/shortUrls/useCases/incrementHit';
+import {
+	IIncrementHit,
+	IncrementHit,
+} from '@modules/shortUrls/useCases/incrementHit';
 
 let incrementHit: IIncrementHit;
 

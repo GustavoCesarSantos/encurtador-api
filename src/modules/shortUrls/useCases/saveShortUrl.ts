@@ -1,5 +1,5 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
-import { BaseRepository } from 'infra/db/baseRepository';
+import { BaseRepository } from '@infra/db/baseRepository';
+import { ShortUrl } from '../shortUrl';
 
 export interface ISaveShortUrl {
 	execute(url: string, code: string): Promise<void | Error>;

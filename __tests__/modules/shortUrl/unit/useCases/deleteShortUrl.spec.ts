@@ -1,6 +1,6 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
-import { DeleteShortUrl } from '@/shortUrls/useCases/deleteShortUrl';
-import { BaseRepository } from 'infra/db/baseRepository';
+import { BaseRepository } from '@infra/db/baseRepository';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
+import { DeleteShortUrl } from '@modules/shortUrls/useCases/deleteShortUrl';
 
 let deleteShortUrl: DeleteShortUrl;
 

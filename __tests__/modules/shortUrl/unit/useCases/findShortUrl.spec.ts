@@ -1,6 +1,6 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
-import { FindShortUrl } from '@/shortUrls/useCases/findShortUrl';
-import { BaseRepository } from 'infra/db/baseRepository';
+import { BaseRepository } from '@infra/db/baseRepository';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
+import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
 let findShortUrl: FindShortUrl;
 const codeStub = {

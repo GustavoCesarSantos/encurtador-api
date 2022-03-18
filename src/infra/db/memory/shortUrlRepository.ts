@@ -1,4 +1,4 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { BaseRepository } from '../baseRepository';
 
 export class ShortUrlRepository implements BaseRepository<ShortUrl> {
