@@ -1,4 +1,3 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
 import { FindShortUrl } from '@/shortUrls/useCases/findShortUrl';
 import { ShortUrlRepository } from '../../../../src/infra/db/memory/shortUrlRepository';
 
@@ -9,10 +8,17 @@ const makeSut = () => {
 };
 
 describe('Find short url', () => {
-	test('Should return a empty array when the short url is not found', async () => {
+	test('Should return an empty array when the short url is not found', async () => {
+		const code = 'fail';
 		const findShortUrl = makeSut();
-		const code = '12345';
 		const result = await findShortUrl.execute(code);
 		expect(result).toHaveLength(0);
+	});
+
+	test('Should return an array with only the short url found', async () => {
+		const code = 'success';
+		const findShortUrl = makeSut();
+		const result = await findShortUrl.execute(code);
+		expect(result).toHaveLength(1);
 	});
 });
