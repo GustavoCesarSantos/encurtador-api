@@ -22,8 +22,8 @@
 [x] Criar um README
 [x] Criar módulo "short url"
 [x] Criar CRUD da short url
-[] Criar testes de integração casos de uso - repositorios
-[] Criar controllers
+[x] Criar testes de integração casos de uso - repositorios (save, findOne)
+[] Criar controllers (save, findOne)
 [] Criar testes de integração controllers - casos de uso
 [] Criar adaptador express
 [] Criar rotas
