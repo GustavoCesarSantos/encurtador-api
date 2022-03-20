@@ -55,7 +55,7 @@ describe('Create short url', () => {
 		expect(response.status).toBe(400);
 	});
 
-	test('Should return an missing params error when url is not provided', async () => {
+	test('Should return a missing params error when url is not provided', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: '' },
 		});
@@ -64,7 +64,7 @@ describe('Create short url', () => {
 		});
 	});
 
-	test('Should return 400 when an error ir returned by save short url use case', async () => {
+	test('Should return 400 when save short url use case return an error', async () => {
 		const saveShortUrlWithError = makeSutWithError();
 		const response = await saveShortUrlWithError.handle({
 			body: { url: 'teste' },
@@ -72,14 +72,14 @@ describe('Create short url', () => {
 		expect(response.status).toBe(400);
 	});
 
-	test('Should return 201 when short url is created', async () => {
+	test('Should return 201 when the short url is created', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: 'teste' },
 		});
 		expect(response.status).toBe(201);
 	});
 
-	test('Should return a short url', async () => {
+	test('Should return the short url in response body', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: 'teste' },
 		});
