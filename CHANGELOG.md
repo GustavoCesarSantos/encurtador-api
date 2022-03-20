@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.3.0...v1.4.0) (2022-03-20)
+
+
+### Features
+
+* Cria teste de integração da controller criar url encurtada ([2706318](https://github.com/GustavoCesarSantos/encurtador-api/commit/27063186c78752aaaa6f32579a922d971bb6b001))
+
 ## [1.3.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.2.0...v1.3.0) (2022-03-20)
 
 
