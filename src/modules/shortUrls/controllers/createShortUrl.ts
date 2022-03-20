@@ -22,9 +22,9 @@ type Response = {
 };
 
 export class CreateShortUrl {
-	generateCode: IGenerateCode;
-	returnShortUrl: IReturnShortUrl;
-	saveShortUrl: ISaveShortUrl;
+	private readonly generateCode: IGenerateCode;
+	private readonly returnShortUrl: IReturnShortUrl;
+	private readonly saveShortUrl: ISaveShortUrl;
 
 	constructor(props: PropsConstructor) {
 		this.generateCode = props.generateCode;
