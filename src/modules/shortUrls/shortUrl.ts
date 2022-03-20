@@ -44,6 +44,16 @@ export class ShortUrl {
 		return code;
 	}
 
+	public getHits(): number {
+		const hits = this.hits;
+		return hits;
+	}
+
+	public getRootUrl(): string {
+		const rootUrl = this.rootUrl;
+		return rootUrl;
+	}
+
 	public setCreatedDate() {
 		this.createdat = new Date();
 	}
