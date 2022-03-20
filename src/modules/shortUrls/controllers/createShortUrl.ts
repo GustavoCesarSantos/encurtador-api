@@ -4,7 +4,7 @@ import { IGenerateCode } from '../useCases/generateCode';
 import { IReturnShortUrl } from '../useCases/returnShortUrl';
 import { ISaveShortUrl } from '../useCases/saveShortUrl';
 
-type propsConstructor = {
+type PropsConstructor = {
 	generateCode: IGenerateCode;
 	returnShortUrl: IReturnShortUrl;
 	saveShortUrl: ISaveShortUrl;
@@ -26,7 +26,7 @@ export class CreateShortUrl {
 	returnShortUrl: IReturnShortUrl;
 	saveShortUrl: ISaveShortUrl;
 
-	constructor(props: propsConstructor) {
+	constructor(props: PropsConstructor) {
 		this.generateCode = props.generateCode;
 		this.returnShortUrl = props.returnShortUrl;
 		this.saveShortUrl = props.saveShortUrl;
