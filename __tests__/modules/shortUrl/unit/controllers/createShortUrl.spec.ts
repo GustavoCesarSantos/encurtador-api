@@ -1,7 +1,8 @@
 import { MissingParams } from '@helpers/errors/missingParams';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
-import { IReturnShortenedUrl } from '@modules/shortUrls/useCases/returnShortenedUrl';
+import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
+import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 
 let saveShortUrl: any;
 
@@ -11,16 +12,23 @@ class GenerateCodeDummie implements IGenerateCode {
 	}
 }
 
-class ReturnShortenedUrlDummie implements IReturnShortenedUrl {
+class ReturnShortUrlDummie implements IReturnShortUrl {
 	execute(code: string): string {
 		return '';
 	}
 }
 
+class SaveShortUrlDummie implements ISaveShortUrl {
+	async execute(url: string, code: string): Promise<void | Error> {
+		return;
+	}
+}
+
 const makeSut = () => {
 	const generateCode = new GenerateCodeDummie();
-	const returnShortenedUrl = new ReturnShortenedUrlDummie();
-	return new CreateShortUrl({ generateCode, returnShortenedUrl });
+	const returnShortUrl = new ReturnShortUrlDummie();
+	const saveShortUrl = new SaveShortUrlDummie();
+	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
 };
 
 describe('Create short url', () => {
@@ -43,14 +51,14 @@ describe('Create short url', () => {
 		});
 	});
 
-	test('Should return 201 when shortened url is created', async () => {
+	test('Should return 201 when short url is created', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: 'teste' },
 		});
 		expect(response.status).toBe(201);
 	});
 
-	test('Should return a shortened url', async () => {
+	test('Should return a short url', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: 'teste' },
 		});
