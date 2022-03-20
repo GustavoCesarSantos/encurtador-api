@@ -4,6 +4,7 @@ import { Guard } from '@utils/guard';
 type Request = {
 	body: {
 		url: string;
+		code: string;
 	};
 };
 
@@ -12,10 +13,11 @@ type Response = {
 	body: object;
 };
 
-export class SaveShortUrl {
+export class CreateShortUrl {
 	public async handle(request: Request): Promise<Response> {
 		const result = Guard.againstEmptyOrUndefined([
 			{ propName: 'Url', value: request.body.url },
+			{ propName: 'Code', value: request.body.code },
 		]);
 		if (!result.isSuccess) {
 			return {
