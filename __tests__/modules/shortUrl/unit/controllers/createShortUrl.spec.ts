@@ -61,7 +61,7 @@ describe('Create short url', () => {
 			body: { url: '' },
 		});
 		expect(response.body).toStrictEqual({
-			message: new MissingParams('Url'),
+			message: 'Missing params: Url',
 		});
 	});
 

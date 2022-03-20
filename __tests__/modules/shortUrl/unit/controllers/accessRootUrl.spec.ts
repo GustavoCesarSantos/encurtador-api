@@ -52,7 +52,7 @@ describe('Access root url', () => {
 	test('Should return a missing params error when code is not provided', async () => {
 		const response = await accessRootUrl.handle({ params: { code: '' } });
 		expect(response.body).toStrictEqual({
-			message: new MissingParams('Code'),
+			message: 'Missing params: Code',
 		});
 	});
 

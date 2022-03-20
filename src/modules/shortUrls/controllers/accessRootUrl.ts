@@ -36,9 +36,9 @@ export class AccessRootUrl implements IController<Request> {
 			{ propName: 'Code', value: code },
 		]);
 		if (!result.isSuccess) {
-			return HttpResponse.badRequest({
-				message: new MissingParams(`${result.isError}`),
-			});
+			return HttpResponse.badRequest(
+				new MissingParams(`${result.isError}`),
+			);
 		}
 		const shortUrl = await this.findShortUrl.execute(code);
 		if (!shortUrl) {

@@ -36,15 +36,15 @@ export class CreateShortUrl implements IController<Request> {
 			{ propName: 'Url', value: url },
 		]);
 		if (!result.isSuccess) {
-			return HttpResponse.badRequest({
-				message: new MissingParams(`${result.isError}`),
-			});
+			return HttpResponse.badRequest(
+				new MissingParams(`${result.isError}`),
+			);
 		}
 		const code = this.generateCode.execute();
 		const shortUrl = this.returnShortUrl.execute(code);
 		const error = await this.saveShortUrl.execute(url, code);
 		if (error) {
-			return HttpResponse.badRequest({ message: error });
+			return HttpResponse.badRequest(error);
 		}
 		return HttpResponse.okWithBody({ url: shortUrl });
 	}

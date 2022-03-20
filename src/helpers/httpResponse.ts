@@ -23,10 +23,10 @@ export class HttpResponse {
 		};
 	}
 
-	static badRequest(error: object): Response {
+	static badRequest(error: Error): Response {
 		return {
 			status: 400,
-			body: error,
+			body: { message: error.message },
 		};
 	}
 
