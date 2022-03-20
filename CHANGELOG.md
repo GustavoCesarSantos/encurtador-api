@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.1.1...v1.2.0) (2022-03-20)
+
+
+### Features
+
+* Cria caso de teste de sucesso ([309a4d4](https://github.com/GustavoCesarSantos/encurtador-api/commit/309a4d4a5c446d01f95834245c841b551d13e4f8))
+* Cria controller salvar url encurtada ([ea4dd27](https://github.com/GustavoCesarSantos/encurtador-api/commit/ea4dd27842734d2e24f6181d48971ba09a72e663))
+* Cria teste unitario do controller salvar url encurtada ([1ce0537](https://github.com/GustavoCesarSantos/encurtador-api/commit/1ce053746c096669595b9b8e78c8a07041c45273))
+
 ### [1.1.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.1.0...v1.1.1) (2022-03-20)
 
 ## 1.1.0 (2022-03-20)
