@@ -9,14 +9,14 @@ const makeSut = () => {
 };
 
 describe('Find short url', () => {
-	test('Should return null when the short url is not found', async () => {
+	test('Should return null when the short url schema is not found', async () => {
 		const code = 'fail';
 		const findShortUrl = makeSut();
 		const result = await findShortUrl.execute(code);
 		expect(result).toBeNull();
 	});
 
-	test('Should return the short url found', async () => {
+	test('Should return the short url schema found', async () => {
 		const code = 'success';
 		const findShortUrl = makeSut();
 		const result = await findShortUrl.execute(code);

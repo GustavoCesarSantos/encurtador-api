@@ -3,10 +3,6 @@ import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
 let findShortUrl: FindShortUrl;
-const codeStub = {
-	default: 'test',
-	success: 'success',
-};
 
 class ShortUrlRepositoryStub implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {
@@ -42,12 +38,12 @@ describe('Find short url', () => {
 	});
 
 	test('Should return null when the short url schema is not found', async () => {
-		const result = await findShortUrl.execute(codeStub.default);
+		const result = await findShortUrl.execute('fail');
 		expect(result).toBeNull();
 	});
 
-	test('Should return a short url when the short url schema is found', async () => {
-		const result = await findShortUrl.execute(codeStub.success);
+	test('Should the short url schema found', async () => {
+		const result = await findShortUrl.execute('success');
 		expect(result instanceof ShortUrl).toBe(true);
 	});
 });
