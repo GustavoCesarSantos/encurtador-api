@@ -23,6 +23,11 @@ class SaveShortUrlDummie implements ISaveShortUrl {
 		return;
 	}
 }
+class SaveShortUrlFakie implements ISaveShortUrl {
+	async execute(url: string, code: string): Promise<void | Error> {
+		return new Error();
+	}
+}
 
 const makeSut = () => {
 	const generateCode = new GenerateCodeDummie();
@@ -31,10 +36,18 @@ const makeSut = () => {
 	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
 };
 
+const makeSutWithError = () => {
+	const generateCode = new GenerateCodeDummie();
+	const returnShortUrl = new ReturnShortUrlDummie();
+	const saveShortUrl = new SaveShortUrlFakie();
+	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
+};
+
 describe('Create short url', () => {
 	beforeEach(() => {
 		saveShortUrl = makeSut();
 	});
+
 	test('Should return 400 when url is not provided', async () => {
 		const response = await saveShortUrl.handle({
 			body: { url: '' },
@@ -49,6 +62,14 @@ describe('Create short url', () => {
 		expect(response.body).toStrictEqual({
 			message: new MissingParams('Url'),
 		});
+	});
+
+	test('Should return 400 when an error ir returned by save short url use case', async () => {
+		const saveShortUrlWithError = makeSutWithError();
+		const response = await saveShortUrlWithError.handle({
+			body: { url: 'teste' },
+		});
+		expect(response.status).toBe(400);
 	});
 
 	test('Should return 201 when short url is created', async () => {
