@@ -23,8 +23,8 @@
 [x] Criar módulo "short url"
 [x] Criar CRUD da short url
 [x] Criar testes de integração casos de uso - repositorios (save, findOne)
-[] Criar controllers (save, findOne)
-[] Criar testes de integração controllers - casos de uso
+[x] Criar controllers (save, findOne)
+[x] Criar testes de integração controllers - casos de uso
 [] Criar adaptador express
 [] Criar rotas
 
