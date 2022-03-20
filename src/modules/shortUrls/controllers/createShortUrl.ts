@@ -25,6 +25,6 @@ export class CreateShortUrl {
 				body: { message: new MissingParams(`${result.isError}`) },
 			};
 		}
-		return { status: 200, body: { message: 'ok' } };
+		return { status: 201, body: { message: 'ok' } };
 	}
 }
