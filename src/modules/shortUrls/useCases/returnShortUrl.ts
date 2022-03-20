@@ -1,8 +1,8 @@
-export interface IReturnShortenedUrl {
+export interface IReturnShortUrl {
 	execute(code: string): string;
 }
 
-export class ReturnShortenedUrl implements IReturnShortenedUrl {
+export class ReturnShortUrl implements IReturnShortUrl {
 	execute(code: string): string {
 		return `${process.env.DOMAIN_URL}/${code}`;
 	}

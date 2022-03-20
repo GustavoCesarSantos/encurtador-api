@@ -2,7 +2,7 @@ import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { BaseRepository } from '../baseRepository';
 
 export class ShortUrlRepository implements BaseRepository<ShortUrl> {
-	shortenedUrls: any[] = [
+	shortUrls: any[] = [
 		{
 			uuid: 'teste',
 			rootUrl: 'teste',
@@ -14,13 +14,13 @@ export class ShortUrlRepository implements BaseRepository<ShortUrl> {
 	];
 
 	async save(entity: ShortUrl): Promise<void> {
-		this.shortenedUrls.push(entity);
+		this.shortUrls.push(entity);
 	}
 	findMany(): Promise<ShortUrl[]> {
 		throw new Error('Method not implemented.');
 	}
 	async findOne(identifier: string): Promise<ShortUrl | null> {
-		const shortUrlDB = this.shortenedUrls.find(
+		const shortUrlDB = this.shortUrls.find(
 			shortUrl => shortUrl.code === identifier,
 		);
 		if (!shortUrlDB) return null;
