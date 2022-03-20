@@ -14,6 +14,6 @@ describe('Save short url', () => {
 		const code = '12345';
 		saveShortUrl.execute(url, code);
 		const result = await shortUrlRepository.findOne(code);
-		expect(result?.getCode()).toEqual(code);
+		expect(result?.getCode()).toBe(code);
 	});
 });

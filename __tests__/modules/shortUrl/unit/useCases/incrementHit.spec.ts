@@ -17,6 +17,6 @@ describe('Increment hit', () => {
 	test('Should increment hit property', async () => {
 		const hit = 2;
 		const result = incrementHit.execute(hit);
-		expect(result).toEqual(3);
+		expect(result).toBe(3);
 	});
 });
