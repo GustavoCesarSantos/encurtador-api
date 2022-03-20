@@ -25,7 +25,7 @@
 [x] Criar testes de integração casos de uso - repositorios (save, findOne)
 [x] Criar controllers (save, findOne)
 [x] Criar testes de integração controllers - casos de uso
-[] Criar adaptador express
+[x] Criar adaptador express
 [] Criar rotas
 
 ## Fase 2
