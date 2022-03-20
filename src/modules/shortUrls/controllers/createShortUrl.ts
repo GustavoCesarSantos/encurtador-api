@@ -44,7 +44,13 @@ export class CreateShortUrl {
 		}
 		const code = this.generateCode.execute();
 		const shortUrl = this.returnShortUrl.execute(code);
-		await this.saveShortUrl.execute(url, code);
+		const error = await this.saveShortUrl.execute(url, code);
+		if (error) {
+			return {
+				status: 400,
+				body: { message: error },
+			};
+		}
 		return { status: 201, body: { url: shortUrl } };
 	}
 }
