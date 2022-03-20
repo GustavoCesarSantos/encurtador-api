@@ -2,7 +2,7 @@ import { BaseRepository } from '@infra/db/baseRepository';
 import { ShortUrl } from '../shortUrl';
 
 export interface IUpdateShortUrl {
-	execute(identifier: string, data: any): Promise<void>;
+	execute(identifier: string, data: object): Promise<void>;
 }
 
 export class UpdateShortUrl implements IUpdateShortUrl {
@@ -12,7 +12,7 @@ export class UpdateShortUrl implements IUpdateShortUrl {
 		this.shortUrlRepository = shortUrlRepository;
 	}
 
-	async execute(identifier: string, data: any): Promise<void> {
+	async execute(identifier: string, data: object): Promise<void> {
 		await this.shortUrlRepository.update(identifier, data);
 	}
 }

@@ -17,7 +17,7 @@ class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	findOne(identifier: string): Promise<ShortUrl | null> {
 		throw new Error('Method not implemented.');
 	}
-	async update(identifier: string, data: any): Promise<void> {
+	async update(identifier: string, data: object): Promise<void> {
 		return;
 	}
 	delete(): Promise<void> {

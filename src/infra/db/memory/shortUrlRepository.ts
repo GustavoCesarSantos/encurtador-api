@@ -31,7 +31,7 @@ export class ShortUrlRepository implements BaseRepository<ShortUrl> {
 		return result;
 	}
 
-	update(identifier: string, data: any): Promise<void> {
+	update(identifier: string, data: object): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 
