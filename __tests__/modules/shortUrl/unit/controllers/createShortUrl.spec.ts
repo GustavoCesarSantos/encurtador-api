@@ -42,4 +42,11 @@ describe('Create short url', () => {
 			message: new MissingParams('Code'),
 		});
 	});
+
+	test('Should return 201 when code is created', async () => {
+		const response = await saveShortUrl.handle({
+			body: { url: 'teste', code: '12345' },
+		});
+		expect(response.status).toBe(201);
+	});
 });
