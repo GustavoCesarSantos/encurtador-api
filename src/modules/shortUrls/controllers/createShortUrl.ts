@@ -1,8 +1,11 @@
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Guard } from '@utils/guard';
+import { IController } from '@shared/IController';
+import { Response } from '@shared/response';
 import { IGenerateCode } from '../useCases/generateCode';
 import { IReturnShortUrl } from '../useCases/returnShortUrl';
 import { ISaveShortUrl } from '../useCases/saveShortUrl';
+import { HttpResponse } from '@helpers/httpResponse';
 
 type PropsConstructor = {
 	generateCode: IGenerateCode;
@@ -16,12 +19,7 @@ type Request = {
 	};
 };
 
-type Response = {
-	status: number;
-	body: object;
-};
-
-export class CreateShortUrl {
+export class CreateShortUrl implements IController<Request> {
 	private readonly generateCode: IGenerateCode;
 	private readonly returnShortUrl: IReturnShortUrl;
 	private readonly saveShortUrl: ISaveShortUrl;
@@ -31,26 +29,23 @@ export class CreateShortUrl {
 		this.returnShortUrl = props.returnShortUrl;
 		this.saveShortUrl = props.saveShortUrl;
 	}
-	public async handle(request: Request): Promise<Response> {
+
+	async handle(request: Request): Promise<Response> {
 		const { url } = request.body;
 		const result = Guard.againstEmptyOrUndefined([
 			{ propName: 'Url', value: url },
 		]);
 		if (!result.isSuccess) {
-			return {
-				status: 400,
-				body: { message: new MissingParams(`${result.isError}`) },
-			};
+			return HttpResponse.badRequest({
+				message: new MissingParams(`${result.isError}`),
+			});
 		}
 		const code = this.generateCode.execute();
 		const shortUrl = this.returnShortUrl.execute(code);
 		const error = await this.saveShortUrl.execute(url, code);
 		if (error) {
-			return {
-				status: 400,
-				body: { message: error },
-			};
+			return HttpResponse.badRequest({ message: error });
 		}
-		return { status: 201, body: { url: shortUrl } };
+		return HttpResponse.okWithBody({ url: shortUrl });
 	}
 }

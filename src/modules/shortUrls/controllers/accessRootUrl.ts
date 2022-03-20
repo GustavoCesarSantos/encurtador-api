@@ -1,6 +1,8 @@
 import { MissingParams } from '@helpers/errors/missingParams';
-import { NotFound } from '@helpers/errors/notFound';
+import { HttpResponse } from '@helpers/httpResponse';
+import { Response } from '@shared/response';
 import { Guard } from '@utils/guard';
+import { IController } from '@shared/IController';
 import { IFindShortUrl } from '../useCases/findShortUrl';
 import { IIncrementHit } from '../useCases/incrementHit';
 import { IUpdateShortUrl } from '../useCases/updateShortUrl';
@@ -17,12 +19,7 @@ type Request = {
 	};
 };
 
-type Response = {
-	status: number;
-	body: object;
-};
-
-export class AccessRootUrl {
+export class AccessRootUrl implements IController<Request> {
 	private readonly findShortUrl: IFindShortUrl;
 	private readonly incrementHit: IIncrementHit;
 	private readonly updateShortUrl: IUpdateShortUrl;
@@ -39,20 +36,16 @@ export class AccessRootUrl {
 			{ propName: 'Code', value: code },
 		]);
 		if (!result.isSuccess) {
-			return {
-				status: 400,
-				body: { message: new MissingParams(`${result.isError}`) },
-			};
+			return HttpResponse.badRequest({
+				message: new MissingParams(`${result.isError}`),
+			});
 		}
 		const shortUrl = await this.findShortUrl.execute(code);
 		if (!shortUrl) {
-			return {
-				status: 404,
-				body: { message: new NotFound() },
-			};
+			return HttpResponse.notFound();
 		}
 		const hits = await this.incrementHit.execute(shortUrl.getHits());
 		await this.updateShortUrl.execute(shortUrl.getCode(), { hits });
-		return { status: 302, body: { rootUrl: shortUrl.getRootUrl() } };
+		return HttpResponse.redirect({ rootUrl: shortUrl.getRootUrl() });
 	}
 }

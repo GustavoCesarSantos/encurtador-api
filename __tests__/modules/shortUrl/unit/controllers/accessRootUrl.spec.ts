@@ -5,8 +5,9 @@ import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { IIncrementHit } from '@modules/shortUrls/useCases/incrementHit';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
+import { IController } from '@shared/IController';
 
-let accessRootUrl: any;
+let accessRootUrl: IController;
 
 class FindShortUrlFakie implements IFindShortUrl {
 	async execute(code: string): Promise<ShortUrl | null> {
