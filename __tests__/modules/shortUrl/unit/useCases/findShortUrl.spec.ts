@@ -41,19 +41,13 @@ describe('Find short url', () => {
 		findShortUrl = makeSut();
 	});
 
-	test('Should return an array', async () => {
+	test('Should return null when the short url schema is not found', async () => {
 		const result = await findShortUrl.execute(codeStub.default);
-		expect(Array.isArray(result)).toBe(true);
+		expect(result).toBeNull();
 	});
 
-	test('Should return an empty array when the short url is not found', async () => {
-		const result = await findShortUrl.execute(codeStub.default);
-		expect(result).toHaveLength(0);
-	});
-
-	test('Should return a short url array when the short url is found', async () => {
+	test('Should return a short url when the short url schema is found', async () => {
 		const result = await findShortUrl.execute(codeStub.success);
-		expect(result).toHaveLength(1);
-		expect(result[0] instanceof ShortUrl).toBe(true);
+		expect(result instanceof ShortUrl).toBe(true);
 	});
 });
