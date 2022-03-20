@@ -3,8 +3,9 @@ import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
 import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import { IController } from '@shared/IController';
 
-let saveShortUrl: any;
+let createShortUrl: IController;
 
 class GenerateCodeDummie implements IGenerateCode {
 	execute(): string {
@@ -45,18 +46,18 @@ const makeSutWithError = () => {
 
 describe('Create short url', () => {
 	beforeEach(() => {
-		saveShortUrl = makeSut();
+		createShortUrl = makeSut();
 	});
 
 	test('Should return 400 when url is not provided', async () => {
-		const response = await saveShortUrl.handle({
+		const response = await createShortUrl.handle({
 			body: { url: '' },
 		});
 		expect(response.status).toBe(400);
 	});
 
 	test('Should return a missing params error when url is not provided', async () => {
-		const response = await saveShortUrl.handle({
+		const response = await createShortUrl.handle({
 			body: { url: '' },
 		});
 		expect(response.body).toStrictEqual({
@@ -65,24 +66,24 @@ describe('Create short url', () => {
 	});
 
 	test('Should return 400 when save short url use case return an error', async () => {
-		const saveShortUrlWithError = makeSutWithError();
-		const response = await saveShortUrlWithError.handle({
+		const createShortUrlWithError = makeSutWithError();
+		const response = await createShortUrlWithError.handle({
 			body: { url: 'teste' },
 		});
 		expect(response.status).toBe(400);
 	});
 
 	test('Should return 201 when the short url is created', async () => {
-		const response = await saveShortUrl.handle({
+		const response = await createShortUrl.handle({
 			body: { url: 'teste' },
 		});
 		expect(response.status).toBe(201);
 	});
 
 	test('Should return the short url in response body', async () => {
-		const response = await saveShortUrl.handle({
+		const response = await createShortUrl.handle({
 			body: { url: 'teste' },
 		});
-		expect(response.body.url).not.toBeUndefined();
+		expect(response.body).not.toBeUndefined();
 	});
 });

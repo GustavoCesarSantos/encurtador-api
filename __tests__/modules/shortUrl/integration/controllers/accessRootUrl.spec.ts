@@ -4,8 +4,9 @@ import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { IncrementHit } from '@modules/shortUrls/useCases/incrementHit';
 import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
+import { IController } from '@shared/IController';
 
-let accessRootUrl: any;
+let accessRootUrl: IController;
 
 class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	save(entity: ShortUrl): Promise<void> {

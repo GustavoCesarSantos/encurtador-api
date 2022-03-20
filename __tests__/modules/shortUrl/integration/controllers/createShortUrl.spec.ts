@@ -4,8 +4,9 @@ import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { GenerateCode } from '@modules/shortUrls/useCases/generateCode';
 import { ReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import { IController } from '@shared/IController';
 
-let createShortUrl: any;
+let createShortUrl: IController;
 
 class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	async save(entity: ShortUrl): Promise<void> {
@@ -49,6 +50,6 @@ describe('Create short url', () => {
 		const response = await createShortUrl.handle({
 			body: { url: 'teste' },
 		});
-		expect(response.body.url).not.toBeUndefined();
+		expect(response.body).not.toBeUndefined();
 	});
 });
