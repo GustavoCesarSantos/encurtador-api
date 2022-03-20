@@ -1,4 +1,5 @@
 import { ShortUrlRepository } from '@infra/db/memory/shortUrlRepository';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
 const shortUrlRepository = new ShortUrlRepository();
@@ -8,17 +9,17 @@ const makeSut = () => {
 };
 
 describe('Find short url', () => {
-	test('Should return an empty array when the short url is not found', async () => {
+	test('Should return null when the short url schema is not found', async () => {
 		const code = 'fail';
 		const findShortUrl = makeSut();
 		const result = await findShortUrl.execute(code);
-		expect(result).toHaveLength(0);
+		expect(result).toBeNull();
 	});
 
-	test('Should return an array with only the short url found', async () => {
+	test('Should return the short url schema found', async () => {
 		const code = 'success';
 		const findShortUrl = makeSut();
 		const result = await findShortUrl.execute(code);
-		expect(result).toHaveLength(1);
+		expect(result instanceof ShortUrl).toBe(true);
 	});
 });
