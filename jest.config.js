@@ -12,5 +12,6 @@ module.exports = {
 		'@infra/(.*)': '<rootDir>/src/infra/$1',
 		'@helpers/(.*)': '<rootDir>/src/helpers/$1',
 		'@utils/(.*)': '<rootDir>/src/utils/$1',
+		'@shared/(.*)': '<rootDir>/src/shared/$1',
 	},
 };
