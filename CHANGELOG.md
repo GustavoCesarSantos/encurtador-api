@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.5.0...v1.6.0) (2022-03-20)
+
+
+### Features
+
+* Adiciona pacote express ([a86067e](https://github.com/GustavoCesarSantos/encurtador-api/commit/a86067e8d2145d82ad3f8cb7febd311f279643f7))
+* Adiciona pasta shared aos paths do tsconfig e jestconfig ([030dcb2](https://github.com/GustavoCesarSantos/encurtador-api/commit/030dcb2ae059602a724cdf4b5a5c0c52e52d2fc5))
+* Cria adaptador de routes do express ([c0a0537](https://github.com/GustavoCesarSantos/encurtador-api/commit/c0a05378281a19b250bf7065c1da9d14a79359c5))
+* Cria helper para resposta http ([434f4a8](https://github.com/GustavoCesarSantos/encurtador-api/commit/434f4a8e71c6926ddfcfa81d576f458cd9211a49))
+* Cria interface para as controllers ([1a38ffe](https://github.com/GustavoCesarSantos/encurtador-api/commit/1a38ffe08b6c358bd7bd06848bbca27fe542f0a1))
+* Cria tipagem para respostas das controllers ([75db5a1](https://github.com/GustavoCesarSantos/encurtador-api/commit/75db5a17dc561645e8266d9672a43871b15f5742))
+
 ## [1.5.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.4.0...v1.5.0) (2022-03-20)
 
 
