@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.2.0...v1.3.0) (2022-03-20)
+
+
+### Features
+
+* Adiciona casos de uso a controller acessar url raiz ([2b54e08](https://github.com/GustavoCesarSantos/encurtador-api/commit/2b54e081d62b33db25edf726390aa6842d408715))
+* Adiciona novos casos de teste ao teste unitario da controller acessar url raiz ([f083bfe](https://github.com/GustavoCesarSantos/encurtador-api/commit/f083bfe9e51ca2a1a8cf78e281ad6f7d9d394fec))
+* Adiciona novos métodos a entidade url encurtada ([f397200](https://github.com/GustavoCesarSantos/encurtador-api/commit/f397200b1d941b3022cf65c77c0b4e767f3326d4))
+* Cria controller acessar url raiz ([759600f](https://github.com/GustavoCesarSantos/encurtador-api/commit/759600fb12e2740f2501f88b2a085e04a95740a5))
+* Cria helper para erros do tipo não encontrado ([dc5880b](https://github.com/GustavoCesarSantos/encurtador-api/commit/dc5880b4faf6c304db6be34f200b3f314dcf40c5))
+* Cria teste unitario da controller acessar url raiz ([3cd5700](https://github.com/GustavoCesarSantos/encurtador-api/commit/3cd5700b3311ed772b04ed52c31e983f070e41dc))
+
 ## [1.2.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.1.1...v1.2.0) (2022-03-20)
 
 
