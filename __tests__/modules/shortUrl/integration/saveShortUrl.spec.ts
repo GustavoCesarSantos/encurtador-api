@@ -1,5 +1,5 @@
-import { SaveShortUrl } from '@/shortUrls/useCases/saveShortUrl';
-import { ShortUrlRepository } from '../../../../src/infra/db/memory/shortUrlRepository';
+import { ShortUrlRepository } from '@infra/db/memory/shortUrlRepository';
+import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 
 const shortUrlRepository = new ShortUrlRepository();
 
@@ -14,6 +14,6 @@ describe('Save short url', () => {
 		const code = '12345';
 		saveShortUrl.execute(url, code);
 		const result = await shortUrlRepository.findOne(code);
-		expect(result?.getCode()).toEqual(code);
+		expect(result?.getCode()).toBe(code);
 	});
 });

@@ -1,6 +1,6 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
-import { FindShortUrls } from '@/shortUrls/useCases/findShortUrls';
-import { BaseRepository } from 'infra/db/baseRepository';
+import { BaseRepository } from '@infra/db/baseRepository';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
+import { FindShortUrls } from '@modules/shortUrls/useCases/findShortUrls';
 
 let findShortUrls: FindShortUrls;
 

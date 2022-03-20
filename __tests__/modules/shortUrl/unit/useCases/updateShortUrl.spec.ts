@@ -1,9 +1,9 @@
-import { ShortUrl } from '@/shortUrls/shortUrl';
+import { BaseRepository } from '@infra/db/baseRepository';
+import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	IUpdateShortUrl,
 	UpdateShortUrl,
-} from '@/shortUrls/useCases/updateShortUrl';
-import { BaseRepository } from 'infra/db/baseRepository';
+} from '@modules/shortUrls/useCases/updateShortUrl';
 
 let updateShortUrl: IUpdateShortUrl;
 

@@ -1,4 +1,7 @@
-import { GenerateCode, IGenerateCode } from '@/shortUrls/useCases/generateCode';
+import {
+	GenerateCode,
+	IGenerateCode,
+} from '@modules/shortUrls/useCases/generateCode';
 
 let generateCode: IGenerateCode;
 
