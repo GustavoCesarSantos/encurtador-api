@@ -90,7 +90,7 @@ describe('Access root url', () => {
 			params: { code: 'fail' },
 		});
 		expect(response.body).toStrictEqual({
-			message: new NotFound(),
+			message: new NotFound().message,
 		});
 	});
 
