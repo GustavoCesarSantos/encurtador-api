@@ -5,8 +5,9 @@ import { IncrementHit } from '@modules/shortUrls/useCases/incrementHit';
 import { ReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
+import { IShortUrlUseCaseFactory } from './IShortUrlUseCaseFactory';
 
-export class ShortUrlUseCaseFactory {
+export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	private readonly shortUrlRepository: ShortUrlRepository =
 		new ShortUrlRepository();
 
