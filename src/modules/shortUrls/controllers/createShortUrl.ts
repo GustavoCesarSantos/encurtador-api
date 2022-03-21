@@ -30,7 +30,7 @@ export class CreateShortUrl implements IController<Request> {
 		this.saveShortUrl = props.saveShortUrl;
 	}
 
-	async handle(request: Request): Promise<Response> {
+	public async handle(request: Request): Promise<Response> {
 		const { url } = request.body;
 		const result = Guard.againstEmptyOrUndefined([
 			{ propName: 'Url', value: url },

@@ -30,7 +30,7 @@ export class AccessRootUrl implements IController<Request> {
 		this.updateShortUrl = props.updateShortUrl;
 	}
 
-	async handle(request: Request): Promise<Response> {
+	public async handle(request: Request): Promise<Response> {
 		const { code } = request.params;
 		const result = Guard.againstEmptyOrUndefined([
 			{ propName: 'Code', value: code },
