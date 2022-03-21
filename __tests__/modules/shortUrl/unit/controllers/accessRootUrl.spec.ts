@@ -1,9 +1,12 @@
-import { MissingParams } from '@helpers/errors/missingParams';
 import { NotFound } from '@helpers/errors/notFound';
+import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
+import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
 import { IIncrementHit } from '@modules/shortUrls/useCases/incrementHit';
+import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
+import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
 
@@ -32,11 +35,30 @@ class UpdateShortUrlDummie implements IUpdateShortUrl {
 	}
 }
 
+class UseCaseFactory implements IShortUrlUseCaseFactory {
+	makeGenerateCode(): IGenerateCode {
+		throw new Error('Method not implemented.');
+	}
+	makeReturnShortUrl(): IReturnShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeSaveShortUrl(): ISaveShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeFindShortUrl(): IFindShortUrl {
+		return new FindShortUrlFakie();
+	}
+	makeIncrementHit(): IIncrementHit {
+		return new IncrementHitDummie();
+	}
+	makeUpdateShortUrl(): IUpdateShortUrl {
+		return new UpdateShortUrlDummie();
+	}
+}
+
 const makeSut = () => {
-	const findShortUrl = new FindShortUrlFakie();
-	const incrementHit = new IncrementHitDummie();
-	const updateShortUrl = new UpdateShortUrlDummie();
-	return new AccessRootUrl({ findShortUrl, incrementHit, updateShortUrl });
+	const useCaseFactory = new UseCaseFactory();
+	return new AccessRootUrl(useCaseFactory);
 };
 
 describe('Access root url', () => {

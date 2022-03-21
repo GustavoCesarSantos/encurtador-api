@@ -1,8 +1,11 @@
-import { MissingParams } from '@helpers/errors/missingParams';
+import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
+import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
+import { IIncrementHit } from '@modules/shortUrls/useCases/incrementHit';
 import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
 
 let createShortUrl: IController;
@@ -30,18 +33,56 @@ class SaveShortUrlFakie implements ISaveShortUrl {
 	}
 }
 
+class UseCaseFactory implements IShortUrlUseCaseFactory {
+	makeIncrementHit(): IIncrementHit {
+		throw new Error('Method not implemented.');
+	}
+	makeFindShortUrl(): IFindShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeUpdateShortUrl(): IUpdateShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeGenerateCode(): IGenerateCode {
+		return new GenerateCodeDummie();
+	}
+	makeReturnShortUrl(): IReturnShortUrl {
+		return new ReturnShortUrlDummie();
+	}
+	makeSaveShortUrl(): ISaveShortUrl {
+		return new SaveShortUrlDummie();
+	}
+}
+
+class UseCaseFactoryWithError implements IShortUrlUseCaseFactory {
+	makeIncrementHit(): IIncrementHit {
+		throw new Error('Method not implemented.');
+	}
+	makeFindShortUrl(): IFindShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeUpdateShortUrl(): IUpdateShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeGenerateCode(): IGenerateCode {
+		return new GenerateCodeDummie();
+	}
+	makeReturnShortUrl(): IReturnShortUrl {
+		return new ReturnShortUrlDummie();
+	}
+	makeSaveShortUrl(): ISaveShortUrl {
+		return new SaveShortUrlFakie();
+	}
+}
+
 const makeSut = () => {
-	const generateCode = new GenerateCodeDummie();
-	const returnShortUrl = new ReturnShortUrlDummie();
-	const saveShortUrl = new SaveShortUrlDummie();
-	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
+	const useCaseFactory = new UseCaseFactory();
+	return new CreateShortUrl(useCaseFactory);
 };
 
 const makeSutWithError = () => {
-	const generateCode = new GenerateCodeDummie();
-	const returnShortUrl = new ReturnShortUrlDummie();
-	const saveShortUrl = new SaveShortUrlFakie();
-	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
+	const useCaseFactory = new UseCaseFactoryWithError();
+	return new CreateShortUrl(useCaseFactory);
 };
 
 describe('Create short url', () => {

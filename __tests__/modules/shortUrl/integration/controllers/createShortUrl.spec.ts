@@ -1,9 +1,22 @@
 import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
-import { GenerateCode } from '@modules/shortUrls/useCases/generateCode';
-import { ReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
-import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
+import {
+	GenerateCode,
+	IGenerateCode,
+} from '@modules/shortUrls/useCases/generateCode';
+import { IIncrementHit } from '@modules/shortUrls/useCases/incrementHit';
+import {
+	IReturnShortUrl,
+	ReturnShortUrl,
+} from '@modules/shortUrls/useCases/returnShortUrl';
+import {
+	ISaveShortUrl,
+	SaveShortUrl,
+} from '@modules/shortUrls/useCases/saveShortUrl';
+import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
 
 let createShortUrl: IController;
@@ -26,12 +39,33 @@ class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	}
 }
 
+class UseCaseFactory implements IShortUrlUseCaseFactory {
+	shortUrlRepository: ShortUrlRepositoryDummie =
+		new ShortUrlRepositoryDummie();
+
+	makeGenerateCode(): IGenerateCode {
+		return new GenerateCode();
+	}
+	makeReturnShortUrl(): IReturnShortUrl {
+		return new ReturnShortUrl();
+	}
+	makeSaveShortUrl(): ISaveShortUrl {
+		return new SaveShortUrl(this.shortUrlRepository);
+	}
+	makeFindShortUrl(): IFindShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeIncrementHit(): IIncrementHit {
+		throw new Error('Method not implemented.');
+	}
+	makeUpdateShortUrl(): IUpdateShortUrl {
+		throw new Error('Method not implemented.');
+	}
+}
+
 const makeSut = () => {
-	const shortUrlRepository = new ShortUrlRepositoryDummie();
-	const generateCode = new GenerateCode();
-	const returnShortUrl = new ReturnShortUrl();
-	const saveShortUrl = new SaveShortUrl(shortUrlRepository);
-	return new CreateShortUrl({ generateCode, returnShortUrl, saveShortUrl });
+	const useCaseFactory = new UseCaseFactory();
+	return new CreateShortUrl(useCaseFactory);
 };
 
 describe('Create short url', () => {

@@ -1,9 +1,22 @@
 import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
-import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
-import { IncrementHit } from '@modules/shortUrls/useCases/incrementHit';
-import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
+import {
+	FindShortUrl,
+	IFindShortUrl,
+} from '@modules/shortUrls/useCases/findShortUrl';
+import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
+import {
+	IIncrementHit,
+	IncrementHit,
+} from '@modules/shortUrls/useCases/incrementHit';
+import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
+import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import {
+	IUpdateShortUrl,
+	UpdateShortUrl,
+} from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
 
 let accessRootUrl: IController;
@@ -28,12 +41,33 @@ class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
 	}
 }
 
+class UseCaseFactory implements IShortUrlUseCaseFactory {
+	shortUrlRepository: ShortUrlRepositoryDummie =
+		new ShortUrlRepositoryDummie();
+
+	makeGenerateCode(): IGenerateCode {
+		throw new Error('Method not implemented.');
+	}
+	makeReturnShortUrl(): IReturnShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeSaveShortUrl(): ISaveShortUrl {
+		throw new Error('Method not implemented.');
+	}
+	makeFindShortUrl(): IFindShortUrl {
+		return new FindShortUrl(this.shortUrlRepository);
+	}
+	makeIncrementHit(): IIncrementHit {
+		return new IncrementHit();
+	}
+	makeUpdateShortUrl(): IUpdateShortUrl {
+		return new UpdateShortUrl(this.shortUrlRepository);
+	}
+}
+
 const makeSut = () => {
-	const shortUrlRepository = new ShortUrlRepositoryDummie();
-	const findShortUrl = new FindShortUrl(shortUrlRepository);
-	const incrementHit = new IncrementHit();
-	const updateShortUrl = new UpdateShortUrl(shortUrlRepository);
-	return new AccessRootUrl({ updateShortUrl, incrementHit, findShortUrl });
+	const useCaseFactory = new UseCaseFactory();
+	return new AccessRootUrl(useCaseFactory);
 };
 
 describe('Create short url', () => {
