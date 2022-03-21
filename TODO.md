@@ -26,7 +26,8 @@
 [x] Criar controllers (save, findOne)
 [x] Criar testes de integração controllers - casos de uso
 [x] Criar adaptador express
-[] Criar rotas
+[x] Criar rotas
+[] Criar servidor
 
 ## Fase 2
 
