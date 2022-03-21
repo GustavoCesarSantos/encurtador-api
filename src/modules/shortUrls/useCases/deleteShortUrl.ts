@@ -1,7 +1,11 @@
 import { BaseRepository } from '@infra/db/baseRepository';
 import { ShortUrl } from '../shortUrl';
 
-export class DeleteShortUrl {
+export interface IDeleteShortUrl {
+	execute(uuid: string): Promise<void>;
+}
+
+export class DeleteShortUrl implements IDeleteShortUrl {
 	private readonly shortUrlRepository: BaseRepository<ShortUrl>;
 
 	constructor(shortUrlRepository: BaseRepository<ShortUrl>) {
