@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.6.0...v1.7.0) (2022-03-21)
+
+
+### Features
+
+* Cria arquivo de rotas da entidade url encurtada ([fa469fa](https://github.com/GustavoCesarSantos/encurtador-api/commit/fa469fa500d5cc4ba150950f85c7fb1cb5a16937))
+* Cria fabrica de casos de uso ([44d3842](https://github.com/GustavoCesarSantos/encurtador-api/commit/44d3842da0310f90b12336700e10ad2b72cd1e10))
+* Cria fabrica de constrollers ([c02d9c7](https://github.com/GustavoCesarSantos/encurtador-api/commit/c02d9c772eadc78210032a9fe25f7a8355198c96))
+* Cria interface da fabrica de casos de uso ([cb841fd](https://github.com/GustavoCesarSantos/encurtador-api/commit/cb841fd84f368e639e1d14ae99536bbf99d2fbee))
+
 ## [1.6.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.5.0...v1.6.0) (2022-03-20)
 
 
