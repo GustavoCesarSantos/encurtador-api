@@ -6,7 +6,7 @@ import { IController } from '@shared/IController';
 import { IFindShortUrl } from '../useCases/findShortUrl';
 import { IIncrementHit } from '../useCases/incrementHit';
 import { IUpdateShortUrl } from '../useCases/updateShortUrl';
-import { ShortUrlUseCaseFactory } from '@infra/factories/useCases/shortUrl';
+import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 
 type Request = {
 	params: {
@@ -19,7 +19,7 @@ export class AccessRootUrl implements IController<Request> {
 	private readonly incrementHit: IIncrementHit;
 	private readonly updateShortUrl: IUpdateShortUrl;
 
-	constructor(factory: ShortUrlUseCaseFactory) {
+	constructor(factory: IShortUrlUseCaseFactory) {
 		this.findShortUrl = factory.makeFindShortUrl();
 		this.incrementHit = factory.makeIncrementHit();
 		this.updateShortUrl = factory.makeUpdateShortUrl();
