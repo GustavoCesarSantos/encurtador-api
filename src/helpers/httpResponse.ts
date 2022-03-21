@@ -26,14 +26,23 @@ export class HttpResponse {
 	static badRequest(error: Error): Response {
 		return {
 			status: 400,
-			body: { message: error.message },
+			body: {
+				name: error.name,
+				message: error.message,
+				stack: error.stack,
+			},
 		};
 	}
 
 	static notFound(): Response {
+		const error = new NotFound();
 		return {
 			status: 404,
-			body: { message: new NotFound() },
+			body: {
+				name: error.name,
+				message: error.message,
+				stack: error.stack,
+			},
 		};
 	}
 }
