@@ -6,12 +6,7 @@ import { IController } from '@shared/IController';
 import { IFindShortUrl } from '../useCases/findShortUrl';
 import { IIncrementHit } from '../useCases/incrementHit';
 import { IUpdateShortUrl } from '../useCases/updateShortUrl';
-
-type PropsConstructor = {
-	findShortUrl: IFindShortUrl;
-	incrementHit: IIncrementHit;
-	updateShortUrl: IUpdateShortUrl;
-};
+import { ShortUrlUseCaseFactory } from '@infra/factories/useCases/shortUrl';
 
 type Request = {
 	params: {
@@ -24,10 +19,10 @@ export class AccessRootUrl implements IController<Request> {
 	private readonly incrementHit: IIncrementHit;
 	private readonly updateShortUrl: IUpdateShortUrl;
 
-	constructor(props: PropsConstructor) {
-		this.findShortUrl = props.findShortUrl;
-		this.incrementHit = props.incrementHit;
-		this.updateShortUrl = props.updateShortUrl;
+	constructor(factory: ShortUrlUseCaseFactory) {
+		this.findShortUrl = factory.makeFindShortUrl();
+		this.incrementHit = factory.makeIncrementHit();
+		this.updateShortUrl = factory.makeUpdateShortUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {

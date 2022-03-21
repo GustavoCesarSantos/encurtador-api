@@ -6,12 +6,7 @@ import { IGenerateCode } from '../useCases/generateCode';
 import { IReturnShortUrl } from '../useCases/returnShortUrl';
 import { ISaveShortUrl } from '../useCases/saveShortUrl';
 import { HttpResponse } from '@helpers/httpResponse';
-
-type PropsConstructor = {
-	generateCode: IGenerateCode;
-	returnShortUrl: IReturnShortUrl;
-	saveShortUrl: ISaveShortUrl;
-};
+import { ShortUrlUseCaseFactory } from '@infra/factories/useCases/shortUrl';
 
 type Request = {
 	body: {
@@ -24,10 +19,10 @@ export class CreateShortUrl implements IController<Request> {
 	private readonly returnShortUrl: IReturnShortUrl;
 	private readonly saveShortUrl: ISaveShortUrl;
 
-	constructor(props: PropsConstructor) {
-		this.generateCode = props.generateCode;
-		this.returnShortUrl = props.returnShortUrl;
-		this.saveShortUrl = props.saveShortUrl;
+	constructor(factory: ShortUrlUseCaseFactory) {
+		this.generateCode = factory.makeGenerateCode();
+		this.returnShortUrl = factory.makeReturnShortUrl();
+		this.saveShortUrl = factory.makeSaveShortUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {
