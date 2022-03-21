@@ -27,9 +27,7 @@ export class HttpResponse {
 		return {
 			status: 400,
 			body: {
-				name: error.name,
 				message: error.message,
-				stack: error.stack,
 			},
 		};
 	}
@@ -39,9 +37,7 @@ export class HttpResponse {
 		return {
 			status: 404,
 			body: {
-				name: error.name,
 				message: error.message,
-				stack: error.stack,
 			},
 		};
 	}
