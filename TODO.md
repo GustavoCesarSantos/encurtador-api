@@ -27,7 +27,7 @@
 [x] Criar testes de integração controllers - casos de uso
 [x] Criar adaptador express
 [x] Criar rotas
-[] Criar servidor
+[x] Criar servidor
 
 ## Fase 2
 
