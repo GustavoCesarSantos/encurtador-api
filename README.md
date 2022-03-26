@@ -1,6 +1,6 @@
 <h1 align="center"> ✂️ Curtinhas </h1>
 
-<p align="center"> Encurtador de url </p>
+<p align="center"> Encurtador de urls </p>
 
 ![Bower](https://img.shields.io/bower/l/mi)
 [![GitHub issues](https://img.shields.io/github/issues/GustavoCesarSantos/encurtador-api)](https://github.com/GustavoCesarSantos/encurtador-api/issues)
