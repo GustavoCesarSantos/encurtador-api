@@ -1,10 +1,7 @@
 import { randomUUID } from 'crypto';
-import * as dotenv from 'dotenv';
 
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Guard } from '@utils/guard';
-
-dotenv.config();
 
 type ShortUrlConstructor = {
 	uuid?: string;
