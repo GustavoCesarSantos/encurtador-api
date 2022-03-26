@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.7.0...v1.8.0) (2022-03-26)
+
+
+### Features
+
+* Add some props to tsconfig ([b49652e](https://github.com/GustavoCesarSantos/encurtador-api/commit/b49652e1b1bba361fce4383e7a5903ec9e11bc0a))
+* Add tsconfig path ([6925e1b](https://github.com/GustavoCesarSantos/encurtador-api/commit/6925e1bff0c37e33907f9486eb00ff7400422360))
+* Create express server file ([1d3156b](https://github.com/GustavoCesarSantos/encurtador-api/commit/1d3156b9eb96d19cbd74b86adce3013873379fdd))
+* Create index for routes ([8f8b92c](https://github.com/GustavoCesarSantos/encurtador-api/commit/8f8b92c74dac0be907266f1db39217ce0fb3b252))
+* Cria entrypoint do projeto ([33b9b61](https://github.com/GustavoCesarSantos/encurtador-api/commit/33b9b61860b7094b9c9e0d42e655484c3f15389a))
+* Cria interface para casos de uso ([bd7247d](https://github.com/GustavoCesarSantos/encurtador-api/commit/bd7247d52290639d8743f508727aa842f146a6bc))
+
+
+### Bug Fixes
+
+* Fix prettier script ([4f476fb](https://github.com/GustavoCesarSantos/encurtador-api/commit/4f476fbcba8e7e95db98232bc340165d56fcc1a4))
+
 ## [1.7.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.6.0...v1.7.0) (2022-03-21)
 
 
