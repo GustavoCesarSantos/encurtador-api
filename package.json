@@ -13,7 +13,7 @@
 		"dev": "ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/index.ts",
 		"release": "standard-version",
 		"lint": "eslint . --ext .ts --fix",
-		"prettier": "prettier --config .prettierrc *.ts --write",
+		"prettier": "prettier --config .prettierrc src/*.ts --write",
 		"lint-staged": "lint-staged",
 		"prepare": "husky install"
 	},
