@@ -5,7 +5,7 @@ import { ShortUrlControllerFactory } from '@infra/factories/controllers/shortUrl
 
 const shortUrlControllerFactory = new ShortUrlControllerFactory();
 
-export default (router: Router): void => {
+export const shortUrl = (router: Router): void => {
 	router.get(
 		'/:code',
 		expressRouteAdapter(shortUrlControllerFactory.makeAccessRootUrl()),

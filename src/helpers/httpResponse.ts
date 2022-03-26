@@ -1,4 +1,4 @@
-import { Response } from 'shared/response';
+import { Response } from '@shared/response';
 import { NotFound } from './errors/notFound';
 
 export class HttpResponse {
