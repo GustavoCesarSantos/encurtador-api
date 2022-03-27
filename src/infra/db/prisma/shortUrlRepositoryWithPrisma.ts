@@ -1,14 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
-import { BaseRepository } from '../baseRepository';
 import { ShortUrlMapper } from '@utils/mappers/shortUrlMapper';
+import { IShortUrlRepository } from '../shortUrlRepository';
 
-export interface ISShortUrlRepository extends BaseRepository<ShortUrl> {
-	getShortUrlByCode(code: string): Promise<ShortUrl | null>;
-}
-
-export class ShortUrlRepository implements ISShortUrlRepository {
+export class ShortUrlRepositoryWithPrisma implements IShortUrlRepository {
 	private readonly prisma;
 	private readonly mapper;
 
@@ -26,15 +22,11 @@ export class ShortUrlRepository implements ISShortUrlRepository {
 		throw new Error('Method not implemented.');
 	}
 
-	findMany(): Promise<ShortUrl[]> {
+	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
 		throw new Error('Method not implemented.');
 	}
 
-	findOne(identifier: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-
-	update(identifier: string, data: object): Promise<void> {
+	update(uuid: string, data: object): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 
