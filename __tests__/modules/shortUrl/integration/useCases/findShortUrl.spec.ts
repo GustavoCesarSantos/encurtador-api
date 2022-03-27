@@ -1,8 +1,8 @@
-import { ShortUrlRepository } from '@infra/db/memory/shortUrlRepository';
+import { ShortUrlRepositoryWithMemory } from '@infra/db/memory/shortUrlRepositoryWithMemory';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
-const shortUrlRepository = new ShortUrlRepository();
+const shortUrlRepository = new ShortUrlRepositoryWithMemory();
 
 const makeSut = () => {
 	return new FindShortUrl(shortUrlRepository);

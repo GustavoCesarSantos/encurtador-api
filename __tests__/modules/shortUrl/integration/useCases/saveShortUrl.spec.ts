@@ -1,7 +1,7 @@
-import { ShortUrlRepository } from '@infra/db/memory/shortUrlRepository';
+import { ShortUrlRepositoryWithMemory } from '@infra/db/memory/shortUrlRepositoryWithMemory';
 import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 
-const shortUrlRepository = new ShortUrlRepository();
+const shortUrlRepository = new ShortUrlRepositoryWithMemory();
 
 const makeSut = () => {
 	return new SaveShortUrl(shortUrlRepository);
@@ -13,7 +13,7 @@ describe('Save short url', () => {
 		const url = 'teste';
 		const code = '12345';
 		saveShortUrl.execute(url, code);
-		const result = await shortUrlRepository.findOne(code);
+		const result = await shortUrlRepository.getShortUrlByCode(code);
 		expect(result?.getCode()).toBe(code);
 	});
 });
