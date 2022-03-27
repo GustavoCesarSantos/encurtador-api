@@ -10,6 +10,10 @@ export const expressRouteAdapter = (controller: IController) => {
 				.status(httpResponse.status)
 				.json({ error: httpResponse.body });
 		}
+		if (httpResponse.status === 302) {
+			const { rootUrl } = httpResponse.body as { rootUrl: string };
+			return response.redirect(rootUrl);
+		}
 		return response.status(httpResponse.status).json(httpResponse.body);
 	};
 };

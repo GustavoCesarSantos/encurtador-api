@@ -1,4 +1,4 @@
-import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
@@ -21,19 +21,19 @@ import { IController } from '@shared/IController';
 
 let accessRootUrl: IController;
 
-class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
-	save(entity: ShortUrl): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	findMany(): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	async findOne(identifier: string): Promise<ShortUrl | null> {
+class ShortUrlRepositoryDummie implements IShortUrlRepository {
+	async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
 		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
 		if (shortUrl instanceof Error) return null;
 		return shortUrl;
 	}
-	async update(identifier: string, data: object): Promise<void> {
+	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
+		throw new Error('Method not implemented.');
+	}
+	save(entity: ShortUrl): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+	async update(uuid: string, data: object): Promise<void> {
 		return;
 	}
 	delete(uuid: string): Promise<void> {

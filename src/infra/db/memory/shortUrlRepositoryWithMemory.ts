@@ -1,34 +1,32 @@
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
-import { BaseRepository } from '../baseRepository';
+import { IShortUrlRepository } from '../shortUrlRepository';
 
-export class ShortUrlRepository implements BaseRepository<ShortUrl> {
+export class ShortUrlRepositoryWithMemory implements IShortUrlRepository {
 	shortUrls: ShortUrl[] = [];
 
 	async save(entity: ShortUrl): Promise<void> {
 		this.shortUrls.push(entity);
 	}
 
-	findMany(): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-
-	async findOne(identifier: string): Promise<ShortUrl | null> {
-		if (identifier === 'success') {
+	async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
+		if (code === 'success') {
 			const shortUrl = ShortUrl.create({
 				url: 'teste',
-				code: identifier,
+				code: code,
 			});
 			if (shortUrl instanceof Error) return null;
 			return shortUrl;
 		}
-		if (identifier === 'fail') {
-			return null;
-		}
+		if (code === 'fail') return null;
 		const result = this.shortUrls.find(
-			shortUrl => shortUrl.getCode() === identifier,
+			shortUrl => shortUrl.getCode() === code,
 		);
 		if (!result) return null;
 		return result;
+	}
+
+	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
+		throw new Error('Method not implemented.');
 	}
 
 	update(identifier: string, data: object): Promise<void> {

@@ -1,5 +1,5 @@
 import { MissingParams } from '@helpers/errors/missingParams';
-import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	ISaveShortUrl,
@@ -8,20 +8,20 @@ import {
 
 let saveShortUrl: ISaveShortUrl;
 
-class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
+class ShortUrlRepositoryDummie implements IShortUrlRepository {
+	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
+		throw new Error('Method not implemented.');
+	}
+	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
+		throw new Error('Method not implemented.');
+	}
 	async save(entity: ShortUrl): Promise<void> {
 		return;
 	}
-	findMany(): Promise<ShortUrl[]> {
+	update(uuid: string, data: object): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
-	findOne(): Promise<ShortUrl> {
-		throw new Error('Method not implemented.');
-	}
-	update(): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	delete(): Promise<void> {
+	delete(uuid: string): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 }

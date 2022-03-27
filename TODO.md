@@ -27,7 +27,10 @@
 [x] Criar testes de integração controllers - casos de uso
 [x] Criar adaptador express
 [x] Criar rotas
-[] Criar servidor
+[x] Criar servidor
+[] Criar validador da integridade da url raiz
+[] Lidar com erros ao redirecionar para url invalida
+[] Lidar com erros vindos do banco de dados
 
 ## Fase 2
 

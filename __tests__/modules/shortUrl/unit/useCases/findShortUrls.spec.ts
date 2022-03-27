@@ -1,25 +1,25 @@
-import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrls } from '@modules/shortUrls/useCases/findShortUrls';
 
 let findShortUrls: FindShortUrls;
 
-class ShortUrlRepositoryFakie implements BaseRepository<ShortUrl> {
-	save(entity: ShortUrl): Promise<void> {
+class ShortUrlRepositoryFakie implements IShortUrlRepository {
+	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
 		throw new Error('Method not implemented.');
 	}
-	async findMany(): Promise<ShortUrl[]> {
+	async getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
 		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
 		if (shortUrl instanceof Error) return [];
 		return [shortUrl];
 	}
-	async findOne(identifier: string): Promise<ShortUrl | null> {
+	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
-	update(): Promise<void> {
+	update(uuid: string, data: object): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
-	delete(): Promise<void> {
+	delete(uuid: string): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 }
@@ -35,7 +35,8 @@ describe('Find short urls', () => {
 	});
 
 	test('Should return an array', async () => {
-		const result = await findShortUrls.execute();
+		const ownerId = 1;
+		const result = await findShortUrls.execute(ownerId);
 		expect(Array.isArray(result)).toBe(true);
 	});
 });

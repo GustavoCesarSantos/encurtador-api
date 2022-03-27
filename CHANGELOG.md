@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.8.0...v1.9.0) (2022-03-27)
+
+
+### Features
+
+* Adiciona campos unicos a model ShortUrl ([9d1e805](https://github.com/GustavoCesarSantos/encurtador-api/commit/9d1e805973ca1cbc15a3a6b2ef0bb4f6560880be))
+* Adiciona redirecionamento ao adaptador de routas do express ([acff156](https://github.com/GustavoCesarSantos/encurtador-api/commit/acff1560c0a571aee9d54c6d015f7255b2f0282b))
+* Atualiza pacote do prisma e prisma client ([d9fd5f8](https://github.com/GustavoCesarSantos/encurtador-api/commit/d9fd5f858f461179989612b470b132ac700a4bc4))
+* Cria arquivo de ci ([49153bc](https://github.com/GustavoCesarSantos/encurtador-api/commit/49153bcaa7ff37cd4f2299af96d6b69eb8657082))
+* Cria interface dos mappers ([9fd334b](https://github.com/GustavoCesarSantos/encurtador-api/commit/9fd334b7924ba4097cd83f41dfa4b4f8ec9d2121))
+* Cria interface para o repositório de url encurtada ([cc234d9](https://github.com/GustavoCesarSantos/encurtador-api/commit/cc234d9a615fe40e7d2b69e7aeca56338354329d))
+* Cria mapper da url encurtada ([eeb98f7](https://github.com/GustavoCesarSantos/encurtador-api/commit/eeb98f7d68948d8e7cc18b77c443b769c190fa8f))
+* Cria migration para trocar tipo do campo uuid ([cf2bba9](https://github.com/GustavoCesarSantos/encurtador-api/commit/cf2bba9e2d39633e91be07b25d8ea0381a89e7b2))
+* Cria migration que adiciona campos unicos a model ShortUrl ([b39bdb4](https://github.com/GustavoCesarSantos/encurtador-api/commit/b39bdb4a114f349159032d7a2d85b39a4c315c39))
+* Implementa todos os métodos no repostiório com prisma ([61876bc](https://github.com/GustavoCesarSantos/encurtador-api/commit/61876bce007c98f3319de79f0a74428fef3dc948))
+
+
+### Bug Fixes
+
+* Corrige atribuição do parametro uuid para o caso de uso atualizar url encurtada ([d36fe2e](https://github.com/GustavoCesarSantos/encurtador-api/commit/d36fe2e23adc84590f25ec4b9e73d4ac2393435a))
+* Corrige nome do repositório com prisma orm na fabrica de casos de uso ([e2e7ae5](https://github.com/GustavoCesarSantos/encurtador-api/commit/e2e7ae54c076c95503fa2f6e6504987fcceffdae))
+* Corrige testes de acordo com a nova interface do repositório da url encurtada ([956c9da](https://github.com/GustavoCesarSantos/encurtador-api/commit/956c9da6eaac3f72b60b6c4c44bcd80d8e9224fb))
+* Corrige uso da interface do repositório de url encurtada e o uso dos métodos de query ([5c6d73d](https://github.com/GustavoCesarSantos/encurtador-api/commit/5c6d73da7d791d3150d41fe70d95b06c2e484a35))
+
 ## [1.8.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.7.0...v1.8.0) (2022-03-26)
 
 
