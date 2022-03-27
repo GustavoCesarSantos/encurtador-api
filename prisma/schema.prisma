@@ -9,7 +9,7 @@ datasource db {
 
 model ShortUrls {
   id        Int      @id @default(autoincrement())
-  uuid      Int
+  uuid      String
   url       String   @db.VarChar(255)
   code      String   @db.VarChar(5)
   hits      Int?
