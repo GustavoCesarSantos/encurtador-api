@@ -9,13 +9,15 @@ datasource db {
 
 model ShortUrls {
   id        Int      @id @default(autoincrement())
-  uuid      Int
+  uuid      String
   url       String   @db.VarChar(255)
   code      String   @db.VarChar(5)
   hits      Int?
   createdat DateTime @default(now()) @db.Timestamp(6)
   ownerid   Int
   Owners    Owners   @relation(fields: [ownerid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@unique(fields: [code], name: "Code")
+  @@unique(fields: [uuid], name: "UUID")
 }
 
 model Owners {

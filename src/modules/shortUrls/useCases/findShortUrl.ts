@@ -1,4 +1,4 @@
-import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { ShortUrl } from '../shortUrl';
 
 export interface IFindShortUrl {
@@ -6,14 +6,14 @@ export interface IFindShortUrl {
 }
 
 export class FindShortUrl implements IFindShortUrl {
-	private readonly shortUrlRepository: BaseRepository<ShortUrl>;
+	private readonly shortUrlRepository: IShortUrlRepository;
 
-	constructor(shortUrlRepository: BaseRepository<ShortUrl>) {
+	constructor(shortUrlRepository: IShortUrlRepository) {
 		this.shortUrlRepository = shortUrlRepository;
 	}
 
 	async execute(code: string): Promise<ShortUrl | null> {
-		const shortUrl = await this.shortUrlRepository.findOne(code);
+		const shortUrl = await this.shortUrlRepository.getShortUrlByCode(code);
 		if (!shortUrl || !(shortUrl instanceof ShortUrl)) return null;
 		return shortUrl;
 	}

@@ -24,7 +24,7 @@ export class ShortUrl {
 		this.rootUrl = props.url;
 		this.code = props.code;
 		this.hits = props.hits ?? 0;
-		this.ownerid = props.ownerid ?? 0;
+		this.ownerid = props.ownerid ?? 1;
 	}
 
 	public static create(props: ShortUrlConstructor) {
@@ -34,6 +34,11 @@ export class ShortUrl {
 		]);
 		if (!result.isSuccess) return new MissingParams(`${result.isError}`);
 		return new ShortUrl(props);
+	}
+
+	public getUUID() {
+		const uuid = this.uuid;
+		return uuid;
 	}
 
 	public getCode(): string {
@@ -51,7 +56,17 @@ export class ShortUrl {
 		return rootUrl;
 	}
 
-	public setCreatedDate() {
+	public getOwnerId(): number {
+		const id = this.ownerid;
+		return id;
+	}
+
+	public setCreatedDate(): void {
 		this.createdat = new Date();
+	}
+
+	public getCreatedDate(): Date {
+		const createdAt = this.createdat;
+		return createdAt;
 	}
 }

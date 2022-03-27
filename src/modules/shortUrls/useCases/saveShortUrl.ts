@@ -1,4 +1,4 @@
-import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { ShortUrl } from '../shortUrl';
 
 export interface ISaveShortUrl {
@@ -6,9 +6,9 @@ export interface ISaveShortUrl {
 }
 
 export class SaveShortUrl implements ISaveShortUrl {
-	private readonly shortUrlRepository: BaseRepository<ShortUrl>;
+	private readonly shortUrlRepository: IShortUrlRepository;
 
-	constructor(shortUrlRepository: BaseRepository<ShortUrl>) {
+	constructor(shortUrlRepository: IShortUrlRepository) {
 		this.shortUrlRepository = shortUrlRepository;
 	}
 

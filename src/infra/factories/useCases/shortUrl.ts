@@ -1,4 +1,5 @@
-import { ShortUrlRepository } from '@infra/db/prisma/shortUrlRepository';
+import { ShortUrlRepositoryWithPrisma } from '@infra/db/prisma/shortUrlRepositoryWithPrisma';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { GenerateCode } from '@modules/shortUrls/useCases/generateCode';
 import { IncrementHit } from '@modules/shortUrls/useCases/incrementHit';
@@ -8,8 +9,8 @@ import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IShortUrlUseCaseFactory } from './IShortUrlUseCaseFactory';
 
 export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
-	private readonly shortUrlRepository: ShortUrlRepository =
-		new ShortUrlRepository();
+	private readonly shortUrlRepository: IShortUrlRepository =
+		new ShortUrlRepositoryWithPrisma();
 
 	public makeIncrementHit(): IncrementHit {
 		return new IncrementHit();
