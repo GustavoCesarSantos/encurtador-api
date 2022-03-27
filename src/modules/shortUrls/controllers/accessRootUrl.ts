@@ -40,7 +40,7 @@ export class AccessRootUrl implements IController<Request> {
 			return HttpResponse.notFound();
 		}
 		const hits = await this.incrementHit.execute(shortUrl.getHits());
-		await this.updateShortUrl.execute(shortUrl.getCode(), { hits });
+		await this.updateShortUrl.execute(shortUrl.getUUID(), { hits });
 		return HttpResponse.redirect({ rootUrl: shortUrl.getRootUrl() });
 	}
 }
