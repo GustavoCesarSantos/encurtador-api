@@ -16,21 +16,44 @@ export class ShortUrlRepositoryWithPrisma implements IShortUrlRepository {
 	public async save(entity: ShortUrl): Promise<void> {
 		const data = this.mapper.toPersistence(entity);
 		await this.prisma.shortUrls.create({ data });
+		await this.prisma.$disconnect();
 	}
 
-	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
+	public async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
+		const shortUrlDB = await this.prisma.shortUrls.findUnique({
+			where: { code },
+		});
+		await this.prisma.$disconnect();
+		return this.mapper.toDomain(shortUrlDB);
 	}
 
-	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
+	public async getShortUrlOwnedByOwnerId(
+		ownerId: number,
+	): Promise<ShortUrl[]> {
+		const shortUrlsDB = await this.prisma.shortUrls.findMany({
+			where: { ownerid: ownerId },
+		});
+		await this.prisma.$disconnect();
+		const shortUrls: ShortUrl[] = [];
+		const result = shortUrlsDB.every(shortUrlDB => {
+			const shortUrl = this.mapper.toDomain(shortUrlDB);
+			if (!shortUrl) return false;
+			shortUrls.push(shortUrl);
+			return true;
+		});
+		if (!result) return [];
+		return shortUrls;
 	}
 
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
+	public async update(uuid: string, data: object): Promise<void> {
+		await this.prisma.shortUrls.update({
+			where: { uuid },
+			data: data,
+		});
+		await this.prisma.$disconnect();
 	}
 
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
+	public async delete(uuid: string): Promise<void> {
+		await this.prisma.shortUrls.delete({ where: { uuid } });
 	}
 }
