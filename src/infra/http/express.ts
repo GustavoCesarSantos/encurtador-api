@@ -1,6 +1,7 @@
 import express, { Express, Router } from 'express';
 
 import { routes } from '@infra/routes';
+import { logger } from '@infra/listeners/logger/loggerPino';
 
 export class ExpressApp {
 	public readonly app: Express;
@@ -18,6 +19,8 @@ export class ExpressApp {
 	}
 
 	public listen() {
-		this.app.listen(this.port);
+		this.app.listen(this.port, () =>
+			logger.info(`Server running in port:${this.port}`),
+		);
 	}
 }
