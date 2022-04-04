@@ -27,7 +27,7 @@ describe('Access root url', () => {
 		expect(status).toBe(302);
 	});
 
-	test('Should return status code 302', async () => {
+	test('Should redirect to root url', async () => {
 		const { text } = await request(app.getApp())
 			.post('/v1/')
 			.send({ url: 'success' });
