@@ -1,4 +1,4 @@
-import { Guard } from '../../src/utils/guard';
+import { Guard } from '@utils/guard';
 
 const propName = 'Teste';
 
