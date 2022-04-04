@@ -5,6 +5,8 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"test": "jest --no-cache --runInBand",
+		"test:unit": "jest --no-cache --runInBand --testPathPattern=./__tests__/unit",
+		"test:integration": "jest --no-cache --runInBand --testPathPattern=./__tests__/integration",
 		"test:dev": "jest --no-cache --runInBand --watchAll",
 		"test:cov": "jest --no-cache --runInBand --coverage",
 		"test:staged": "jest --passWithNoTests --findRelatedTests",
