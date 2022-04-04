@@ -7,28 +7,28 @@ app.setupRoutes();
 
 describe('Create short url', () => {
 	test('Should return status code 400 when url is not passed in request body', async () => {
-		const response = await request(app.getApp()).post('/v1/').send({});
-		expect(response.status).toBe(400);
+		const { status } = await request(app.getApp()).post('/v1/').send({});
+		expect(status).toBe(400);
 	});
 
 	test('Should return error message with missing param when url is not passed in request body', async () => {
-		const response = await request(app.getApp()).post('/v1/').send({});
-		const body = JSON.parse(response.text);
+		const { text } = await request(app.getApp()).post('/v1/').send({});
+		const body = JSON.parse(text);
 		expect(body.error.message).toBe('Missing params: Url');
 	});
 
 	test('Should return status code 201 when valid params are passed', async () => {
-		const response = await request(app.getApp())
+		const { status } = await request(app.getApp())
 			.post('/v1/')
 			.send({ url: 'success' });
-		expect(response.status).toBe(201);
+		expect(status).toBe(201);
 	});
 
 	test('Should return a short url when valid params are passed', async () => {
-		const response = await request(app.getApp())
+		const { text } = await request(app.getApp())
 			.post('/v1/')
 			.send({ url: 'success' });
-		const body = JSON.parse(response.text);
+		const body = JSON.parse(text);
 		expect(body).toHaveProperty('url');
 	});
 });
