@@ -24,6 +24,7 @@ export class ShortUrlRepositoryWithPrisma implements IShortUrlRepository {
 			where: { code },
 		});
 		await this.prisma.$disconnect();
+		if (!shortUrlDB) return null;
 		return this.mapper.toDomain(shortUrlDB);
 	}
 
