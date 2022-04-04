@@ -6,7 +6,7 @@ const app = new ExpressApp();
 app.setupRoutes();
 
 describe('Access root url', () => {
-	test('Should return status code 400 when url is not passed in request body', async () => {
+	test('Should return status code 404 when schema is not found', async () => {
 		const { status } = await request(app.getApp()).get('/v1/fail');
 		expect(status).toBe(404);
 	});
