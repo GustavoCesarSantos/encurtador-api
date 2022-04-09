@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.9.0...v1.10.0) (2022-04-04)
+
+
+### Features
+
+* Adiciona pacote supertest ([ff53687](https://github.com/GustavoCesarSantos/encurtador-api/commit/ff5368760784921a019b852f4f694c383bddfe44))
+* Adiciona tipagem ao pacote supertest ([c8b2717](https://github.com/GustavoCesarSantos/encurtador-api/commit/c8b27179929ad2284c33326e38fdaa7559201d58))
+* Cria teste e2e para acesso de url original ([53bb7ff](https://github.com/GustavoCesarSantos/encurtador-api/commit/53bb7ff93cdda494639660252091d0125c56fdfd))
+* Cria teste e2e para criação de url encurtada ([6e51fb8](https://github.com/GustavoCesarSantos/encurtador-api/commit/6e51fb8a9984f8a19c99cc25c21794c6cdb5f8af))
+
+
+### Bug Fixes
+
+* Corrige caso de erro ao tentar retornar schema da url encurtada ([1c6cb71](https://github.com/GustavoCesarSantos/encurtador-api/commit/1c6cb716858db75f63e6d69fcc40b97dedddb798))
+
 ## [1.9.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.8.0...v1.9.0) (2022-03-27)
 
 
