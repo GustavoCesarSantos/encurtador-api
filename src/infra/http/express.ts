@@ -1,7 +1,7 @@
 import express, { Express, Router } from 'express';
 
 import { routes } from '@infra/routes';
-import { logger } from '@infra/listeners/logger/loggerPino';
+import { logger } from '@infra/listeners/loggers/loggerPino';
 
 export class ExpressApp {
 	public readonly app: Express;
