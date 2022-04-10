@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.10.0...v1.11.0) (2022-04-10)
+
+
+### Features
+
+* Adiciona implementação da interface listener e método update na classe pino logger ([4253ea9](https://github.com/GustavoCesarSantos/encurtador-api/commit/4253ea9712cf7e4bae9b05d6ca6f1f389ec076fa))
+* Adiciona log ao subir servidor ([d38bb27](https://github.com/GustavoCesarSantos/encurtador-api/commit/d38bb27fdacc0cc00d52153320bfae41f0834939))
+* Adiciona os pacotes pino e pino-pretty ([0afc8f4](https://github.com/GustavoCesarSantos/encurtador-api/commit/0afc8f471db709ec0ea82dc2b36814b86f29ccb8))
+* Adiciona variavel para declarar o ambiente que o código está sendo utilizado ([ef5bacf](https://github.com/GustavoCesarSantos/encurtador-api/commit/ef5bacf753cd3be65f0e200a0a807ac3488efa7d))
+* Atualiza pacotes do projeto ([8f66565](https://github.com/GustavoCesarSantos/encurtador-api/commit/8f66565045cae43dbf4aec0ae84c48ea1bea05de))
+* Cria enum para os nomes de eventos ([b6e29b8](https://github.com/GustavoCesarSantos/encurtador-api/commit/b6e29b8792f23424f0152ccbf2683b76e122a54d))
+* Cria interface listener ([1f9b795](https://github.com/GustavoCesarSantos/encurtador-api/commit/1f9b7952c831bdaab6b7e3c5d7742e06666841bc))
+* Cria interface logger ([7744d39](https://github.com/GustavoCesarSantos/encurtador-api/commit/7744d3935b313172cb84b5897938ed8af718a9b5))
+* Cria logger utilizando o pacote pino ([f5b6658](https://github.com/GustavoCesarSantos/encurtador-api/commit/f5b665895652a0dcbc79658ea5f87d70c2b3da20))
+* Cria scripts para testes unitarios e de integração ([23509e0](https://github.com/GustavoCesarSantos/encurtador-api/commit/23509e0d7fd1a105e89ead63e7d8b018a8b37daa))
+* Cria teste unitario para o pino logger ([13c1eb1](https://github.com/GustavoCesarSantos/encurtador-api/commit/13c1eb18ceae6e850b9cc943fc350f802a3d503c))
+
+
+### Bug Fixes
+
+* Corrige ci yml ([33d7186](https://github.com/GustavoCesarSantos/encurtador-api/commit/33d71865fa06deb068ae944389d4340125ce6bf3))
+* Corrige ci yml ([e3db201](https://github.com/GustavoCesarSantos/encurtador-api/commit/e3db20112b788fbf37e359c10388f4fd2b434d78))
+* Corrige nome da pasta loggers ([fc57f9e](https://github.com/GustavoCesarSantos/encurtador-api/commit/fc57f9e29aa369ec04ed69455580e2bfa046cce6))
+
 ## [1.10.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.9.0...v1.10.0) (2022-04-04)
 
 
