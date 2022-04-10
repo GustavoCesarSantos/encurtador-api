@@ -32,7 +32,14 @@ export class PinoLogger implements ILogger, IListener {
 				`Tipo invalido de payload: ${typeof payload} para evento: ${eventName}`,
 			);
 		}
-		if (eventName === EventNames.error) return this.error(payload);
+		if (eventName === EventNames.error) {
+			if (typeof payload === 'string' || payload instanceof Error) {
+				return this.error(payload);
+			}
+			return this.error(
+				`Tipo invalido de payload para evento: ${eventName}`,
+			);
+		}
 		this.error(
 			`Incapaz de gerar logs para este tipo de evento: ${eventName}`,
 		);
