@@ -1,5 +1,7 @@
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener } from '@infra/listeners/listener';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
@@ -63,9 +65,19 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 }
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(eventName: string, payload: any): void {
+		return;
+	}
+}
+
 const makeSut = () => {
 	const useCaseFactory = new UseCaseFactory();
-	return new CreateShortUrl(useCaseFactory);
+	const eventManagerDummy = new EventManagerDummy();
+	return new CreateShortUrl(useCaseFactory, eventManagerDummy);
 };
 
 describe('Create short url', () => {
