@@ -1,3 +1,6 @@
+import { EventNames } from '@helpers/eventNames';
+import { ListenersManager } from '@infra/listeners/eventManager';
+import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrlUseCaseFactory } from '../useCases/shortUrl';
@@ -11,6 +14,9 @@ export class ShortUrlControllerFactory {
 	}
 
 	public makeCreateShortUrl(): CreateShortUrl {
-		return new CreateShortUrl(this.shortUrlUseCaseFactory);
+		const logger = PinoLogger.create();
+		const manager = new ListenersManager();
+		manager.attach(EventNames.info, [logger]);
+		return new CreateShortUrl(this.shortUrlUseCaseFactory, manager);
 	}
 }
