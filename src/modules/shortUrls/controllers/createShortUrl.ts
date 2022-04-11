@@ -7,6 +7,8 @@ import { IReturnShortUrl } from '../useCases/returnShortUrl';
 import { ISaveShortUrl } from '../useCases/saveShortUrl';
 import { HttpResponse } from '@helpers/httpResponse';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
+import { IEventManager } from '@infra/listeners/eventManager';
+import { EventNames } from '@helpers/eventNames';
 
 type Request = {
 	body: {
@@ -18,11 +20,13 @@ export class CreateShortUrl implements IController<Request> {
 	private readonly generateCode: IGenerateCode;
 	private readonly returnShortUrl: IReturnShortUrl;
 	private readonly saveShortUrl: ISaveShortUrl;
+	private readonly manager: IEventManager;
 
-	constructor(factory: IShortUrlUseCaseFactory) {
+	constructor(factory: IShortUrlUseCaseFactory, eventMangaer: IEventManager) {
 		this.generateCode = factory.makeGenerateCode();
 		this.returnShortUrl = factory.makeReturnShortUrl();
 		this.saveShortUrl = factory.makeSaveShortUrl();
+		this.manager = eventMangaer;
 	}
 
 	public async handle(request: Request): Promise<Response> {
