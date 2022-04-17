@@ -17,6 +17,7 @@ export class ShortUrlControllerFactory {
 		const logger = PinoLogger.create();
 		const manager = new ListenersManager();
 		manager.attach(EventNames.info, [logger]);
+		manager.attach(EventNames.error, [logger]);
 		return new CreateShortUrl(this.shortUrlUseCaseFactory, manager);
 	}
 }
