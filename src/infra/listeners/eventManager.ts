@@ -1,8 +1,8 @@
-import { IListener } from './listener';
+import { IListener, Payload } from './listener';
 
 export interface IEventManager {
 	attach(eventName: string, listeners: IListener[]): void;
-	notify(eventName: string, payload: any): void;
+	notify(payload: Payload): void;
 }
 
 export class ListenersManager implements IEventManager {
@@ -13,9 +13,9 @@ export class ListenersManager implements IEventManager {
 		this.listeners[eventName].push(...listeners);
 	}
 
-	public notify(eventName: string, payload: any): void {
-		this.listeners[eventName].forEach((listener: IListener) => {
-			listener.update({ eventName, message: payload });
+	public notify(payload: Payload): void {
+		this.listeners[payload.eventName].forEach((listener: IListener) => {
+			listener.update(payload);
 		});
 	}
 }

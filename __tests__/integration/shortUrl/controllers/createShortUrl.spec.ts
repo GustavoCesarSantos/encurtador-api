@@ -1,7 +1,7 @@
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener } from '@infra/listeners/listener';
+import { IListener, Payload } from '@infra/listeners/listener';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
@@ -69,7 +69,7 @@ class EventManagerDummy implements IEventManager {
 	attach(eventName: string, listeners: IListener[]): void {
 		return;
 	}
-	notify(eventName: string, payload: any): void {
+	notify(payload: Payload): void {
 		return;
 	}
 }
