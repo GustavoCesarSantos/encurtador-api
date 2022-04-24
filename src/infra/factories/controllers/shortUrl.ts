@@ -6,18 +6,21 @@ import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrlUseCaseFactory } from '../useCases/shortUrl';
 
 export class ShortUrlControllerFactory {
+	private readonly logger = PinoLogger.create();
 	private readonly shortUrlUseCaseFactory: ShortUrlUseCaseFactory =
 		new ShortUrlUseCaseFactory();
 
 	public makeAccessRootUrl(): AccessRootUrl {
-		return new AccessRootUrl(this.shortUrlUseCaseFactory);
+		const manager = new ListenersManager();
+		manager.attach(EventNames.info, [this.logger]);
+		manager.attach(EventNames.error, [this.logger]);
+		return new AccessRootUrl(this.shortUrlUseCaseFactory, manager);
 	}
 
 	public makeCreateShortUrl(): CreateShortUrl {
-		const logger = PinoLogger.create();
 		const manager = new ListenersManager();
-		manager.attach(EventNames.info, [logger]);
-		manager.attach(EventNames.error, [logger]);
+		manager.attach(EventNames.info, [this.logger]);
+		manager.attach(EventNames.error, [this.logger]);
 		return new CreateShortUrl(this.shortUrlUseCaseFactory, manager);
 	}
 }
