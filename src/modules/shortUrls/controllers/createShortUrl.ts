@@ -105,7 +105,9 @@ export class CreateShortUrl implements IController<Request> {
 			eventName: EventNames.info,
 			message: {
 				where: 'CreateShortUrl',
-				what: `Retornando a resposta: ${{ url: shortUrl }}`,
+				what: `Retornando a resposta: ${JSON.stringify({
+					url: shortUrl,
+				})}`,
 			},
 		});
 		return HttpResponse.okWithBody({ url: shortUrl });
