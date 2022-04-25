@@ -23,6 +23,15 @@ import { IController } from '@shared/IController';
 
 let createShortUrl: IController;
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 class ShortUrlRepositoryDummie implements IShortUrlRepository {
 	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
 		throw new Error('Method not implemented.');
@@ -46,7 +55,8 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		new ShortUrlRepositoryDummie();
 
 	makeGenerateCode(): IGenerateCode {
-		return new GenerateCode();
+		const eventManagerDummy = new EventManagerDummy();
+		return new GenerateCode(eventManagerDummy);
 	}
 	makeReturnShortUrl(): IReturnShortUrl {
 		return new ReturnShortUrl();
@@ -62,15 +72,6 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 	makeUpdateShortUrl(): IUpdateShortUrl {
 		throw new Error('Method not implemented.');
-	}
-}
-
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
 	}
 }
 
