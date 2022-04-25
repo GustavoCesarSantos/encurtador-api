@@ -39,10 +39,10 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeReturnShortUrl(): ReturnShortUrl {
-		return new ReturnShortUrl();
+		return new ReturnShortUrl(this.manager);
 	}
 
 	public makeSaveShortUrl(): SaveShortUrl {
-		return new SaveShortUrl(this.shortUrlRepository);
+		return new SaveShortUrl(this.shortUrlRepository, this.manager);
 	}
 }
