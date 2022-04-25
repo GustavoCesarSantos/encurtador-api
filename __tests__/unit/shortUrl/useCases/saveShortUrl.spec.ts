@@ -1,5 +1,7 @@
 import { MissingParams } from '@helpers/errors/missingParams';
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener, Payload } from '@infra/listeners/listener';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	ISaveShortUrl,
@@ -26,9 +28,19 @@ class ShortUrlRepositoryDummie implements IShortUrlRepository {
 	}
 }
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 const makeSut = () => {
 	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
-	return new SaveShortUrl(shortUrlRepositoryDummie);
+	const eventManagerDummy = new EventManagerDummy();
+	return new SaveShortUrl(shortUrlRepositoryDummie, eventManagerDummy);
 };
 
 describe('Save short url', () => {

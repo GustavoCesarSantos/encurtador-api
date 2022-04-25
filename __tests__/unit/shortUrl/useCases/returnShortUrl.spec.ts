@@ -1,3 +1,5 @@
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener, Payload } from '@infra/listeners/listener';
 import {
 	IReturnShortUrl,
 	ReturnShortUrl,
@@ -5,8 +7,18 @@ import {
 
 let returnShortUrl: IReturnShortUrl;
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 const makeSut = () => {
-	return new ReturnShortUrl();
+	const eventManagerDummy = new EventManagerDummy();
+	return new ReturnShortUrl(eventManagerDummy);
 };
 
 describe('Return short url', () => {

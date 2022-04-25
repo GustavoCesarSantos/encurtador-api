@@ -51,18 +51,21 @@ class ShortUrlRepositoryDummie implements IShortUrlRepository {
 }
 
 class UseCaseFactory implements IShortUrlUseCaseFactory {
+	eventManagerDummy = new EventManagerDummy();
 	shortUrlRepository: ShortUrlRepositoryDummie =
 		new ShortUrlRepositoryDummie();
 
 	makeGenerateCode(): IGenerateCode {
-		const eventManagerDummy = new EventManagerDummy();
-		return new GenerateCode(eventManagerDummy);
+		return new GenerateCode(this.eventManagerDummy);
 	}
 	makeReturnShortUrl(): IReturnShortUrl {
-		return new ReturnShortUrl();
+		return new ReturnShortUrl(this.eventManagerDummy);
 	}
 	makeSaveShortUrl(): ISaveShortUrl {
-		return new SaveShortUrl(this.shortUrlRepository);
+		return new SaveShortUrl(
+			this.shortUrlRepository,
+			this.eventManagerDummy,
+		);
 	}
 	makeFindShortUrl(): IFindShortUrl {
 		throw new Error('Method not implemented.');
