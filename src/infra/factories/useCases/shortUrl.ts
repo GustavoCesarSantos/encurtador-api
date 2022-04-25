@@ -1,5 +1,8 @@
+import { EventNames } from '@helpers/eventNames';
 import { ShortUrlRepositoryWithPrisma } from '@infra/db/prisma/shortUrlRepositoryWithPrisma';
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
+import { ListenersManager } from '@infra/listeners/eventManager';
+import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { GenerateCode } from '@modules/shortUrls/useCases/generateCode';
 import { IncrementHit } from '@modules/shortUrls/useCases/incrementHit';
@@ -9,6 +12,7 @@ import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IShortUrlUseCaseFactory } from './IShortUrlUseCaseFactory';
 
 export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
+	private readonly logger = PinoLogger.create();
 	private readonly shortUrlRepository: IShortUrlRepository =
 		new ShortUrlRepositoryWithPrisma();
 
@@ -25,7 +29,9 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeGenerateCode(): GenerateCode {
-		return new GenerateCode();
+		const manager = new ListenersManager();
+		manager.attach(EventNames.info, [this.logger]);
+		return new GenerateCode(manager);
 	}
 
 	public makeReturnShortUrl(): ReturnShortUrl {
