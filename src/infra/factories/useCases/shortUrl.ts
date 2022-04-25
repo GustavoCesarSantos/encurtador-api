@@ -12,9 +12,15 @@ import { UpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IShortUrlUseCaseFactory } from './IShortUrlUseCaseFactory';
 
 export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
+	private readonly manager = new ListenersManager();
 	private readonly logger = PinoLogger.create();
 	private readonly shortUrlRepository: IShortUrlRepository =
 		new ShortUrlRepositoryWithPrisma();
+
+	constructor() {
+		this.manager.attach(EventNames.info, [this.logger]);
+		this.manager.attach(EventNames.error, [this.logger]);
+	}
 
 	public makeIncrementHit(): IncrementHit {
 		return new IncrementHit();
@@ -29,9 +35,7 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeGenerateCode(): GenerateCode {
-		const manager = new ListenersManager();
-		manager.attach(EventNames.info, [this.logger]);
-		return new GenerateCode(manager);
+		return new GenerateCode(this.manager);
 	}
 
 	public makeReturnShortUrl(): ReturnShortUrl {
