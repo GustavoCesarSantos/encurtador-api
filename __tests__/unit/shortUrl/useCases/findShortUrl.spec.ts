@@ -1,4 +1,6 @@
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener, Payload } from '@infra/listeners/listener';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 
@@ -27,9 +29,19 @@ class ShortUrlRepositoryStub implements IShortUrlRepository {
 	}
 }
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 const makeSut = () => {
 	const shortUrlRepositoryStub = new ShortUrlRepositoryStub();
-	return new FindShortUrl(shortUrlRepositoryStub);
+	const eventManagerDummy = new EventManagerDummy();
+	return new FindShortUrl(shortUrlRepositoryStub, eventManagerDummy);
 };
 
 describe('Find short url', () => {
