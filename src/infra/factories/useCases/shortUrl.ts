@@ -27,7 +27,7 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeFindShortUrl(): FindShortUrl {
-		return new FindShortUrl(this.shortUrlRepository);
+		return new FindShortUrl(this.shortUrlRepository, this.manager);
 	}
 
 	public makeUpdateShortUrl(): UpdateShortUrl {
