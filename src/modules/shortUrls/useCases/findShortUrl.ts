@@ -1,4 +1,5 @@
 import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
+import { IEventManager } from '@infra/listeners/eventManager';
 import { ShortUrl } from '../shortUrl';
 
 export interface IFindShortUrl {
@@ -7,9 +8,14 @@ export interface IFindShortUrl {
 
 export class FindShortUrl implements IFindShortUrl {
 	private readonly shortUrlRepository: IShortUrlRepository;
+	private readonly eventManager: IEventManager;
 
-	constructor(shortUrlRepository: IShortUrlRepository) {
+	constructor(
+		shortUrlRepository: IShortUrlRepository,
+		eventManager: IEventManager,
+	) {
 		this.shortUrlRepository = shortUrlRepository;
+		this.eventManager = eventManager;
 	}
 
 	async execute(code: string): Promise<ShortUrl | null> {
