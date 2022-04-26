@@ -23,6 +23,15 @@ import { IController } from '@shared/IController';
 
 let accessRootUrl: IController;
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 class ShortUrlRepositoryDummie implements IShortUrlRepository {
 	async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
 		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
@@ -46,6 +55,7 @@ class ShortUrlRepositoryDummie implements IShortUrlRepository {
 class UseCaseFactory implements IShortUrlUseCaseFactory {
 	shortUrlRepository: ShortUrlRepositoryDummie =
 		new ShortUrlRepositoryDummie();
+	eventManagerDummy = new EventManagerDummy();
 
 	makeGenerateCode(): IGenerateCode {
 		throw new Error('Method not implemented.');
@@ -57,22 +67,16 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		throw new Error('Method not implemented.');
 	}
 	makeFindShortUrl(): IFindShortUrl {
-		return new FindShortUrl(this.shortUrlRepository);
+		return new FindShortUrl(
+			this.shortUrlRepository,
+			this.eventManagerDummy,
+		);
 	}
 	makeIncrementHit(): IIncrementHit {
 		return new IncrementHit();
 	}
 	makeUpdateShortUrl(): IUpdateShortUrl {
 		return new UpdateShortUrl(this.shortUrlRepository);
-	}
-}
-
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
 	}
 }
 
