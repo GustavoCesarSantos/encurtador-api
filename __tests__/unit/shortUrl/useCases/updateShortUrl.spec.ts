@@ -1,4 +1,7 @@
 import { BaseRepository } from '@infra/db/baseRepository';
+import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener, Payload } from '@infra/listeners/listener';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	IUpdateShortUrl,
@@ -7,27 +10,37 @@ import {
 
 let updateShortUrl: IUpdateShortUrl;
 
-class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
+class ShortUrlRepositoryFakie implements IShortUrlRepository {
+	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
+		throw new Error('Method not implemented.');
+	}
+	async getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
+		throw new Error('Method not implemented.');
+	}
 	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
-	findMany(): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	findOne(identifier: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	async update(identifier: string, data: object): Promise<void> {
+	async update(uuid: string, data: object): Promise<void> {
 		return;
 	}
-	delete(): Promise<void> {
+	delete(uuid: string): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 }
 
 const makeSut = () => {
-	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
-	return new UpdateShortUrl(shortUrlRepositoryDummie);
+	const shortUrlRepositoryFakie = new ShortUrlRepositoryFakie();
+	const eventManagerDummy = new EventManagerDummy();
+	return new UpdateShortUrl(shortUrlRepositoryFakie, eventManagerDummy);
 };
 
 describe('Update short url', () => {

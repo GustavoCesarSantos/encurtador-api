@@ -76,7 +76,10 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		return new IncrementHit(this.eventManagerDummy);
 	}
 	makeUpdateShortUrl(): IUpdateShortUrl {
-		return new UpdateShortUrl(this.shortUrlRepository);
+		return new UpdateShortUrl(
+			this.shortUrlRepository,
+			this.eventManagerDummy,
+		);
 	}
 }
 
