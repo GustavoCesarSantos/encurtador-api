@@ -1,9 +1,5 @@
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
-import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener, Payload } from '@infra/listeners/listener';
 import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	FindShortUrl,
 	IFindShortUrl,
@@ -20,41 +16,13 @@ import {
 	UpdateShortUrl,
 } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { ShortUrlRepositoryStub } from '../../../testDoubles/stub/shortUrlRepository';
 
 let accessRootUrl: IController;
 
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
-	}
-}
-
-class ShortUrlRepositoryDummie implements IShortUrlRepository {
-	async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
-		if (shortUrl instanceof Error) return null;
-		return shortUrl;
-	}
-	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	save(entity: ShortUrl): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	async update(uuid: string, data: object): Promise<void> {
-		return;
-	}
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
-class UseCaseFactory implements IShortUrlUseCaseFactory {
-	shortUrlRepository: ShortUrlRepositoryDummie =
-		new ShortUrlRepositoryDummie();
+class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
+	shortUrlRepository: ShortUrlRepositoryStub = new ShortUrlRepositoryStub();
 	eventManagerDummy = new EventManagerDummy();
 
 	makeGenerateCode(): IGenerateCode {
@@ -84,9 +52,9 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 }
 
 const makeSut = () => {
-	const useCaseFactory = new UseCaseFactory();
+	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new AccessRootUrl(useCaseFactory, eventManagerDummy);
+	return new AccessRootUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 describe('Create short url', () => {
@@ -94,9 +62,9 @@ describe('Create short url', () => {
 		accessRootUrl = makeSut();
 	});
 
-	test('Should return 302 when short url is created', async () => {
+	test('Should return 302 when short url can be redirect', async () => {
 		const response = await accessRootUrl.handle({
-			params: { code: 'teste' },
+			params: { code: 'success' },
 		});
 		expect(response.status).toBe(302);
 	});
