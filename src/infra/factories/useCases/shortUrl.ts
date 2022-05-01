@@ -31,7 +31,7 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeUpdateShortUrl(): UpdateShortUrl {
-		return new UpdateShortUrl(this.shortUrlRepository);
+		return new UpdateShortUrl(this.shortUrlRepository, this.manager);
 	}
 
 	public makeGenerateCode(): GenerateCode {
