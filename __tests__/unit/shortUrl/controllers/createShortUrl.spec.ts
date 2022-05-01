@@ -1,6 +1,4 @@
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
-import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener, Payload } from '@infra/listeners/listener';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import { IGenerateCode } from '@modules/shortUrls/useCases/generateCode';
@@ -9,22 +7,23 @@ import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let createShortUrl: IController;
 
-class GenerateCodeDummie implements IGenerateCode {
+class GenerateCodeDummy implements IGenerateCode {
 	execute(): string {
 		return '';
 	}
 }
 
-class ReturnShortUrlDummie implements IReturnShortUrl {
+class ReturnShortUrlDummy implements IReturnShortUrl {
 	execute(code: string): string {
 		return '';
 	}
 }
 
-class SaveShortUrlDummie implements ISaveShortUrl {
+class SaveShortUrlDummy implements ISaveShortUrl {
 	async execute(url: string, code: string): Promise<void | Error> {
 		return;
 	}
@@ -35,7 +34,7 @@ class SaveShortUrlFakie implements ISaveShortUrl {
 	}
 }
 
-class UseCaseFactory implements IShortUrlUseCaseFactory {
+class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
 	makeIncrementHit(): IIncrementHit {
 		throw new Error('Method not implemented.');
 	}
@@ -46,17 +45,17 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		throw new Error('Method not implemented.');
 	}
 	makeGenerateCode(): IGenerateCode {
-		return new GenerateCodeDummie();
+		return new GenerateCodeDummy();
 	}
 	makeReturnShortUrl(): IReturnShortUrl {
-		return new ReturnShortUrlDummie();
+		return new ReturnShortUrlDummy();
 	}
 	makeSaveShortUrl(): ISaveShortUrl {
-		return new SaveShortUrlDummie();
+		return new SaveShortUrlDummy();
 	}
 }
 
-class UseCaseFactoryWithError implements IShortUrlUseCaseFactory {
+class UseCaseFactoryWithErrorDummy implements IShortUrlUseCaseFactory {
 	makeIncrementHit(): IIncrementHit {
 		throw new Error('Method not implemented.');
 	}
@@ -67,35 +66,26 @@ class UseCaseFactoryWithError implements IShortUrlUseCaseFactory {
 		throw new Error('Method not implemented.');
 	}
 	makeGenerateCode(): IGenerateCode {
-		return new GenerateCodeDummie();
+		return new GenerateCodeDummy();
 	}
 	makeReturnShortUrl(): IReturnShortUrl {
-		return new ReturnShortUrlDummie();
+		return new ReturnShortUrlDummy();
 	}
 	makeSaveShortUrl(): ISaveShortUrl {
 		return new SaveShortUrlFakie();
 	}
 }
 
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
-	}
-}
-
 const makeSut = () => {
-	const useCaseFactory = new UseCaseFactory();
+	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new CreateShortUrl(useCaseFactory, eventManagerDummy);
+	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 const makeSutWithError = () => {
-	const useCaseFactory = new UseCaseFactoryWithError();
+	const useCaseFactoryDummy = new UseCaseFactoryWithErrorDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new CreateShortUrl(useCaseFactory, eventManagerDummy);
+	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 describe('Create short url', () => {
