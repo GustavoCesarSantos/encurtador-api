@@ -22,6 +22,16 @@ describe('Pino Logger', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 
+	test('Should call warn log method when event type is warn', () => {
+		const logger = PinoLogger.create();
+		const spy = jest.spyOn(logger, 'warn');
+		logger.update({
+			eventName: EventNames.warn,
+			message: { where: 'success', what: 'success' },
+		});
+		expect(spy).toHaveBeenCalled();
+	});
+
 	test('Should call error log method when event type is error', () => {
 		const logger = PinoLogger.create();
 		const spy = jest.spyOn(logger, 'error');
