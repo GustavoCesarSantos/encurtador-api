@@ -1,6 +1,5 @@
 import { EventNames } from '@helpers/eventNames';
 import { ShortUrlRepositoryWithPrisma } from '@infra/db/prisma/shortUrlRepositoryWithPrisma';
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { ListenersManager } from '@infra/listeners/eventManager';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
@@ -24,7 +23,7 @@ export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	}
 
 	public makeIncrementHit(): IncrementHit {
-		return new IncrementHit();
+		return new IncrementHit(this.manager);
 	}
 
 	public makeFindShortUrl(): FindShortUrl {
