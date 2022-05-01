@@ -1,32 +1,11 @@
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrls } from '@modules/shortUrls/useCases/findShortUrls';
+import { ShortUrlRepositoryStub } from '../../../testDoubles/stub/shortUrlRepository';
 
 let findShortUrls: FindShortUrls;
 
-class ShortUrlRepositoryFakie implements IShortUrlRepository {
-	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	async getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
-		if (shortUrl instanceof Error) return [];
-		return [shortUrl];
-	}
-	save(entity: ShortUrl): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
 const makeSut = () => {
-	const shortUrlRepositoryFakie = new ShortUrlRepositoryFakie();
-	return new FindShortUrls(shortUrlRepositoryFakie);
+	const shortUrlRepositoryStub = new ShortUrlRepositoryStub();
+	return new FindShortUrls(shortUrlRepositoryStub);
 };
 
 describe('Find short urls', () => {

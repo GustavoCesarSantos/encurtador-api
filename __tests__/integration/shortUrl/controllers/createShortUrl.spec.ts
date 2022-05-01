@@ -1,7 +1,5 @@
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import {
 	GenerateCode,
@@ -18,39 +16,26 @@ import {
 } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { ShortUrlRepositoryDummy } from '../../../testDoubles/dummy/shortUrlRepository';
 
 let createShortUrl: IController;
 
-class ShortUrlRepositoryDummie implements IShortUrlRepository {
-	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	async save(entity: ShortUrl): Promise<void> {
-		return;
-	}
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
-class UseCaseFactory implements IShortUrlUseCaseFactory {
-	shortUrlRepository: ShortUrlRepositoryDummie =
-		new ShortUrlRepositoryDummie();
+class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
+	eventManagerDummy = new EventManagerDummy();
+	shortUrlRepository: ShortUrlRepositoryDummy = new ShortUrlRepositoryDummy();
 
 	makeGenerateCode(): IGenerateCode {
-		return new GenerateCode();
+		return new GenerateCode(this.eventManagerDummy);
 	}
 	makeReturnShortUrl(): IReturnShortUrl {
-		return new ReturnShortUrl();
+		return new ReturnShortUrl(this.eventManagerDummy);
 	}
 	makeSaveShortUrl(): ISaveShortUrl {
-		return new SaveShortUrl(this.shortUrlRepository);
+		return new SaveShortUrl(
+			this.shortUrlRepository,
+			this.eventManagerDummy,
+		);
 	}
 	makeFindShortUrl(): IFindShortUrl {
 		throw new Error('Method not implemented.');
@@ -64,8 +49,9 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 }
 
 const makeSut = () => {
-	const useCaseFactory = new UseCaseFactory();
-	return new CreateShortUrl(useCaseFactory);
+	const useCaseFactoryDummy = new UseCaseFactoryDummy();
+	const eventManagerDummy = new EventManagerDummy();
+	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 describe('Create short url', () => {

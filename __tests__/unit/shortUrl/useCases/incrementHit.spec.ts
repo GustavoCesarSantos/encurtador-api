@@ -2,11 +2,13 @@ import {
 	IIncrementHit,
 	IncrementHit,
 } from '@modules/shortUrls/useCases/incrementHit';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let incrementHit: IIncrementHit;
 
 const makeSut = () => {
-	return new IncrementHit();
+	const eventManagerDummy = new EventManagerDummy();
+	return new IncrementHit(eventManagerDummy);
 };
 
 describe('Increment hit', () => {
