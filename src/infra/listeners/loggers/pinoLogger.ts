@@ -23,6 +23,7 @@ export class PinoLogger implements ILogger, IListener {
 	update(payload: Payload): void {
 		const message: Message = payload.message;
 		if (payload.eventName === EventNames.info) return this.info(message);
+		if (payload.eventName === EventNames.warn) return this.warn(message);
 		if (payload.eventName === EventNames.error) return this.error(message);
 		this.error({
 			where: 'PinoLogger',
@@ -40,6 +41,10 @@ export class PinoLogger implements ILogger, IListener {
 
 	public info(message: Message): void {
 		this.logger.info(message);
+	}
+
+	public warn(message: Message): void {
+		this.logger.warn(message);
 	}
 
 	public error(error: Message): void {
