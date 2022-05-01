@@ -19,8 +19,8 @@ export class ShortUrlRepositoryStub implements IShortUrlRepository {
 	save(entity: ShortUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
+	async update(uuid: string, data: object): Promise<void> {
+		return;
 	}
 	delete(uuid: string): Promise<void> {
 		throw new Error('Method not implemented.');
