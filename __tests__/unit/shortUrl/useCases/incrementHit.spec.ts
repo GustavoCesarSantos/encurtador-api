@@ -1,3 +1,5 @@
+import { IEventManager } from '@infra/listeners/eventManager';
+import { IListener, Payload } from '@infra/listeners/listener';
 import {
 	IIncrementHit,
 	IncrementHit,
@@ -5,8 +7,18 @@ import {
 
 let incrementHit: IIncrementHit;
 
+class EventManagerDummy implements IEventManager {
+	attach(eventName: string, listeners: IListener[]): void {
+		return;
+	}
+	notify(payload: Payload): void {
+		return;
+	}
+}
+
 const makeSut = () => {
-	return new IncrementHit();
+	const eventManagerDummy = new EventManagerDummy();
+	return new IncrementHit(eventManagerDummy);
 };
 
 describe('Increment hit', () => {

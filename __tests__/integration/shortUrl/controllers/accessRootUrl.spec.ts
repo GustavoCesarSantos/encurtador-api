@@ -73,7 +73,7 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		);
 	}
 	makeIncrementHit(): IIncrementHit {
-		return new IncrementHit();
+		return new IncrementHit(this.eventManagerDummy);
 	}
 	makeUpdateShortUrl(): IUpdateShortUrl {
 		return new UpdateShortUrl(this.shortUrlRepository);
