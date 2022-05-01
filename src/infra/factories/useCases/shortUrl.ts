@@ -14,11 +14,12 @@ import { IShortUrlUseCaseFactory } from './IShortUrlUseCaseFactory';
 export class ShortUrlUseCaseFactory implements IShortUrlUseCaseFactory {
 	private readonly manager = new ListenersManager();
 	private readonly logger = PinoLogger.create();
-	private readonly shortUrlRepository: IShortUrlRepository =
+	private readonly shortUrlRepository: ShortUrlRepositoryWithPrisma =
 		new ShortUrlRepositoryWithPrisma();
 
 	constructor() {
 		this.manager.attach(EventNames.info, [this.logger]);
+		this.manager.attach(EventNames.warn, [this.logger]);
 		this.manager.attach(EventNames.error, [this.logger]);
 	}
 
