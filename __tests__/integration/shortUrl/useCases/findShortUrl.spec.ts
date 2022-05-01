@@ -1,17 +1,7 @@
 import { ShortUrlRepositoryWithMemory } from '@infra/db/memory/shortUrlRepositoryWithMemory';
-import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener, Payload } from '@infra/listeners/listener';
 import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { FindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
-
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
-	}
-}
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 const makeSut = () => {
 	const shortUrlRepository = new ShortUrlRepositoryWithMemory();
