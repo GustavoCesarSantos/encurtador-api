@@ -1,20 +1,10 @@
-import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener, Payload } from '@infra/listeners/listener';
 import {
 	IIncrementHit,
 	IncrementHit,
 } from '@modules/shortUrls/useCases/incrementHit';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let incrementHit: IIncrementHit;
-
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
-	}
-}
 
 const makeSut = () => {
 	const eventManagerDummy = new EventManagerDummy();
