@@ -54,13 +54,6 @@ export class AccessRootUrl implements IController<Request> {
 			},
 		});
 		const shortUrl = await this.findShortUrl.execute(code);
-		this.eventManager.notify({
-			eventName: EventNames.info,
-			message: {
-				where: 'AccessRootUrl',
-				what: `Url encurtada: ${shortUrl} encontrada, utilizando o código: ${code}`,
-			},
-		});
 		if (!shortUrl) {
 			this.eventManager.notify({
 				eventName: EventNames.error,
@@ -71,6 +64,13 @@ export class AccessRootUrl implements IController<Request> {
 			});
 			return HttpResponse.notFound();
 		}
+		this.eventManager.notify({
+			eventName: EventNames.info,
+			message: {
+				where: 'AccessRootUrl',
+				what: `Url encurtada: ${shortUrl} encontrada, utilizando o código: ${code}`,
+			},
+		});
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
