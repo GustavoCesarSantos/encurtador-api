@@ -1,9 +1,5 @@
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
-import { IEventManager } from '@infra/listeners/eventManager';
-import { IListener, Payload } from '@infra/listeners/listener';
 import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import { IFindShortUrl } from '@modules/shortUrls/useCases/findShortUrl';
 import {
 	GenerateCode,
@@ -20,40 +16,14 @@ import {
 } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { ShortUrlRepositoryDummy } from '../../../testDoubles/dummy/shortUrlRepository';
 
 let createShortUrl: IController;
 
-class EventManagerDummy implements IEventManager {
-	attach(eventName: string, listeners: IListener[]): void {
-		return;
-	}
-	notify(payload: Payload): void {
-		return;
-	}
-}
-
-class ShortUrlRepositoryDummie implements IShortUrlRepository {
-	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	async save(entity: ShortUrl): Promise<void> {
-		return;
-	}
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
-class UseCaseFactory implements IShortUrlUseCaseFactory {
+class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
 	eventManagerDummy = new EventManagerDummy();
-	shortUrlRepository: ShortUrlRepositoryDummie =
-		new ShortUrlRepositoryDummie();
+	shortUrlRepository: ShortUrlRepositoryDummy = new ShortUrlRepositoryDummy();
 
 	makeGenerateCode(): IGenerateCode {
 		return new GenerateCode(this.eventManagerDummy);
@@ -79,9 +49,9 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 }
 
 const makeSut = () => {
-	const useCaseFactory = new UseCaseFactory();
+	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new CreateShortUrl(useCaseFactory, eventManagerDummy);
+	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 describe('Create short url', () => {
