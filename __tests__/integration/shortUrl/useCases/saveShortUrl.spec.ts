@@ -1,10 +1,12 @@
 import { ShortUrlRepositoryWithMemory } from '@infra/db/memory/shortUrlRepositoryWithMemory';
 import { SaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 const shortUrlRepository = new ShortUrlRepositoryWithMemory();
 
 const makeSut = () => {
-	return new SaveShortUrl(shortUrlRepository);
+	const eventManagerDummy = new EventManagerDummy();
+	return new SaveShortUrl(shortUrlRepository, eventManagerDummy);
 };
 
 describe('Save short url', () => {

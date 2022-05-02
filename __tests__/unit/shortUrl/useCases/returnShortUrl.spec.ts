@@ -2,11 +2,13 @@ import {
 	IReturnShortUrl,
 	ReturnShortUrl,
 } from '@modules/shortUrls/useCases/returnShortUrl';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let returnShortUrl: IReturnShortUrl;
 
 const makeSut = () => {
-	return new ReturnShortUrl();
+	const eventManagerDummy = new EventManagerDummy();
+	return new ReturnShortUrl(eventManagerDummy);
 };
 
 describe('Return short url', () => {

@@ -1,8 +1,8 @@
 import pino, { Logger } from 'pino';
 
-import { IListener } from '../listener';
+import { IListener, Payload } from '../listener';
 import { EventNames } from '@helpers/eventNames';
-import { ILogger } from './logger';
+import { ILogger, Message } from './logger';
 
 export class PinoLogger implements ILogger, IListener {
 	private transport: any = {};
@@ -20,40 +20,34 @@ export class PinoLogger implements ILogger, IListener {
 		}
 		this.logger = pino(this.transport);
 	}
+	update(payload: Payload): void {
+		const message: Message = payload.message;
+		if (payload.eventName === EventNames.info) return this.info(message);
+		if (payload.eventName === EventNames.warn) return this.warn(message);
+		if (payload.eventName === EventNames.error) return this.error(message);
+		this.error({
+			where: 'PinoLogger',
+			what: `Incapaz de gerar logs para este tipo de evento: ${payload.eventName}`,
+		});
+	}
 
 	public static create(): PinoLogger {
 		return new PinoLogger();
-	}
-
-	public update(eventName: string, payload: string | Error): void {
-		if (eventName === EventNames.info) {
-			if (typeof payload === 'string') return this.info(payload);
-			return this.error(
-				`Tipo invalido de payload: ${typeof payload} para evento: ${eventName}`,
-			);
-		}
-		if (eventName === EventNames.error) {
-			if (typeof payload === 'string' || payload instanceof Error) {
-				return this.error(payload);
-			}
-			return this.error(
-				`Tipo invalido de payload para evento: ${eventName}`,
-			);
-		}
-		this.error(
-			`Incapaz de gerar logs para este tipo de evento: ${eventName}`,
-		);
 	}
 
 	public child(binding: pino.Bindings): Logger<any> {
 		return this.logger.child(binding);
 	}
 
-	public info(message: string): void {
+	public info(message: Message): void {
 		this.logger.info(message);
 	}
 
-	public error(error: string | Error): void {
+	public warn(message: Message): void {
+		this.logger.warn(message);
+	}
+
+	public error(error: Message): void {
 		this.logger.error(error);
 	}
 }

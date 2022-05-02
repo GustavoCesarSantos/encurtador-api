@@ -2,11 +2,13 @@ import {
 	GenerateCode,
 	IGenerateCode,
 } from '@modules/shortUrls/useCases/generateCode';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let generateCode: IGenerateCode;
 
 const makeSut = (): GenerateCode => {
-	return new GenerateCode();
+	const eventManagerDummy = new EventManagerDummy();
+	return new GenerateCode(eventManagerDummy);
 };
 
 describe('Generate code', () => {

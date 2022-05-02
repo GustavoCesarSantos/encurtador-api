@@ -1,33 +1,16 @@
-import { BaseRepository } from '@infra/db/baseRepository';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	IUpdateShortUrl,
 	UpdateShortUrl,
 } from '@modules/shortUrls/useCases/updateShortUrl';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { ShortUrlRepositoryDummy } from '../../../testDoubles/dummy/shortUrlRepository';
 
 let updateShortUrl: IUpdateShortUrl;
 
-class ShortUrlRepositoryDummie implements BaseRepository<ShortUrl> {
-	save(entity: ShortUrl): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	findMany(): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	findOne(identifier: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	async update(identifier: string, data: object): Promise<void> {
-		return;
-	}
-	delete(): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
 const makeSut = () => {
-	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
-	return new UpdateShortUrl(shortUrlRepositoryDummie);
+	const shortUrlRepositoryDummy = new ShortUrlRepositoryDummy();
+	const eventManagerDummy = new EventManagerDummy();
+	return new UpdateShortUrl(shortUrlRepositoryDummy, eventManagerDummy);
 };
 
 describe('Update short url', () => {

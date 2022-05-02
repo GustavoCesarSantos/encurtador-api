@@ -9,6 +9,7 @@ import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
 
 let accessRootUrl: IController;
 
@@ -23,19 +24,19 @@ class FindShortUrlFakie implements IFindShortUrl {
 	}
 }
 
-class IncrementHitDummie implements IIncrementHit {
+class IncrementHitDummy implements IIncrementHit {
 	execute(hit: number): number {
 		return 1;
 	}
 }
 
-class UpdateShortUrlDummie implements IUpdateShortUrl {
+class UpdateShortUrlDummy implements IUpdateShortUrl {
 	async execute(identifier: string, data: any): Promise<void> {
 		return;
 	}
 }
 
-class UseCaseFactory implements IShortUrlUseCaseFactory {
+class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
 	makeGenerateCode(): IGenerateCode {
 		throw new Error('Method not implemented.');
 	}
@@ -49,16 +50,17 @@ class UseCaseFactory implements IShortUrlUseCaseFactory {
 		return new FindShortUrlFakie();
 	}
 	makeIncrementHit(): IIncrementHit {
-		return new IncrementHitDummie();
+		return new IncrementHitDummy();
 	}
 	makeUpdateShortUrl(): IUpdateShortUrl {
-		return new UpdateShortUrlDummie();
+		return new UpdateShortUrlDummy();
 	}
 }
 
 const makeSut = () => {
-	const useCaseFactory = new UseCaseFactory();
-	return new AccessRootUrl(useCaseFactory);
+	const useCaseFactoryDummy = new UseCaseFactoryDummy();
+	const eventManagerDummy = new EventManagerDummy();
+	return new AccessRootUrl(useCaseFactoryDummy, eventManagerDummy);
 };
 
 describe('Access root url', () => {

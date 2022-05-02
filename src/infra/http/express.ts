@@ -33,15 +33,15 @@ export class ExpressApp {
 	}
 
 	public handleUncaughtException(): void {
-		process.on('uncaughtException', (err: Error) => {
-			this.logger.info('Caiu aqui');
-			this.logger.error(err);
+		process.on('uncaughtException', (error: Error) => {
+			this.logger.error(error);
 			process.exit(1);
 		});
+	}
 
-		process.on('unhandledRejection', (err: Error) => {
-			this.logger.info('Caiu aqui');
-			this.logger.error(err);
+	public handleUnhandledRejection(): void {
+		process.on('unhandledRejection', (error: Error) => {
+			this.logger.error(error);
 			process.exit(1);
 		});
 	}

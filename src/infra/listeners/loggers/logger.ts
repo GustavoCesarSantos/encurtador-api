@@ -1,4 +1,8 @@
+export type Message = {
+	where: string;
+	what: string;
+};
 export interface ILogger {
-	info(message: string): void;
-	error(error: string | Error): void;
+	info(message: Message): void;
+	error(error: Message): void;
 }

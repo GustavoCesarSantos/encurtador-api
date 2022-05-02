@@ -1,34 +1,17 @@
 import { MissingParams } from '@helpers/errors/missingParams';
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
 import {
 	ISaveShortUrl,
 	SaveShortUrl,
 } from '@modules/shortUrls/useCases/saveShortUrl';
+import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { ShortUrlRepositoryDummy } from '../../../testDoubles/dummy/shortUrlRepository';
 
 let saveShortUrl: ISaveShortUrl;
 
-class ShortUrlRepositoryDummie implements IShortUrlRepository {
-	getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		throw new Error('Method not implemented.');
-	}
-	getShortUrlByCode(code: string): Promise<ShortUrl | null> {
-		throw new Error('Method not implemented.');
-	}
-	async save(entity: ShortUrl): Promise<void> {
-		return;
-	}
-	update(uuid: string, data: object): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-	delete(uuid: string): Promise<void> {
-		throw new Error('Method not implemented.');
-	}
-}
-
 const makeSut = () => {
-	const shortUrlRepositoryDummie = new ShortUrlRepositoryDummie();
-	return new SaveShortUrl(shortUrlRepositoryDummie);
+	const shortUrlRepositoryDummy = new ShortUrlRepositoryDummy();
+	const eventManagerDummy = new EventManagerDummy();
+	return new SaveShortUrl(shortUrlRepositoryDummy, eventManagerDummy);
 };
 
 describe('Save short url', () => {
