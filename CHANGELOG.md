@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.10.0...v1.12.0) (2022-05-02)
+
+
+### Features
+
+* Adiciona event manager a classe creat short url ([ce84988](https://github.com/GustavoCesarSantos/encurtador-api/commit/ce849886d0ad5bc5db9fcac805896e2b483fe6f6))
+* adiciona eventManager a construção do caso de uso incrementHits ([3095f3c](https://github.com/GustavoCesarSantos/encurtador-api/commit/3095f3c44e20b7d27657b7ce55fc2286c0e1abfd))
+* adiciona eventManager a construção do caso de uso updateShortUrl ([2dff661](https://github.com/GustavoCesarSantos/encurtador-api/commit/2dff6613e12091f0cba1b6c3c19f358ae64aacd8))
+* Adiciona gerente de eventos a criação do caso de uso retornar url encurtada na fabrica de casos de uso ([e6fa83a](https://github.com/GustavoCesarSantos/encurtador-api/commit/e6fa83a57f31693317918fa204307ab463fb0631))
+* Adiciona gerente de eventos a criação do caso de uso retornar url encurtada no teste unitario ([d942a10](https://github.com/GustavoCesarSantos/encurtador-api/commit/d942a1003888b5a6478a3d99ded9df4ea9f8adab))
+* Adiciona gerente de eventos ao caso de uso gerar código ([2ef577f](https://github.com/GustavoCesarSantos/encurtador-api/commit/2ef577f3a1052bff4f81cbe96cc8f55d8f1a1cee))
+* Adiciona gerente de eventos ao construtor do caso de uso gerador de código ([5ea8ed3](https://github.com/GustavoCesarSantos/encurtador-api/commit/5ea8ed39603c86a11be501810793cac9670d36fe))
+* Adiciona gerente de eventos ao construtor dos casos de uso gerador de código nos testes unitario e de integração ([5989ae6](https://github.com/GustavoCesarSantos/encurtador-api/commit/5989ae69086bdd928ab2474b196b05cd5d675f7c))
+* Adiciona gerente de eventos ao construtor dos casos de uso retorna e salva url encurtada ([c2ef904](https://github.com/GustavoCesarSantos/encurtador-api/commit/c2ef904f1fb1884e7883b4c0ceaeecc56aeb5289))
+* Adiciona gerente de eventos ao construtor dos casos de uso retorna e salva url encurtada nos testes de unidade e integração ([d6bb9d2](https://github.com/GustavoCesarSantos/encurtador-api/commit/d6bb9d26bf1135003b9f68427c2d7439a0124079))
+* Adiciona gerente de eventos e log ao caso de uso retorna url encurtada ([32a6317](https://github.com/GustavoCesarSantos/encurtador-api/commit/32a6317a145cf5a15dcf508a3fa0b849855934f0))
+* Adiciona gerente de eventos e log ao caso de uso salva url encurtada ([593e37b](https://github.com/GustavoCesarSantos/encurtador-api/commit/593e37b6870f74abdbead37abe6d3d9dcde13077))
+* Adiciona gerente de eventos no construtor do caso de uso retornar url encurtada ([4fa0fe2](https://github.com/GustavoCesarSantos/encurtador-api/commit/4fa0fe26af5ac467cfa6cb80b4db397f249341e0))
+* Adiciona gerente de eventos no construtor do caso de uso retornar url encurtada no teste de integração ([a450de1](https://github.com/GustavoCesarSantos/encurtador-api/commit/a450de1788e0b86e626958811821b0dafdc5ba66))
+* Adiciona gerente de eventos no construtor do caso de uso retornar url encurtada no teste de integração da controller acessar url original ([fed0ac8](https://github.com/GustavoCesarSantos/encurtador-api/commit/fed0ac8fb7b70f3a309882794dfab92832ebd0cd))
+* Adiciona implementação da interface listener e método update na classe pino logger ([4253ea9](https://github.com/GustavoCesarSantos/encurtador-api/commit/4253ea9712cf7e4bae9b05d6ca6f1f389ec076fa))
+* Adiciona listeners ao evento errors ([9211bc6](https://github.com/GustavoCesarSantos/encurtador-api/commit/9211bc67af202791a2f9ee72b0576d3095e042d1))
+* adiciona listeners ao evento warn nos casos de uso ([f1adf7c](https://github.com/GustavoCesarSantos/encurtador-api/commit/f1adf7cad4dbc9559ab88beaf7a4f24fbc3e0fc5))
+* Adiciona log ao subir servidor ([d38bb27](https://github.com/GustavoCesarSantos/encurtador-api/commit/d38bb27fdacc0cc00d52153320bfae41f0834939))
+* Adiciona logs a classe createShortUrl ([c2fb0c6](https://github.com/GustavoCesarSantos/encurtador-api/commit/c2fb0c6bd3728c977cc26abfd3b32099c5ce04ed))
+* Adiciona logs a controller access root url ([d94c4c8](https://github.com/GustavoCesarSantos/encurtador-api/commit/d94c4c8d5b476f976e25b6d008ed4285e9db8262))
+* Adiciona manager na construção da classe create short url na fabrica de controllers ([456e99a](https://github.com/GustavoCesarSantos/encurtador-api/commit/456e99a453883ac549fcd18148b9cd5e1093acb1))
+* Adiciona método que lida com erros não tratados ([689a504](https://github.com/GustavoCesarSantos/encurtador-api/commit/689a50439d57fa17e91eba36a63aba67ea5aafe9))
+* Adiciona os pacotes pino e pino-pretty ([0afc8f4](https://github.com/GustavoCesarSantos/encurtador-api/commit/0afc8f471db709ec0ea82dc2b36814b86f29ccb8))
+* Adiciona parametro event manager ao construtor da classe access root url ([ab8dffa](https://github.com/GustavoCesarSantos/encurtador-api/commit/ab8dffa06ea370fdb8997acee79b827ed8a09969))
+* Adiciona parametro event manager ao construtor da classe access root url ([c0794ad](https://github.com/GustavoCesarSantos/encurtador-api/commit/c0794add06891d265d9c5db143d7e58fe67c5d40))
+* Adiciona parametro event manager ao construtor da classe access root url na fabrica de controllers ([c833d48](https://github.com/GustavoCesarSantos/encurtador-api/commit/c833d48c888fa87cfeba38ecda9822ab56beae1f))
+* adiciona tipo warn ao enum de nomes de eventos ([fe0a1a5](https://github.com/GustavoCesarSantos/encurtador-api/commit/fe0a1a5d00fbfdf68dc5ffe4ebf56fceafc4273b))
+* Adiciona variavel para declarar o ambiente que o código está sendo utilizado ([ef5bacf](https://github.com/GustavoCesarSantos/encurtador-api/commit/ef5bacf753cd3be65f0e200a0a807ac3488efa7d))
+* Atualiza pacotes do projeto ([8f66565](https://github.com/GustavoCesarSantos/encurtador-api/commit/8f66565045cae43dbf4aec0ae84c48ea1bea05de))
+* Converte para string o objeto de resposta da requisicação de criar url encurtada ([cd31ceb](https://github.com/GustavoCesarSantos/encurtador-api/commit/cd31cebc6563430a76180f15b356162a09efd24d))
+* Cria enum para os nomes de eventos ([b6e29b8](https://github.com/GustavoCesarSantos/encurtador-api/commit/b6e29b8792f23424f0152ccbf2683b76e122a54d))
+* Cria event manager ([af7001e](https://github.com/GustavoCesarSantos/encurtador-api/commit/af7001e9c1f5ab2010136ae5abc7acb1169cbae3))
+* Cria interface listener ([1f9b795](https://github.com/GustavoCesarSantos/encurtador-api/commit/1f9b7952c831bdaab6b7e3c5d7742e06666841bc))
+* Cria interface logger ([7744d39](https://github.com/GustavoCesarSantos/encurtador-api/commit/7744d3935b313172cb84b5897938ed8af718a9b5))
+* Cria logger utilizando o pacote pino ([f5b6658](https://github.com/GustavoCesarSantos/encurtador-api/commit/f5b665895652a0dcbc79658ea5f87d70c2b3da20))
+* Cria scripts para testes unitarios e de integração ([23509e0](https://github.com/GustavoCesarSantos/encurtador-api/commit/23509e0d7fd1a105e89ead63e7d8b018a8b37daa))
+* Cria teste unitario para o pino logger ([13c1eb1](https://github.com/GustavoCesarSantos/encurtador-api/commit/13c1eb18ceae6e850b9cc943fc350f802a3d503c))
+* **findShortUrl:** adiciona logs ([af628af](https://github.com/GustavoCesarSantos/encurtador-api/commit/af628afbbc907e034714a794b852dd52b38d0304))
+* **incrementHit:** adiciona logs ([c582602](https://github.com/GustavoCesarSantos/encurtador-api/commit/c582602917182a6c87e3a60466404439f16b32a5))
+* **pinoLogger:** Adiciona método de log do tipo warn ([1384540](https://github.com/GustavoCesarSantos/encurtador-api/commit/13845408f348de2f20197cf3001fe3c1695a925b))
+* **updateShortUrl:** adiciona logs ([c331e32](https://github.com/GustavoCesarSantos/encurtador-api/commit/c331e3242dc508d833c337fff243373d89e88b91))
+
+
+### Bug Fixes
+
+* Adiciona permissao de acesso ao disco aos hooks do husky ([67b59eb](https://github.com/GustavoCesarSantos/encurtador-api/commit/67b59ebcc8ea8f3c5644b520af82ad266fe6f941))
+* Corrige ci yml ([33d7186](https://github.com/GustavoCesarSantos/encurtador-api/commit/33d71865fa06deb068ae944389d4340125ce6bf3))
+* Corrige ci yml ([e3db201](https://github.com/GustavoCesarSantos/encurtador-api/commit/e3db20112b788fbf37e359c10388f4fd2b434d78))
+* Corrige nome da pasta loggers ([fc57f9e](https://github.com/GustavoCesarSantos/encurtador-api/commit/fc57f9e29aa369ec04ed69455580e2bfa046cce6))
+* Corrige testes unitario e de integração da classe create short url ([739a9f2](https://github.com/GustavoCesarSantos/encurtador-api/commit/739a9f2e1c89f34957357559629267642dc6ddd6))
+
 ## [1.11.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.10.0...v1.11.0) (2022-04-10)
 
 
