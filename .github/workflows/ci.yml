@@ -4,10 +4,8 @@
 name: SHORTENER URL API CI
 
 on:
-    push:
-        branches: [develop]
     pull_request:
-        branches: [develop]
+        branches: [develop, main]
 
 jobs:
     test:
