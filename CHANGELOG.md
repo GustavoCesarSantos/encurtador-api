@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.12.1...v1.13.0) (2022-05-14)
+
+
+### Features
+
+* :sparkles: adiciona gracefull shutdown ([e954188](https://github.com/GustavoCesarSantos/encurtador-api/commit/e9541886dc13acf8eeb83a42b876530c1efc61a4))
+
 ### [1.12.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.12.0...v1.12.1) (2022-05-14)
 
 ## [1.12.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.10.0...v1.12.0) (2022-05-02)

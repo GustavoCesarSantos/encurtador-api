@@ -3,6 +3,7 @@ import { Logger } from 'pino';
 
 import { routes } from '@infra/routes';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { Server } from 'node:http';
 
 export class ExpressApp {
 	private readonly app: Express;
@@ -26,23 +27,9 @@ export class ExpressApp {
 		routes(router);
 	}
 
-	public listen(): void {
-		this.app.listen(this.port, () =>
+	public listen(): Server {
+		return this.app.listen(this.port, () =>
 			this.logger.info(`Server running in port: ${this.port}`),
 		);
-	}
-
-	public handleUncaughtException(): void {
-		process.on('uncaughtException', (error: Error) => {
-			this.logger.error(error);
-			process.exit(1);
-		});
-	}
-
-	public handleUnhandledRejection(): void {
-		process.on('unhandledRejection', (error: Error) => {
-			this.logger.error(error);
-			process.exit(1);
-		});
 	}
 }
