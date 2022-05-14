@@ -4,8 +4,6 @@
 name: SHORTENER URL API CI
 
 on:
-    push:
-        branches: [develop]
     pull_request:
         branches: [develop, main]
 
@@ -24,6 +22,9 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: 'npm'
+            - name: Install dependencies
             - run: npm install
+            - name: Run unit tests
             - run: npm run test:unit
+            - name: Run integration tests
             - run: npm run test:integration
