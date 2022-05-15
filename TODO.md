@@ -29,7 +29,7 @@
 - [x] Criar rotas
 - [x] Criar servidor
 - [x] Adicionar logs
-- [] Adicionar gracefull shutdown
+- [x] Adicionar gracefull shutdown
 - [] Criar validador da integridade da url raiz
 
 ## Fase 2
