@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.13.0...v1.14.0) (2022-05-29)
+
+
+### Features
+
+* adiciona uso do método de setCors ao entrypoint ([7a64b7d](https://github.com/GustavoCesarSantos/encurtador-api/commit/7a64b7d3aa5e3712e6d028b811287838babc3e9b))
+* cria método para configurar cors ([5ccc6c5](https://github.com/GustavoCesarSantos/encurtador-api/commit/5ccc6c5d81fae30251deacb3359cbd625d470135))
+* cria resposta http para os erros do tipo servidor ([2826d7a](https://github.com/GustavoCesarSantos/encurtador-api/commit/2826d7af1cdd7e193ffc1c0c6942bec9bbd4c7b5))
+
 ## [1.13.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.12.1...v1.13.0) (2022-05-14)
 
 
