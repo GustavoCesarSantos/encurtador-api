@@ -41,4 +41,13 @@ export class HttpResponse {
 			},
 		};
 	}
+
+	static serverError(): Response {
+		return {
+			status: 500,
+			body: {
+				message: 'Internal Server Error',
+			},
+		};
+	}
 }
