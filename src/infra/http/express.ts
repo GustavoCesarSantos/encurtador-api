@@ -1,5 +1,6 @@
 import express, { Express, Router } from 'express';
 import { Logger } from 'pino';
+import cors from 'cors';
 
 import { routes } from '@infra/routes';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
@@ -19,6 +20,14 @@ export class ExpressApp {
 
 	public getApp(): Express {
 		return this.app;
+	}
+
+	public setCors() {
+		const allowedOrigins = ['http://localhost:3000'];
+		const options: cors.CorsOptions = {
+			origin: allowedOrigins,
+		};
+		this.app.use(cors(options));
 	}
 
 	public setupRoutes(): void {
