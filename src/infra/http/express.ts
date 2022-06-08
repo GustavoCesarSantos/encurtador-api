@@ -32,8 +32,8 @@ export class ExpressApp {
 
 	public setupRoutes(): void {
 		const router = Router();
-		this.app.use('/v1', router);
 		routes(router);
+		this.app.use('/v1', router);
 	}
 
 	public listen(): Server {
