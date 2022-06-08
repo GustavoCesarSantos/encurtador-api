@@ -8,7 +8,7 @@ import { Server } from 'node:http';
 
 export class ExpressApp {
 	private readonly app: Express;
-	private readonly port: string = process.env.PORT ?? '3000';
+	private readonly port: string = process.env.PORT ?? '3001';
 	private readonly logger: Logger<any> = PinoLogger.create().child({
 		environment: `${process.env.NODE_ENV}`,
 	});
