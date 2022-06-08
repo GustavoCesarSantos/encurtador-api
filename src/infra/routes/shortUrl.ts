@@ -7,11 +7,11 @@ const shortUrlControllerFactory = new ShortUrlControllerFactory();
 
 export const shortUrl = (router: Router): void => {
 	router.get(
-		'/:code',
+		'/shortenedUrls/:code',
 		expressRouteAdapter(shortUrlControllerFactory.makeAccessRootUrl()),
 	);
 	router.post(
-		'/',
+		'/shortenedUrls',
 		expressRouteAdapter(shortUrlControllerFactory.makeCreateShortUrl()),
 	);
 };
