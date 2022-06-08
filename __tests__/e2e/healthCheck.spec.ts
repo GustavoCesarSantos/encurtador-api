@@ -7,13 +7,13 @@ app.setupRoutes();
 
 describe('Health Check url', () => {
 	test('Should return status code 200 when server is running', async () => {
-		const { status } = await request(app.getApp()).get('/v1/healthCheck');
+		const { status } = await request(app.getApp()).get('/v1/health');
 		expect(status).toBe(200);
 	});
 
 	test('Should return status ok when server is running', async () => {
-		const { text } = await request(app.getApp()).get('/v1/healthCheck');
+		const { text } = await request(app.getApp()).get('/v1/health');
 		const response = JSON.parse(text);
-		expect(response.healthCheck).toBe('ok');
+		expect(response.message).toBe('ok');
 	});
 });
