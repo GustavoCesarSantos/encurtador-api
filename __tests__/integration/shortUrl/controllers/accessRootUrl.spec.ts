@@ -62,14 +62,14 @@ describe('Create short url', () => {
 		accessRootUrl = makeSut();
 	});
 
-	test('Should return 302 when short url can be redirect', async () => {
+	test('Should return 201 when foot url is found', async () => {
 		const response = await accessRootUrl.handle({
 			params: { code: 'success' },
 		});
-		expect(response.status).toBe(302);
+		expect(response.status).toBe(201);
 	});
 
-	test('Should return root url when this can be redirect', async () => {
+	test('Should return root url when this is found', async () => {
 		const response = await accessRootUrl.handle({
 			params: { code: 'success' },
 		});

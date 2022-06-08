@@ -23,10 +23,24 @@ export class ExpressApp {
 	}
 
 	public setCors() {
-		const allowedOrigins = ['http://localhost:3000'];
 		const options: cors.CorsOptions = {
-			origin: allowedOrigins,
+			allowedHeaders: [
+				'Origin',
+				'X-Requested-With',
+				'Content-Type',
+				'Accept',
+				'X-Access-Token',
+			],
+			credentials: true,
+			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+			origin: 'http://localhost:3000',
+			preflightContinue: false,
 		};
+
+		// const allowedOrigins = ['*'];
+		// const options: cors.CorsOptions = {
+		// 	origin: allowedOrigins,
+		// };
 		this.app.use(cors(options));
 	}
 

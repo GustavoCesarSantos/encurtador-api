@@ -21,27 +21,28 @@ describe('Access root url', () => {
 		expect(body.error.message).toBe('Not found');
 	});
 
-	test('Should return status code 302', async () => {
+	test('Should return status code 201', async () => {
 		const { text } = await request(app.getApp())
 			.post('/v1/shortenedUrls')
 			.send({ url: 'success' });
 		const body = JSON.parse(text);
-		const code: string = body.url.split('v1/')[1];
+		const code: string = body.url.slice(-5);
 		const { status } = await request(app.getApp()).get(
 			`/v1/shortenedUrls/${code}`,
 		);
-		expect(status).toBe(302);
+		expect(status).toBe(201);
 	});
 
-	test('Should redirect to root url', async () => {
+	test('Should return the root url', async () => {
 		const { text } = await request(app.getApp())
 			.post('/v1/shortenedUrls')
 			.send({ url: 'success' });
 		const body = JSON.parse(text);
-		const code: string = body.url.split('v1/')[1];
-		const { redirect } = await request(app.getApp()).get(
+		const code: string = body.url.slice(-5);
+		const response = await request(app.getApp()).get(
 			`/v1/shortenedUrls/${code}`,
 		);
-		expect(redirect).toBe(true);
+		const body2 = JSON.parse(response.text);
+		expect(body2.rootUrl).toBe('success');
 	});
 });
