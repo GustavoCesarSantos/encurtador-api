@@ -8,7 +8,7 @@ import { Server } from 'node:http';
 
 export class ExpressApp {
 	private readonly app: Express;
-	private readonly port: string = process.env.PORT ?? '3000';
+	private readonly port: string = process.env.PORT ?? '3001';
 	private readonly logger: Logger<any> = PinoLogger.create().child({
 		environment: `${process.env.NODE_ENV}`,
 	});
@@ -23,17 +23,31 @@ export class ExpressApp {
 	}
 
 	public setCors() {
-		const allowedOrigins = ['http://localhost:3000'];
 		const options: cors.CorsOptions = {
-			origin: allowedOrigins,
+			allowedHeaders: [
+				'Origin',
+				'X-Requested-With',
+				'Content-Type',
+				'Accept',
+				'X-Access-Token',
+			],
+			credentials: true,
+			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+			origin: 'http://localhost:3000',
+			preflightContinue: false,
 		};
+
+		// const allowedOrigins = ['*'];
+		// const options: cors.CorsOptions = {
+		// 	origin: allowedOrigins,
+		// };
 		this.app.use(cors(options));
 	}
 
 	public setupRoutes(): void {
 		const router = Router();
-		this.app.use('/v1', router);
 		routes(router);
+		this.app.use('/v1', router);
 	}
 
 	public listen(): Server {

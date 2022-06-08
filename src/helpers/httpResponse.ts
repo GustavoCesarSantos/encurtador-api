@@ -16,13 +16,6 @@ export class HttpResponse {
 		};
 	}
 
-	static redirect(body: object): Response {
-		return {
-			status: 302,
-			body,
-		};
-	}
-
 	static badRequest(error: Error): Response {
 		return {
 			status: 400,
