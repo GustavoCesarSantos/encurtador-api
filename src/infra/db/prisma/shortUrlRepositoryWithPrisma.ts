@@ -28,7 +28,14 @@ export class ShortUrlRepositoryWithPrisma implements IShortUrlRepository {
 	public async getShortUrlOwnedByOwnerId(
 		ownerId: number,
 	): Promise<ShortUrl[]> {
-		const shortUrlsDB = await this.prisma.shortUrls.findMany({
+		const shortUrlsDB: {
+			uuid: string;
+			url: string;
+			code: string;
+			hits: number | null;
+			createdat: Date;
+			ownerid: number;
+		}[] = await this.prisma.shortUrls.findMany({
 			where: { ownerid: ownerId },
 		});
 		const shortUrls: ShortUrl[] = [];
