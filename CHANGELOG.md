@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.0...v1.15.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* :bug: corrige erro de tipagem ([a43eb6e](https://github.com/GustavoCesarSantos/encurtador-api/commit/a43eb6edbff112664d38951733e06a85d9b30974))
+* corrige dependencias ([abc6ee5](https://github.com/GustavoCesarSantos/encurtador-api/commit/abc6ee5ac87f82800c72f4f460691595f2660b52))
+* corrige problema de build do heroku ([88e268d](https://github.com/GustavoCesarSantos/encurtador-api/commit/88e268df998891616fffe4943742d889e8d7a50e))
+* corrige problema de deploy ([4c5337c](https://github.com/GustavoCesarSantos/encurtador-api/commit/4c5337cc7489a509293280f09a797b8537351eea))
+* corrige problema de deploy do heroku ([646e508](https://github.com/GustavoCesarSantos/encurtador-api/commit/646e508e141fc595f47b51cc211dc83a75d2fba3))
+
 ## [1.15.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.14.0...v1.15.0) (2022-06-09)
 
 
