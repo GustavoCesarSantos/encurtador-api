@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "ShortUrls" ALTER COLUMN "uuid" SET DATA TYPE TEXT;
