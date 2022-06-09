@@ -11,7 +11,7 @@
 		"test:dev": "jest --no-cache --runInBand --watchAll",
 		"test:cov": "jest --no-cache --runInBand --coverage",
 		"test:staged": "jest --passWithNoTests --findRelatedTests",
-		"build": "rimraf ./dist && tsc",
+		"build": "rimraf ./dist && tsc -p .",
 		"start": "export NODE_ENV=production && prisma db push && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index.js",
 		"dev": "export NODE_ENV=development && prisma migrate dev && ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/index.ts",
 		"release": "standard-version",
