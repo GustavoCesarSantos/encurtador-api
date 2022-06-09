@@ -33,14 +33,9 @@ export class ExpressApp {
 			],
 			credentials: true,
 			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-			origin: 'http://localhost:3000',
+			origin: process.env.DOMAIN_URL,
 			preflightContinue: false,
 		};
-
-		// const allowedOrigins = ['*'];
-		// const options: cors.CorsOptions = {
-		// 	origin: allowedOrigins,
-		// };
 		this.app.use(cors(options));
 	}
 
