@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.14.0...v1.15.0) (2022-06-09)
+
+
+### Features
+
+* :sparkles: cria rota de health check ([2b59bb3](https://github.com/GustavoCesarSantos/encurtador-api/commit/2b59bb3c1763be543c00b9f6fd2ff636af0d5f52))
+* adiciona as rotas de health check ao router do express ([e808eb6](https://github.com/GustavoCesarSantos/encurtador-api/commit/e808eb6a3dcea4cab4dc675781c21dafb2246ee3))
+
+
+### Bug Fixes
+
+* :bug: corrige número da porta ([e093432](https://github.com/GustavoCesarSantos/encurtador-api/commit/e093432bcb7e05740391c6d14540e9ccf65fecbe))
+
 ## [1.14.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.13.0...v1.14.0) (2022-05-29)
 
 
