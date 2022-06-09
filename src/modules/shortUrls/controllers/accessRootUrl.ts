@@ -113,7 +113,7 @@ export class AccessRootUrl implements IController<Request> {
 					})}`,
 				},
 			});
-			return HttpResponse.redirect({ rootUrl: shortUrl.getRootUrl() });
+			return HttpResponse.okWithBody({ rootUrl: shortUrl.getRootUrl() });
 		} catch (error) {
 			return HttpResponse.serverError();
 		}
