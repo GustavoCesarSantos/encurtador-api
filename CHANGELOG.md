@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.2](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.1...v1.15.2) (2022-06-09)
+
+
+### Bug Fixes
+
+* corrige erro de conflito ([2dffa15](https://github.com/GustavoCesarSantos/encurtador-api/commit/2dffa153e1db1a3410a37fac2d50cf29f0f3499c))
+
 ### [1.15.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.0...v1.15.1) (2022-06-09)
 
 
