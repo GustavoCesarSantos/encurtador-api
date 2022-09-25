@@ -1,0 +1,189 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "5bits encurtador API",
+		"description": "Encurtador de links",
+		"contact": {
+			"name": "Gustavo",
+			"email": "gustavocs789@gmail.com"
+		},
+		"license": { "name": "MIT" },
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:{port}/{basePath}",
+			"description": "Development server",
+			"variables": {
+				"port": {
+					"enum": ["8000", "3001"],
+					"default": "3001"
+				},
+				"basePath": {
+					"default": "v1"
+				}
+			}
+		}
+	],
+	"tags": [
+		{
+			"name": "Health Check",
+			"description": "Api health check endpoint"
+		},
+		{
+			"name": "Shortened Url",
+			"description": "Shortened url endpoints"
+		}
+	],
+	"paths": {
+		"/health": {
+			"get": {
+				"tags": ["Health Check"],
+				"summary": "Api health check",
+				"responses": {
+					"200": {
+						"description": "Api healthy",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponseHealthCheck"
+								},
+								"examples": {
+									"valid-health-check": {
+										"summary": "Api healthy response",
+										"value": {
+											"message": "ok"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shortenedUrls/{code}": {
+			"get": {
+				"tags": ["Shortened Url"],
+				"summary": "Return root url",
+				"parameters": [
+					{
+						"name": "code",
+						"in": "path",
+						"description": "Shortened url code identifier",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Return root url",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponseSuccessAccessRootUrl"
+								},
+								"examples": {
+									"valid-root-url": {
+										"summary": "Root url",
+										"value": {
+											"rootUrl": "https://www.youtube.com/watch?v=tKfKUF0CHV0"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shortenedUrls": {
+			"post": {
+				"tags": ["Shortened Url"],
+				"summary": "Crete a shortened url",
+				"requestBody": {
+					"description": "",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RequestCreateShortenedUrl"
+							},
+							"examples": {
+								"valid-root-url": {
+									"summary": "A valid root url",
+									"value": {
+										"url": "https://www.youtube.com/watch?v=tKfKUF0CHV0"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Shortened url created with success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ResponseSuccessCreateShortenedUrl"
+								},
+								"examples": {
+									"valid-shortened-url": {
+										"summary": "A valid shortened url",
+										"value": {
+											"url": "http://localhost:3000/v1/5796b"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"ResponseHealthCheck": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"description": "Api health status"
+					}
+				}
+			},
+			"ResponseSuccessAccessRootUrl": {
+				"type": "object",
+				"properties": {
+					"rootUrl": {
+						"type": "string",
+						"description": "Root url"
+					}
+				}
+			},
+			"RequestCreateShortenedUrl": {
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "Root url who will be shortened"
+					}
+				},
+				"required": ["url"]
+			},
+			"ResponseSuccessCreateShortenedUrl": {
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "Shortened url"
+					}
+				}
+			}
+		}
+	}
+}
