@@ -1,8 +1,8 @@
 import pino, { Logger } from 'pino';
 
-import { IListener, Payload } from '../listener';
+import { IListener, Payload } from '../IListener';
 import { EventNames } from '@helpers/eventNames';
-import { ILogger, Message } from './logger';
+import { ILogger, Message } from './ILogger';
 
 export class PinoLogger implements ILogger, IListener {
 	private transport: any = {};
