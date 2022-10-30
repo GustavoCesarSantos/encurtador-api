@@ -9,11 +9,15 @@ export class RedisClient implements ICache {
 		this.redisClient = createClient();
 	}
 
+	async connect() {
+		await this.redisClient.connect();
+	}
+
 	async set(key: string, value: string): Promise<void> {
 		await this.redisClient.set(key, value);
 	}
 
 	async get(key: string): Promise<any> {
-		await this.redisClient.get(key);
+		return await this.redisClient.get(key);
 	}
 }
