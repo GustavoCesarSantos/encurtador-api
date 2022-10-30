@@ -22,6 +22,7 @@ export class RateLimit implements IMiddleware {
 
 	public async handle(request: Request): Promise<Response> {
 		try {
+			await this.cache.connect();
 			const key = request.ip;
 			const record = await this.cache.get(key);
 			const window = !process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES
@@ -36,11 +37,11 @@ export class RateLimit implements IMiddleware {
 			}
 			const data: tokenBucket = JSON.parse(record);
 			const now = new Date();
-			if (now.getTime() > data.whenWindowClose.getTime()) {
+			if (now.getTime() > new Date(data.whenWindowClose).getTime()) {
 				await this.setTokenBucket(key, window, limitToken);
 				return HttpResponse.ok();
 			}
-			if (now.getTime() < data.nextTimestampAllowed.getTime()) {
+			if (now.getTime() < new Date(data.nextTimestampAllowed).getTime()) {
 				return HttpResponse.badRequest(new Error('Request Denied'));
 			}
 			if (data.token < 0) {
@@ -58,22 +59,6 @@ export class RateLimit implements IMiddleware {
 		}
 	}
 
-	private getWindowClose(window: number) {
-		const now = new Date();
-		const whenWindowClose = new Date(now.getTime() + (window + 60 * 1000));
-		return whenWindowClose;
-	}
-
-	private getNextRequestTimestampAllowed(
-		window: number,
-		limitToken: number,
-	): Date {
-		const nextTimestamp = new Date();
-		const seconds = (window * 60) / limitToken;
-		nextTimestamp.setSeconds(nextTimestamp.getSeconds() + seconds);
-		return nextTimestamp;
-	}
-
 	private async setTokenBucket(
 		key: string,
 		window: number,
@@ -88,6 +73,23 @@ export class RateLimit implements IMiddleware {
 			token: Number(process.env.RATE_LIMIT_TOKEN),
 		});
 		await this.cache.set(key, value);
+	}
+
+	private getWindowClose(window: number) {
+		const now = new Date();
+		const minutes = 60 * 1000;
+		const whenWindowClose = new Date(now.getTime() + window * minutes);
+		return whenWindowClose;
+	}
+
+	private getNextRequestTimestampAllowed(
+		window: number,
+		limitToken: number,
+	): Date {
+		const nextTimestamp = new Date();
+		const seconds = (window * 60) / limitToken;
+		nextTimestamp.setSeconds(nextTimestamp.getSeconds() + seconds);
+		return nextTimestamp;
 	}
 
 	private async updateTokenBucket(key: string, tokenBucket: tokenBucket) {
