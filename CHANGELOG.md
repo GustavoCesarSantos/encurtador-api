@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.3...v1.16.0) (2022-10-30)
+
+
+### Features
+
+* :sparkles: cria adaptador de middleware ([fc60603](https://github.com/GustavoCesarSantos/encurtador-api/commit/fc606030f99da8f79b6383fa884bd79f31b17754))
+* :sparkles: cria cliente do redis ([678b5d8](https://github.com/GustavoCesarSantos/encurtador-api/commit/678b5d85b8de833cf6efdffef2ea210e72ca7797))
+* :sparkles: cria middleware de rate limit ([a3f5967](https://github.com/GustavoCesarSantos/encurtador-api/commit/a3f5967ea3da51e8ea04b09c516760531ac81c9b))
+* adiciona a propriedade connect a interface de cache ([dc24be6](https://github.com/GustavoCesarSantos/encurtador-api/commit/dc24be61cdeaed372aa55ef2dad2ecfcb8a647df))
+* adiciona middleware rate-limit a rota de health check ([fbfad8d](https://github.com/GustavoCesarSantos/encurtador-api/commit/fbfad8d292b15675eb5af4417e200a71b298f15b))
+* adiciona o método connect a classe redisClient ([504e70b](https://github.com/GustavoCesarSantos/encurtador-api/commit/504e70b71056d7d8d0f2ab0c38e4cde66e0f9dc1))
+* adiciona rate limit ([f0d04cc](https://github.com/GustavoCesarSantos/encurtador-api/commit/f0d04ccbea5a09d0df0e3750b9236ffdd0966d95))
+* cria interface para cache ([18265c1](https://github.com/GustavoCesarSantos/encurtador-api/commit/18265c11069efc75e7b94c5c523eec1ae55b6b79))
+* cria interface para middleware ([14c59ef](https://github.com/GustavoCesarSantos/encurtador-api/commit/14c59ef01bf94e060389d4577c49cf411c507e67))
+* **rate-limit:** cria cliente para redis ([730be48](https://github.com/GustavoCesarSantos/encurtador-api/commit/730be48df922df2880ac664c37600b765c2d9822))
+* **rate-limit:** cria método fabrica para rate limit ([3d46dbb](https://github.com/GustavoCesarSantos/encurtador-api/commit/3d46dbb954b0e37dc27354ce585e04315d2dacee))
+
+
+### Bug Fixes
+
+* corrige classe de rate limit ([65b135f](https://github.com/GustavoCesarSantos/encurtador-api/commit/65b135f8237a2b44c5b759fcd120b34cf427a25f))
+* **middleware adapter:** corrige adaptador de middleware ([728b2e8](https://github.com/GustavoCesarSantos/encurtador-api/commit/728b2e8a6d17036753fb3825cd884e43011bdb72))
+* **rate-limit:** corrige erro na comparação das datas ([d8cc936](https://github.com/GustavoCesarSantos/encurtador-api/commit/d8cc936545e3ddfc0308fbd1ffd99c371faa3ba7))
+* **rate-limit:** corrige import ([3bafaff](https://github.com/GustavoCesarSantos/encurtador-api/commit/3bafaff3a2f9b40b4b678fc6ccc10d8b9e2dd73e))
+* **rate-limit:** cria classe cacheWihtRedis ([7f04957](https://github.com/GustavoCesarSantos/encurtador-api/commit/7f04957e519a3a892257364f54984da4c1d4172b))
+* **rate-limit:** remove classe redisClient ([a790776](https://github.com/GustavoCesarSantos/encurtador-api/commit/a790776cf61ddaef429f4515da7b748a1fef8cfd))
+* **rate-limit:** remove método connect da interface ([4f87c61](https://github.com/GustavoCesarSantos/encurtador-api/commit/4f87c61704a1772c80c5b476eb2e2ac566f3710c))
+* **rate-limit:** remove uso do método connect ([6d57d34](https://github.com/GustavoCesarSantos/encurtador-api/commit/6d57d3491458bfa227276d22957e13b4ddf409da))
+
 ### [1.15.3](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.2...v1.15.3) (2022-09-24)
 
 ### [1.15.2](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.1...v1.15.2) (2022-06-09)

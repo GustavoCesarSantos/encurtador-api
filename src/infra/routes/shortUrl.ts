@@ -1,17 +1,20 @@
 import { Router } from 'express';
 
-import { expressRouteAdapter } from '@infra/adapters/expressRouteAdapter';
+import { adaptRoute } from '@infra/adapters/expressRouteAdapter';
 import { ShortUrlControllerFactory } from '@infra/factories/controllers/shortUrl';
+import { rateLimit } from '@infra/factories/middlewares/rateLimit';
 
 const shortUrlControllerFactory = new ShortUrlControllerFactory();
 
 export const shortUrl = (router: Router): void => {
 	router.get(
 		'/shortenedUrls/:code',
-		expressRouteAdapter(shortUrlControllerFactory.makeAccessRootUrl()),
+		rateLimit,
+		adaptRoute(shortUrlControllerFactory.makeAccessRootUrl()),
 	);
 	router.post(
 		'/shortenedUrls',
-		expressRouteAdapter(shortUrlControllerFactory.makeCreateShortUrl()),
+		rateLimit,
+		adaptRoute(shortUrlControllerFactory.makeCreateShortUrl()),
 	);
 };
