@@ -1,4 +1,4 @@
-import { IListener, Payload } from './listener';
+import { IListener, Payload } from './IListener';
 
 export interface IEventManager {
 	attach(eventName: string, listeners: IListener[]): void;
