@@ -51,7 +51,7 @@ export class RateLimit implements IMiddleware {
 				window,
 				limitToken,
 			);
-			await this.cache.set(key, JSON.stringify(data));
+			await this.updateTokenBucket(key, data);
 			return HttpResponse.ok();
 		} catch (error) {
 			return HttpResponse.serverError();
@@ -88,5 +88,9 @@ export class RateLimit implements IMiddleware {
 			token: Number(process.env.RATE_LIMIT_TOKEN),
 		});
 		await this.cache.set(key, value);
+	}
+
+	private async updateTokenBucket(key: string, tokenBucket: tokenBucket) {
+		await this.cache.set(key, JSON.stringify(tokenBucket));
 	}
 }
