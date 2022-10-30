@@ -1,6 +1,6 @@
 {
 	"name": "shortenerurl-api",
-	"version": "1.15.3",
+	"version": "1.16.0",
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
@@ -64,7 +64,8 @@
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
 		"pino": "^7.10.0",
-		"swagger-ui-express": "^4.5.0"
+		"swagger-ui-express": "^4.5.0",
+		"redis": "^4.3.1"
 	},
 	"standard-version": {
 		"releaseCommitMessageFormat": "chore(release): {{currentTag}} [skip ci]"
