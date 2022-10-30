@@ -37,11 +37,11 @@ export class RateLimit implements IMiddleware {
 			}
 			const data: tokenBucket = JSON.parse(record);
 			const now = new Date();
-			if (now.getTime() > new Date(data.whenWindowClose).getTime()) {
+			if (now > new Date(data.whenWindowClose)) {
 				await this.setTokenBucket(key, window, limitToken);
 				return HttpResponse.ok();
 			}
-			if (now.getTime() < new Date(data.nextTimestampAllowed).getTime()) {
+			if (now < new Date(data.nextTimestampAllowed)) {
 				return HttpResponse.badRequest(new Error('Request Denied'));
 			}
 			if (data.token < 0) {
@@ -75,6 +75,10 @@ export class RateLimit implements IMiddleware {
 		await this.cache.set(key, value);
 	}
 
+	private async updateTokenBucket(key: string, tokenBucket: tokenBucket) {
+		await this.cache.set(key, JSON.stringify(tokenBucket));
+	}
+
 	private getWindowClose(window: number) {
 		const now = new Date();
 		const minutes = 60 * 1000;
@@ -90,9 +94,5 @@ export class RateLimit implements IMiddleware {
 		const seconds = (window * 60) / limitToken;
 		nextTimestamp.setSeconds(nextTimestamp.getSeconds() + seconds);
 		return nextTimestamp;
-	}
-
-	private async updateTokenBucket(key: string, tokenBucket: tokenBucket) {
-		await this.cache.set(key, JSON.stringify(tokenBucket));
 	}
 }
