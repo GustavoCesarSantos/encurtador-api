@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.16.0...v1.17.0) (2022-11-06)
+
+
+### Features
+
+* adiciona inicialização da rota de doc ao entry point ([d46a242](https://github.com/GustavoCesarSantos/encurtador-api/commit/d46a24267819cba58ca6acd026e5246060804a2d))
+* adiciona swagger ao express ([e941911](https://github.com/GustavoCesarSantos/encurtador-api/commit/e941911e04684c70c7ef99689893d91c7c53fa07))
+* cria helper para lidar com swagger ([96c23a7](https://github.com/GustavoCesarSantos/encurtador-api/commit/96c23a7c524fbc727b04193d2019f9d429682c24))
+* cria swagger document ([e765a83](https://github.com/GustavoCesarSantos/encurtador-api/commit/e765a83db70f0116df7c386d6cbf47e9fb86bf03))
+
+
+### Bug Fixes
+
+* :bug: corrige status e cria método created ([6c5e9d1](https://github.com/GustavoCesarSantos/encurtador-api/commit/6c5e9d1ec44d8729d1375c0a90db8489c12a3b47))
+* :bug: corrige uso do método de response ([99a96de](https://github.com/GustavoCesarSantos/encurtador-api/commit/99a96de119cf5bc904039b24dbf3808e6b800e7a))
+
 ## [1.16.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.15.3...v1.16.0) (2022-10-30)
 
 
