@@ -21,7 +21,7 @@ describe('Access root url', () => {
 		expect(body.error.message).toBe('Not found');
 	});
 
-	test('Should return status code 201', async () => {
+	test('Should return status code 200', async () => {
 		const { text } = await request(app.getApp())
 			.post('/v1/shortenedUrls')
 			.send({ url: 'success' });
@@ -30,7 +30,7 @@ describe('Access root url', () => {
 		const { status } = await request(app.getApp()).get(
 			`/v1/shortenedUrls/${code}`,
 		);
-		expect(status).toBe(201);
+		expect(status).toBe(200);
 	});
 
 	test('Should return the root url', async () => {

@@ -110,6 +110,6 @@ export class CreateShortUrl implements IController<Request> {
 				})}`,
 			},
 		});
-		return HttpResponse.okWithBody({ url: shortUrl });
+		return HttpResponse.created({ url: shortUrl });
 	}
 }

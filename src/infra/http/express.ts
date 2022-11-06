@@ -5,6 +5,7 @@ import cors from 'cors';
 import { routes } from '@infra/routes';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { Server } from 'node:http';
+import { SwaggerDoc } from '@infra/doc/swaggerDoc';
 
 export class ExpressApp {
 	private readonly app: Express;
@@ -43,6 +44,10 @@ export class ExpressApp {
 		const router = Router();
 		routes(router);
 		this.app.use('/v1', router);
+	}
+
+	public setDocRoute(): void {
+		this.app.use('/docs', SwaggerDoc.serve(), SwaggerDoc.setup());
 	}
 
 	public listen(): Server {
