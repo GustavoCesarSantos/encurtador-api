@@ -11,6 +11,13 @@ export class HttpResponse {
 
 	static okWithBody(body: object): Response {
 		return {
+			status: 200,
+			body,
+		};
+	}
+
+	static created(body: object): Response {
+		return {
 			status: 201,
 			body,
 		};

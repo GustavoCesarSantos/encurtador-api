@@ -96,11 +96,11 @@ describe('Access root url', () => {
 		});
 	});
 
-	test('Should return 201 when root url is found', async () => {
+	test('Should return 200 when root url is found', async () => {
 		const response = await accessRootUrl.handle({
 			params: { code: 'success' },
 		});
-		expect(response.status).toBe(201);
+		expect(response.status).toBe(200);
 	});
 
 	test('Should return root url when is found', async () => {
