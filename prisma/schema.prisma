@@ -1,12 +1,11 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
   provider             = "postgres"
   url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  relationMode = "prisma"
 }
 
 model ShortUrls {
@@ -17,7 +16,7 @@ model ShortUrls {
   hits      Int?
   createdat DateTime @default(now()) @db.Timestamp(6)
   ownerid   Int
-  Owners    Owners   @relation(fields: [ownerid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Owners    Owners   @relation(fields: [ownerid], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@unique(fields: [code], name: "Code")
   @@unique(fields: [uuid], name: "UUID")
 }
