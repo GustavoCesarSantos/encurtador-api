@@ -1,5 +1,6 @@
 import { EventNames } from '@helpers/eventNames';
 import { IEventManager } from '@infra/listeners/eventManager';
+import { variables } from '@helpers/envs';
 
 export interface IReturnShortUrl {
 	execute(code: string): string;
@@ -20,7 +21,7 @@ export class ReturnShortUrl implements IReturnShortUrl {
 				what: `Iniciando criação da url encurtada, utilizando o código: ${code}`,
 			},
 		});
-		const shortUrl = `${process.env.DOMAIN_URL}/${code}`;
+		const shortUrl = `${variables.domainUrl}/${code}`;
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {

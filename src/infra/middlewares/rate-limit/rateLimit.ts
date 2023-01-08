@@ -2,6 +2,7 @@ import { HttpResponse } from '@helpers/httpResponse';
 import { ICache } from '@infra/cache/ICache';
 import { IMiddleware } from '@shared/IMiddleware';
 import { Response } from '@shared/response';
+import { variables } from '@helpers/envs';
 
 type Request = {
 	ip: string;
@@ -24,12 +25,8 @@ export class RateLimit implements IMiddleware {
 		try {
 			const key = request.ip;
 			const record = await this.cache.get(key);
-			const window = !process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES
-				? 90
-				: Number(process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES);
-			const limitToken = !process.env.RATE_LIMIT_TOKEN
-				? 1000
-				: Number(process.env.RATE_LIMIT_TOKEN);
+			const window = variables.rateLimitFixedWindowInMinutes;
+			const limitToken = variables.rateLimitToken;
 			if (!record) {
 				await this.setTokenBucket(key, window, limitToken);
 				return HttpResponse.ok();
