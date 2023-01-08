@@ -1,13 +1,20 @@
+import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
+import { BullMQQueue } from '@infra/queues/bullmq/bullmqQueue';
+import { CacheWithRedis } from '@infra/cache/cacheWithRedis';
+import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { EventNames } from '@helpers/eventNames';
 import { ListenersManager } from '@infra/listeners/eventManager';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
-import { AccessRootUrl } from '@modules/shortUrls/controllers/accessRootUrl';
-import { CreateShortUrl } from '@modules/shortUrls/controllers/createShortUrl';
 import { ShortUrlUseCaseFactory } from '../useCases/shortUrl';
+import { variables } from '@helpers/envs';
 
 export class ShortUrlControllerFactory {
-	private readonly manager = new ListenersManager();
+	private readonly cache = new CacheWithRedis();
+	private readonly createdQueue = new BullMQQueue(
+		variables.shortenedUrlCreatedQueue,
+	);
 	private readonly logger = PinoLogger.create();
+	private readonly manager = new ListenersManager();
 	private readonly shortUrlUseCaseFactory: ShortUrlUseCaseFactory =
 		new ShortUrlUseCaseFactory();
 
@@ -21,6 +28,11 @@ export class ShortUrlControllerFactory {
 	}
 
 	public makeCreateShortUrl(): CreateShortUrl {
-		return new CreateShortUrl(this.shortUrlUseCaseFactory, this.manager);
+		return new CreateShortUrl(
+			this.shortUrlUseCaseFactory,
+			this.manager,
+			this.cache,
+			this.createdQueue,
+		);
 	}
 }
