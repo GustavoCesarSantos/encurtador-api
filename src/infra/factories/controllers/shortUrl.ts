@@ -24,7 +24,11 @@ export class ShortUrlControllerFactory {
 	}
 
 	public makeAccessRootUrl(): AccessRootUrl {
-		return new AccessRootUrl(this.shortUrlUseCaseFactory, this.manager);
+		return new AccessRootUrl(
+			this.shortUrlUseCaseFactory,
+			this.manager,
+			this.cache,
+		);
 	}
 
 	public makeCreateShortUrl(): CreateShortUrl {
