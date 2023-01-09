@@ -24,19 +24,19 @@ export class AccessRootUrl implements IController<Request> {
 	private readonly eventManager: IEventManager;
 	private readonly findShortUrl: IFindShortUrl;
 	private readonly incrementHit: IIncrementHit;
-	private readonly queue: IQueue;
+	// private readonly queue: IQueue;
 
 	constructor(
 		factory: IShortUrlUseCaseFactory,
 		eventManager: IEventManager,
 		cache: ICache,
-		queue: IQueue,
+		// queue: IQueue,
 	) {
 		this.cache = cache;
 		this.eventManager = eventManager;
 		this.findShortUrl = factory.makeFindShortUrl();
 		this.incrementHit = factory.makeIncrementHit();
-		this.queue = queue;
+		// this.queue = queue;
 	}
 
 	public async handle(request: Request): Promise<Response> {
@@ -85,26 +85,26 @@ export class AccessRootUrl implements IController<Request> {
 					what: `Incremento no número de acessos a url feito com sucesso, número atual: ${hits}`,
 				},
 			});
-			const jobData = { code, hits };
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'AccessRootUrl',
-					what: `Enviando dados para a fila de atualização de hits da url encurtada. Data: ${JSON.stringify(
-						jobData,
-					)}`,
-				},
-			});
-			await this.queue.add('update', jobData);
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'AccessRootUrl',
-					what: `Dados enviados para a fila de atualização de hits da url encurtada. Data: ${JSON.stringify(
-						jobData,
-					)}`,
-				},
-			});
+			// const jobData = { code, hits };
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'AccessRootUrl',
+			// 		what: `Enviando dados para a fila de atualização de hits da url encurtada. Data: ${JSON.stringify(
+			// 			jobData,
+			// 		)}`,
+			// 	},
+			// });
+			// await this.queue.add('update', jobData);
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'AccessRootUrl',
+			// 		what: `Dados enviados para a fila de atualização de hits da url encurtada. Data: ${JSON.stringify(
+			// 			jobData,
+			// 		)}`,
+			// 	},
+			// });
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -176,13 +176,6 @@ export class AccessRootUrl implements IController<Request> {
 				return null;
 			}
 		}
-		this.eventManager.notify({
-			eventName: EventNames.warn,
-			message: {
-				where: 'AccessRootUrl',
-				what: `Url não encontrada na camada de cache, utilizando o código: ${code}`,
-			},
-		});
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {

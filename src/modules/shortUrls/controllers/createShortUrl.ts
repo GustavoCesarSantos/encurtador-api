@@ -21,19 +21,19 @@ export class CreateShortUrl implements IController<Request> {
 	private readonly cache: ICache;
 	private readonly eventManager: IEventManager;
 	private readonly generateCode: IGenerateCode;
-	private readonly queue: IQueue;
+	// private readonly queue: IQueue;
 	private readonly returnShortUrl: IReturnShortUrl;
 
 	constructor(
 		factory: IShortUrlUseCaseFactory,
 		eventManager: IEventManager,
 		cache: ICache,
-		queue: IQueue,
+		// queue: IQueue,
 	) {
 		this.cache = cache;
 		this.eventManager = eventManager;
 		this.generateCode = factory.makeGenerateCode();
-		this.queue = queue;
+		// this.queue = queue;
 		this.returnShortUrl = factory.makeReturnShortUrl();
 	}
 
@@ -85,26 +85,26 @@ export class CreateShortUrl implements IController<Request> {
 					what: `Url encurtada: ${shortUrl} criada, utilizando o código: ${code}, url original: ${url}`,
 				},
 			});
-			const jobData = { url, code };
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'CreateShortUrl',
-					what: `Enviando dados para a fila de criação de urls encurtadas. Data: ${JSON.stringify(
-						jobData,
-					)}`,
-				},
-			});
-			await this.queue.add('creation', jobData);
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'CreateShortUrl',
-					what: `Dados enviados para a fila de criação de urls encurtadas. Data: ${JSON.stringify(
-						jobData,
-					)}`,
-				},
-			});
+			// const jobData = { url, code };
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'CreateShortUrl',
+			// 		what: `Enviando dados para a fila de criação de urls encurtadas. Data: ${JSON.stringify(
+			// 			jobData,
+			// 		)}`,
+			// 	},
+			// });
+			// await this.queue.add('creation', jobData);
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'CreateShortUrl',
+			// 		what: `Dados enviados para a fila de criação de urls encurtadas. Data: ${JSON.stringify(
+			// 			jobData,
+			// 		)}`,
+			// 	},
+			// });
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -112,7 +112,7 @@ export class CreateShortUrl implements IController<Request> {
 					what: `Salvando em cache o código: ${code} e a url original: ${url}`,
 				},
 			});
-			await this.cache.set(code, url);
+			await this.cache.set(code, JSON.stringify({ url, hits: 0 }));
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
