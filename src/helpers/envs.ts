@@ -14,4 +14,5 @@ export const variables = {
 		Number(process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES) ?? 90,
 	rateLimitToken: Number(process.env.RATE_LIMIT_TOKEN) ?? 1000,
 	shortenedUrlCreatedQueue: 'shortened-url-created-queue',
+	shortenedUrlHitsUpdatedQueue: 'shortened-url-hits-updated-queue',
 };
