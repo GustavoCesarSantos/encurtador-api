@@ -7,7 +7,6 @@ import { IEventManager } from '@infra/listeners/eventManager';
 import { IGenerateCode } from '../useCases/generateCode';
 import { IQueue } from '@infra/queues/IQueue';
 import { IReturnShortUrl } from '../useCases/returnShortUrl';
-import { ISaveShortUrl } from '../useCases/saveShortUrl';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
@@ -24,7 +23,6 @@ export class CreateShortUrl implements IController<Request> {
 	private readonly generateCode: IGenerateCode;
 	private readonly queue: IQueue;
 	private readonly returnShortUrl: IReturnShortUrl;
-	private readonly saveShortUrl: ISaveShortUrl;
 
 	constructor(
 		factory: IShortUrlUseCaseFactory,
@@ -37,7 +35,6 @@ export class CreateShortUrl implements IController<Request> {
 		this.generateCode = factory.makeGenerateCode();
 		this.queue = queue;
 		this.returnShortUrl = factory.makeReturnShortUrl();
-		this.saveShortUrl = factory.makeSaveShortUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {
