@@ -16,7 +16,9 @@ import {
 	UpdateShortUrl,
 } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { CacheDummy } from '../../../testDoubles/dummy/cache';
 import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { QueueDummy } from '../../../testDoubles/dummy/queue';
 import { ShortUrlRepositoryStub } from '../../../testDoubles/stub/shortUrlRepository';
 
 let accessRootUrl: IController;
@@ -54,7 +56,14 @@ class UseCaseFactoryDummy implements IShortUrlUseCaseFactory {
 const makeSut = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new AccessRootUrl(useCaseFactoryDummy, eventManagerDummy);
+	const cacheDummy = new CacheDummy();
+	const queueDummy = new QueueDummy();
+	return new AccessRootUrl(
+		useCaseFactoryDummy,
+		eventManagerDummy,
+		cacheDummy,
+		queueDummy,
+	);
 };
 
 describe('Create short url', () => {

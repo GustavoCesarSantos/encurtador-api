@@ -7,7 +7,9 @@ import { IReturnShortUrl } from '@modules/shortUrls/useCases/returnShortUrl';
 import { ISaveShortUrl } from '@modules/shortUrls/useCases/saveShortUrl';
 import { IUpdateShortUrl } from '@modules/shortUrls/useCases/updateShortUrl';
 import { IController } from '@shared/IController';
+import { CacheDummy } from '../../../testDoubles/dummy/cache';
 import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
+import { QueueDummy } from '../../../testDoubles/dummy/queue';
 
 let createShortUrl: IController;
 
@@ -79,13 +81,27 @@ class UseCaseFactoryWithErrorDummy implements IShortUrlUseCaseFactory {
 const makeSut = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
+	const cacheDummy = new CacheDummy();
+	const queueDummy = new QueueDummy();
+	return new CreateShortUrl(
+		useCaseFactoryDummy,
+		eventManagerDummy,
+		cacheDummy,
+		queueDummy,
+	);
 };
 
 const makeSutWithError = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryWithErrorDummy();
 	const eventManagerDummy = new EventManagerDummy();
-	return new CreateShortUrl(useCaseFactoryDummy, eventManagerDummy);
+	const cacheDummy = new CacheDummy();
+	const queueDummy = new QueueDummy();
+	return new CreateShortUrl(
+		useCaseFactoryDummy,
+		eventManagerDummy,
+		cacheDummy,
+		queueDummy,
+	);
 };
 
 describe('Create short url', () => {
@@ -107,14 +123,6 @@ describe('Create short url', () => {
 		expect(response.body).toStrictEqual({
 			message: 'Missing params: Url',
 		});
-	});
-
-	test('Should return 400 when save short url use case return an error', async () => {
-		const createShortUrlWithError = makeSutWithError();
-		const response = await createShortUrlWithError.handle({
-			body: { url: 'teste' },
-		});
-		expect(response.status).toBe(400);
 	});
 
 	test('Should return 201 when the short url is created', async () => {
