@@ -21,4 +21,10 @@ export class CacheWithRedis implements ICache {
 		await this.redisClient.quit();
 		return result;
 	}
+
+	async del(key: string): Promise<void> {
+		await this.redisClient.connect();
+		await this.redisClient.del(key);
+		await this.redisClient.quit();
+	}
 }
