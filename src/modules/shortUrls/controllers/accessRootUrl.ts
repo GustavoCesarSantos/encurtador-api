@@ -130,7 +130,14 @@ export class AccessRootUrl implements IController<Request> {
 				},
 			});
 			return HttpResponse.okWithBody({ rootUrl: shortenedUrl.url });
-		} catch (error) {
+		} catch (error: any) {
+			this.eventManager.notify({
+				eventName: EventNames.error,
+				message: {
+					where: 'AccessRootUrl',
+					what: `Catch error: ${error.message}`,
+				},
+			});
 			return HttpResponse.serverError();
 		}
 	}
