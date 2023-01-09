@@ -15,6 +15,9 @@ export class ShortUrlControllerFactory {
 	);
 	private readonly logger = PinoLogger.create();
 	private readonly manager = new ListenersManager();
+	private readonly updatedQueue = new BullMQQueue(
+		variables.shortenedUrlHitsUpdatedQueue,
+	);
 	private readonly shortUrlUseCaseFactory: ShortUrlUseCaseFactory =
 		new ShortUrlUseCaseFactory();
 
@@ -28,6 +31,7 @@ export class ShortUrlControllerFactory {
 			this.shortUrlUseCaseFactory,
 			this.manager,
 			this.cache,
+			this.updatedQueue,
 		);
 	}
 
