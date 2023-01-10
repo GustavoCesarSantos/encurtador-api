@@ -26,8 +26,6 @@ describe('Return short url', () => {
 	test('Should return a valid code in url', () => {
 		const code = '12345';
 		const result = returnShortUrl.execute(code);
-		// eslint-disable-next-line no-console
-		console.log('result', result);
 		expect(result.split('v1/')[1]).toBe(code);
 	});
 });
