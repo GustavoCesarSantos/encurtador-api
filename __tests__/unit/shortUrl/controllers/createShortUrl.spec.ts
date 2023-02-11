@@ -87,7 +87,7 @@ const makeSut = () => {
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		// queueDummy,
+		queueDummy,
 	);
 };
 
@@ -100,7 +100,7 @@ const makeSutWithError = () => {
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		// queueDummy,
+		queueDummy,
 	);
 };
 
