@@ -62,7 +62,7 @@ const makeSut = () => {
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		// queueDummy,
+		queueDummy,
 	);
 };
 
