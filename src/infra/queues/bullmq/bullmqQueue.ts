@@ -10,7 +10,7 @@ export class BullMQQueue implements IQueue {
 		this.queue = new Queue(queueName, { connection: ioRedis });
 	}
 
-	async add(jobName: string, data: any): Promise<any> {
+	async add(jobName: string, data: string): Promise<void> {
 		await this.queue.add(jobName, data);
 	}
 }

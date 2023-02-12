@@ -6,17 +6,17 @@ import { EventNames } from '@helpers/eventNames';
 import { ListenersManager } from '@infra/listeners/eventManager';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { ShortUrlUseCaseFactory } from '../useCases/shortUrl';
-import { variables } from '@helpers/envs';
+import { QueueName } from '@helpers/queue';
 
 export class ShortUrlControllerFactory {
 	private readonly cache = new CacheWithRedis();
 	private readonly createdQueue = new BullMQQueue(
-		variables.shortenedUrlCreatedQueue,
+		QueueName.ShortenedUrlCreated,
 	);
 	private readonly logger = PinoLogger.create();
 	private readonly manager = new ListenersManager();
 	private readonly updatedQueue = new BullMQQueue(
-		variables.shortenedUrlHitsUpdatedQueue,
+		QueueName.ShortenedUrlHitsUpdated,
 	);
 	private readonly shortUrlUseCaseFactory: ShortUrlUseCaseFactory =
 		new ShortUrlUseCaseFactory();
