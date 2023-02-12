@@ -10,7 +10,7 @@ import { IReturnShortUrl } from '../useCases/returnShortUrl';
 import { IShortUrlUseCaseFactory } from '@infra/factories/useCases/IShortUrlUseCaseFactory';
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
-import { Queue } from '@helpers/queue';
+import { QueueName } from '@helpers/queue';
 
 type Request = {
 	body: {
@@ -133,7 +133,7 @@ export class CreateShortUrl implements IController<Request> {
 				what: `Enviando dados para a fila de criação de urls encurtadas. Data: ${data}`,
 			},
 		});
-		await this.queue.add(Queue.ShortenedUrlCreated, data);
+		await this.queue.add(QueueName.ShortenedUrlCreated, data);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
