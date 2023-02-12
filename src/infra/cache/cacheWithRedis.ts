@@ -25,7 +25,7 @@ export class CacheWithRedis implements ICache {
 		});
 	}
 
-	async get(key: string): Promise<any> {
+	async get(key: string): Promise<string | null> {
 		this.logger.info({
 			where: 'CacheWithRedis',
 			what: `Iniciando busca de chave em cache. Key:${key}`,
