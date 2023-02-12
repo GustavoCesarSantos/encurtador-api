@@ -93,32 +93,29 @@ export class AccessRootUrl implements IController<Request> {
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
-				where: 'AccessRootUrl',
+				where: 'AccessRootUrl.getRootUrlFromCache',
 				what: `Iniciando busca pela url na camada de cache, utilizando o código: ${code}`,
 			},
 		});
 		const shortenedUrlCache = await this.cache.get(code);
-		if (!shortenedUrlCache) return null;
-		this.eventManager.notify({
-			eventName: EventNames.info,
-			message: {
-				where: 'AccessRootUrl',
-				what: `Url encontrada na camada de cache, utilizando o código: ${code}`,
-			},
-		});
-		try {
-			const shortenedUrl = JSON.parse(shortenedUrlCache);
-			return shortenedUrl;
-		} catch (error) {
+		if (!shortenedUrlCache) {
 			this.eventManager.notify({
-				eventName: EventNames.error,
+				eventName: EventNames.warn,
 				message: {
-					where: 'AccessRootUrl',
-					what: `Falha ao tentar parsear dados da url vinda da camada de cache`,
+					where: 'AccessRootUrl.getRootUrlFromCache',
+					what: `Url não encontrada na camada de cache. key: ${code}`,
 				},
 			});
 			return null;
 		}
+		this.eventManager.notify({
+			eventName: EventNames.info,
+			message: {
+				where: 'AccessRootUrl.getRootUrlFromCache',
+				what: `Url encontrada na camada de cache. key: ${code}, value: ${shortenedUrlCache}`,
+			},
+		});
+		return shortenedUrlCache;
 	}
 
 	private async getRootUrlFromDB(code: string): Promise<string | null> {
