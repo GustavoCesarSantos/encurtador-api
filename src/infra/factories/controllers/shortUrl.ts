@@ -10,14 +10,14 @@ import { variables } from '@helpers/envs';
 
 export class ShortUrlControllerFactory {
 	private readonly cache = new CacheWithRedis();
-	// private readonly createdQueue = new BullMQQueue(
-	// 	variables.shortenedUrlCreatedQueue,
-	// );
+	private readonly createdQueue = new BullMQQueue(
+		variables.shortenedUrlCreatedQueue,
+	);
 	private readonly logger = PinoLogger.create();
 	private readonly manager = new ListenersManager();
-	// private readonly updatedQueue = new BullMQQueue(
-	// 	variables.shortenedUrlHitsUpdatedQueue,
-	// );
+	private readonly updatedQueue = new BullMQQueue(
+		variables.shortenedUrlHitsUpdatedQueue,
+	);
 	private readonly shortUrlUseCaseFactory: ShortUrlUseCaseFactory =
 		new ShortUrlUseCaseFactory();
 
@@ -31,7 +31,7 @@ export class ShortUrlControllerFactory {
 			this.shortUrlUseCaseFactory,
 			this.manager,
 			this.cache,
-			// this.updatedQueue,
+			this.updatedQueue,
 		);
 	}
 
@@ -40,7 +40,7 @@ export class ShortUrlControllerFactory {
 			this.shortUrlUseCaseFactory,
 			this.manager,
 			this.cache,
-			// this.createdQueue,
+			this.createdQueue,
 		);
 	}
 }

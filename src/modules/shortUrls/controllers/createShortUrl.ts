@@ -40,11 +40,37 @@ export class CreateShortUrl implements IController<Request> {
 
 	public async handle(request: Request): Promise<Response> {
 		try {
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortUrl',
+					what: `Iniciando requisição. Body: ${JSON.stringify(
+						request.body,
+					)}`,
+				},
+			});
 			const { url } = request.body;
-			const result = Guard.againstEmptyOrUndefined([
-				{ propName: 'Url', value: url },
-			]);
+			const validationSchema = [{ propName: 'Url', value: url }];
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortUrl',
+					what: `Iniciando validação do body: ${JSON.stringify(
+						validationSchema,
+					)} `,
+				},
+			});
+			const result = Guard.againstEmptyOrUndefined(validationSchema);
 			if (!result.isSuccess) {
+				this.eventManager.notify({
+					eventName: EventNames.error,
+					message: {
+						where: 'CreateShortUrl',
+						what: `Body invalido: ${JSON.stringify(
+							validationSchema,
+						)}`,
+					},
+				});
 				this.eventManager.notify({
 					eventName: EventNames.error,
 					message: {
@@ -56,6 +82,13 @@ export class CreateShortUrl implements IController<Request> {
 					new MissingParams(`${result.isError}`),
 				);
 			}
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortUrl',
+					what: `Body validado com sucessso.`,
+				},
+			});
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -87,7 +120,21 @@ export class CreateShortUrl implements IController<Request> {
 				},
 			});
 			const jobData = JSON.stringify({ url, code });
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortUrl',
+					what: `Iniciando envio de dados: ${jobData} para a fila de criação de url encurtada.`,
+				},
+			});
 			await this.sendToShortenedUrlCreationQueue(jobData);
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortUrl',
+					what: `Envio com sucesso para a fila de criação de url encurtada. Dados: ${jobData}`,
+				},
+			});
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -130,7 +177,7 @@ export class CreateShortUrl implements IController<Request> {
 			eventName: EventNames.info,
 			message: {
 				where: 'CreateShortUrl.sendToShortenedUrlCreationQueue',
-				what: `Enviando dados para a fila de criação de urls encurtadas. Data: ${data}`,
+				what: `Enviando dados para a fila de criação de urls encurtadas. Dados: ${data}`,
 			},
 		});
 		await this.queue.add(QueueName.ShortenedUrlCreated, data);
@@ -138,7 +185,7 @@ export class CreateShortUrl implements IController<Request> {
 			eventName: EventNames.info,
 			message: {
 				where: 'CreateShortUrl.sendToShortenedUrlCreationQueue',
-				what: `Dados enviados para a fila de criação de urls encurtadas. Data: ${data}`,
+				what: `Dados enviados para a fila de criação de urls encurtadas. Dados: ${data}`,
 			},
 		});
 	}
