@@ -1,22 +1,30 @@
-import { IShortUrlRepository } from '@infra/db/shortUrlRepository';
-import { ShortUrl } from '@modules/shortUrls/shortUrl';
+import { IShortenedUrlRepository } from '@infra/db/shortenedUrlRepository';
+import { ShortenedUrl } from '@modules/shortenedUrls/shortenedUrl';
 
-export class ShortUrlRepositoryStub implements IShortUrlRepository {
-	async getShortUrlOwnedByOwnerId(ownerId: number): Promise<ShortUrl[]> {
-		const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
-		if (shortUrl instanceof Error) return [];
-		return [shortUrl];
+export class ShortenedUrlRepositoryStub implements IShortenedUrlRepository {
+	async getShortenedUrlOwnedByOwnerId(
+		ownerId: number,
+	): Promise<ShortenedUrl[]> {
+		const shortenedUrl = ShortenedUrl.create({
+			url: 'teste',
+			code: '12345',
+		});
+		if (shortenedUrl instanceof Error) return [];
+		return [shortenedUrl];
 	}
 
-	async getShortUrlByCode(code: string): Promise<ShortUrl | null> {
+	async getShortenedUrlByCode(code: string): Promise<ShortenedUrl | null> {
 		if (code === 'success') {
-			const shortUrl = ShortUrl.create({ url: 'teste', code: '12345' });
-			if (shortUrl instanceof Error) return null;
-			return shortUrl;
+			const shortenedUrl = ShortenedUrl.create({
+				url: 'teste',
+				code: '12345',
+			});
+			if (shortenedUrl instanceof Error) return null;
+			return shortenedUrl;
 		}
 		return null;
 	}
-	save(entity: ShortUrl): Promise<void> {
+	save(entity: ShortenedUrl): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
 	async update(uuid: string, data: object): Promise<void> {
