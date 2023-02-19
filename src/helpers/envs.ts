@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const variables = {
-	domainUrl: process.env.DOMAIN_URL ?? 'http://localhost:3000/v1',
+	domainUrl: process.env.DOMAIN_URL ?? 'http://localhost:3001/v1',
 	port: process.env.PORT ?? '3001',
 	nodeEnv: process.env.NODE_ENV ?? 'development',
 	redisUrl: `redis://:${process.env.REDIS_PASSWORD ?? 'devTestePassword'}@${
