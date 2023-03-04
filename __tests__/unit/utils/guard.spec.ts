@@ -2,7 +2,7 @@ import { Guard } from '@utils/guard';
 
 const propName = 'Teste';
 
-describe('Short url', () => {
+describe('Guard', () => {
 	test('Should return an error when an empty value is passed', () => {
 		const value = '';
 		const result = Guard.againstEmptyOrUndefined([{ propName, value }]);

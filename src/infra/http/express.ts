@@ -2,16 +2,17 @@ import express, { Express, Router } from 'express';
 import { Logger } from 'pino';
 import cors from 'cors';
 
-import { routes } from '@infra/routes';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { routes } from '@infra/routes';
 import { Server } from 'node:http';
 import { SwaggerDoc } from '@infra/doc/swaggerDoc';
+import { variables } from '@helpers/envs';
 
 export class ExpressApp {
 	private readonly app: Express;
-	private readonly port: string = process.env.PORT ?? '3001';
+	private readonly port: string = variables.port;
 	private readonly logger: Logger<any> = PinoLogger.create().child({
-		environment: `${process.env.NODE_ENV}`,
+		environment: variables.nodeEnv,
 	});
 
 	constructor() {
@@ -34,7 +35,7 @@ export class ExpressApp {
 			],
 			credentials: true,
 			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-			origin: process.env.DOMAIN_URL,
+			origin: variables.domainUrl,
 			preflightContinue: false,
 		};
 		this.app.use(cors(options));
