@@ -132,9 +132,9 @@ export class AccessRootUrl implements IController<Request> {
 				eventName: EventNames.info,
 				message: {
 					where: 'AccessRootUrl',
-					what: `Retornando a resposta: ${{
+					what: `Retornando a resposta: ${JSON.stringify({
 						rootUrl: rootUrl,
-					}}`,
+					})}`,
 				},
 			});
 			return HttpResponse.okWithBody({ rootUrl });
