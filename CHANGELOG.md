@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.17.2...v1.18.0) (2023-03-04)
+
+
+### Features
+
+* :sparkles: adiciona camada de cache a controller de acesso a url ([eb4002e](https://github.com/GustavoCesarSantos/encurtador-api/commit/eb4002e6e990dd5c3a77b12fe6a7386105068895))
+* :sparkles: adiciona o método del a interface de cache ([de81d00](https://github.com/GustavoCesarSantos/encurtador-api/commit/de81d007481677f5eb6d186617438261f24c17e7))
+* :sparkles: adiciona variavel para  fila de atualização dos hits ([5ee26e2](https://github.com/GustavoCesarSantos/encurtador-api/commit/5ee26e27f7ebb490e5287dd2e3b33bfc2f4a0ab9))
+* :sparkles: cria arquivo de variaveis de ambiente ([3770634](https://github.com/GustavoCesarSantos/encurtador-api/commit/37706346a7ff0d9134ed7ea35c35f0803010f7c2))
+* :sparkles: cria arquivo para conectar ao client do io redis ([7fab7a3](https://github.com/GustavoCesarSantos/encurtador-api/commit/7fab7a3c9c8c93051765c975ae8a5e60fe834f3a))
+* :sparkles: cria implementação do bullmq ([91c1885](https://github.com/GustavoCesarSantos/encurtador-api/commit/91c1885bcd4462532c8aec2888c80287ea626540))
+* :sparkles: cria interface para queues ([3fda950](https://github.com/GustavoCesarSantos/encurtador-api/commit/3fda950758297075c4cb9ab290d7ed5ed6e29c3b))
+* :sparkles: cria variavel para o nome da fila de criação de url encurtada ([e0d43b3](https://github.com/GustavoCesarSantos/encurtador-api/commit/e0d43b3ce93d1bbc3c417b59046ab06c8c78617c))
+* adiciona fila de atualização ([2d80f97](https://github.com/GustavoCesarSantos/encurtador-api/commit/2d80f974cf47ea34ef59dd2cccf83054f2fc1c97))
+
+
+### Bug Fixes
+
+* :bug: corrige uso de variaveis de ambiente ([97a59a6](https://github.com/GustavoCesarSantos/encurtador-api/commit/97a59a639f140cb17f4568cd7271cbed82c3e639))
+* corrige arquivo de env ([c296afb](https://github.com/GustavoCesarSantos/encurtador-api/commit/c296afb07b2452bdb934cce2d2c82e8ea049f810))
+* corrige fabrica da controller de acesso a url ([0d286e5](https://github.com/GustavoCesarSantos/encurtador-api/commit/0d286e5e7ddeb9f775a0137ca8733648ae9f531c))
+* corrige husky hooks ([1da976e](https://github.com/GustavoCesarSantos/encurtador-api/commit/1da976e6afb92419022f559125e4776ac3903052))
+* corrige log ([e6d4290](https://github.com/GustavoCesarSantos/encurtador-api/commit/e6d4290cda2525582b07ddf99cc782632c383d8b))
+* corrige retorno da url da camada de cache ([02c6335](https://github.com/GustavoCesarSantos/encurtador-api/commit/02c6335af6bdd2b53b3a486752d87cf8f3ed770c))
+* desabilita o uso de filas temporariamente ([704c8c9](https://github.com/GustavoCesarSantos/encurtador-api/commit/704c8c9942b02c5fcb76395ee06413917fc6df1f))
+* desabilita o uso de filas temporariamente ([bb1e397](https://github.com/GustavoCesarSantos/encurtador-api/commit/bb1e3970ed1f143090edc5451fd210eaa648e43e))
+
 ### [1.17.2](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.17.1...v1.17.2) (2022-12-27)
 
 ### [1.17.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.17.0...v1.17.1) (2022-12-27)
