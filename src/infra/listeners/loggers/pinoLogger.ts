@@ -1,15 +1,16 @@
 import pino, { Logger } from 'pino';
 
-import { IListener, Payload } from '../IListener';
 import { EventNames } from '@helpers/eventNames';
+import { IListener, Payload } from '../IListener';
 import { ILogger, Message } from './ILogger';
+import { variables } from '@helpers/envs';
 
 export class PinoLogger implements ILogger, IListener {
 	private transport: any = {};
 	private readonly logger!: Logger<any>;
 
 	private constructor() {
-		if (process.env.NODE_ENV === 'development') {
+		if (variables.nodeEnv === 'development') {
 			this.transport = pino.transport({
 				target: 'pino-pretty',
 				options: {

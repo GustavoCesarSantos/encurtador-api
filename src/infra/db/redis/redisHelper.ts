@@ -1,3 +1,7 @@
 import { createClient } from 'redis';
 
-export const redis = createClient();
+import { variables } from '@helpers/envs';
+
+export const redis = createClient({
+	url: variables.redisUrl,
+});

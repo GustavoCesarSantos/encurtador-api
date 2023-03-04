@@ -2,6 +2,12 @@ import { EventNames } from '@helpers/eventNames';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 
 describe('Pino Logger', () => {
+	beforeAll(() => {
+		jest.spyOn(PinoLogger.prototype, 'info').mockImplementation();
+		jest.spyOn(PinoLogger.prototype, 'warn').mockImplementation();
+		jest.spyOn(PinoLogger.prototype, 'error').mockImplementation();
+	});
+
 	test('Should call error log method when invalid an event name is passed', () => {
 		const logger = PinoLogger.create();
 		const spy = jest.spyOn(logger, 'error');

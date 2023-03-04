@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { shortUrl } from './shortUrl';
 import { healthCheck } from './healthCheck';
+import { shortenedUrl } from './shortenedUrl';
 
 export const routes = (router: Router) => {
-	shortUrl(router);
+	shortenedUrl(router);
 	healthCheck(router);
 };

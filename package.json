@@ -1,10 +1,10 @@
 {
 	"name": "shortenerurl-api",
-	"version": "1.17.2",
+	"version": "1.18.0",
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
-		"test": "jest --no-cache --runInBand",
+		"test": "jest --no-cache --runInBand --detectOpenHandles",
 		"test:unit": "jest --no-cache --runInBand --testPathPattern=./__tests__/unit",
 		"test:integration": "jest --no-cache --runInBand --testPathPattern=./__tests__/integration",
 		"test:e2e": "jest --no-cache --runInBand --testPathPattern=./__tests__/e2e",
@@ -60,12 +60,13 @@
 	},
 	"dependencies": {
 		"@prisma/client": "^4.8.0",
+		"bullmq": "^3.5.3",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"pino": "^8.8.0",
-		"swagger-ui-express": "^4.6.0",
-		"redis": "^4.5.1"
+		"redis": "^4.5.1",
+		"swagger-ui-express": "^4.6.0"
 	},
 	"standard-version": {
 		"releaseCommitMessageFormat": "chore(release): {{currentTag}} [skip ci]"
