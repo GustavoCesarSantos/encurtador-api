@@ -4,6 +4,7 @@ import { ExpressApp } from '@infra/http/express';
 import { RateLimit } from '@infra/middlewares/rate-limit/rateLimit';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { HttpResponse } from '@helpers/httpResponse';
+import { CreateShortenedUrl } from '@modules/shortenedUrls/controllers/createShortenedUrl';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -18,6 +19,10 @@ describe('Create short url', () => {
 		jest.spyOn(PinoLogger.prototype, 'info').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'warn').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'error').mockImplementation();
+		jest.spyOn(
+			CreateShortenedUrl.prototype as any,
+			'sendToShortenedUrlCreationQueue',
+		).mockImplementation();
 	});
 
 	test('Should return status code 400 when url is not passed in request body', async () => {

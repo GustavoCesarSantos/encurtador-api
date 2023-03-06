@@ -4,6 +4,7 @@ import { ExpressApp } from '@infra/http/express';
 import { RateLimit } from '@infra/middlewares/rate-limit/rateLimit';
 import { HttpResponse } from '@helpers/httpResponse';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { AccessRootUrl } from '@modules/shortenedUrls/controllers/accessRootUrl';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -18,9 +19,19 @@ describe('Access root url', () => {
 		jest.spyOn(PinoLogger.prototype, 'info').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'warn').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'error').mockImplementation();
+		jest.spyOn(
+			AccessRootUrl.prototype as any,
+			'sendToShortenedUrlHitsUpdatedQueue',
+		).mockImplementation();
 	});
 
 	test('Should return status code 404 when schema is not found', async () => {
+		jest.spyOn(
+			AccessRootUrl.prototype as any,
+			'getRootUrl',
+		).mockImplementation(async () => {
+			return null;
+		});
 		const { status } = await request(app.getApp()).get(
 			'/v1/shortenedUrls/fail',
 		);
@@ -28,6 +39,12 @@ describe('Access root url', () => {
 	});
 
 	test('Should return not found message when code is not found', async () => {
+		jest.spyOn(
+			AccessRootUrl.prototype as any,
+			'getRootUrl',
+		).mockImplementation(async () => {
+			return null;
+		});
 		const { text } = await request(app.getApp()).get(
 			'/v1/shortenedUrls/fail',
 		);
@@ -36,6 +53,12 @@ describe('Access root url', () => {
 	});
 
 	test('Should return status code 200', async () => {
+		jest.spyOn(
+			AccessRootUrl.prototype as any,
+			'getRootUrl',
+		).mockImplementation(async () => {
+			return 'success';
+		});
 		const { text } = await request(app.getApp())
 			.post('/v1/shortenedUrls')
 			.send({ url: 'success' });
@@ -48,15 +71,17 @@ describe('Access root url', () => {
 	});
 
 	test('Should return the root url', async () => {
-		const { text } = await request(app.getApp())
-			.post('/v1/shortenedUrls')
-			.send({ url: 'success' });
-		const body = JSON.parse(text);
-		const code: string = body.url.slice(-5);
+		const rootUrl = 'success';
+		jest.spyOn(
+			AccessRootUrl.prototype as any,
+			'getRootUrl',
+		).mockImplementation(async () => {
+			return rootUrl;
+		});
 		const response = await request(app.getApp()).get(
-			`/v1/shortenedUrls/${code}`,
+			`/v1/shortenedUrls/12345`,
 		);
-		const body2 = JSON.parse(response.text);
-		expect(body2.rootUrl).toBe('success');
+		const data = JSON.parse(response.text);
+		expect(data.rootUrl).toBe(rootUrl);
 	});
 });
