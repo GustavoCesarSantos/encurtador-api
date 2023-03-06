@@ -5,6 +5,7 @@ import { RateLimit } from '@infra/middlewares/rate-limit/rateLimit';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { HttpResponse } from '@helpers/httpResponse';
 import { CreateShortenedUrl } from '@modules/shortenedUrls/controllers/createShortenedUrl';
+import { ioRedis } from '@infra/db/redis/ioRedisHelper';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -23,6 +24,10 @@ describe('Create short url', () => {
 			CreateShortenedUrl.prototype as any,
 			'sendToShortenedUrlCreationQueue',
 		).mockImplementation();
+	});
+
+	afterAll(async () => {
+		await ioRedis.quit();
 	});
 
 	test('Should return status code 400 when url is not passed in request body', async () => {

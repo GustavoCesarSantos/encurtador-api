@@ -5,6 +5,7 @@ import { RateLimit } from '@infra/middlewares/rate-limit/rateLimit';
 import { HttpResponse } from '@helpers/httpResponse';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { AccessRootUrl } from '@modules/shortenedUrls/controllers/accessRootUrl';
+import { ioRedis } from '@infra/db/redis/ioRedisHelper';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -23,6 +24,10 @@ describe('Access root url', () => {
 			AccessRootUrl.prototype as any,
 			'sendToShortenedUrlHitsUpdatedQueue',
 		).mockImplementation();
+	});
+
+	afterAll(async () => {
+		await ioRedis.quit();
 	});
 
 	test('Should return status code 404 when schema is not found', async () => {
