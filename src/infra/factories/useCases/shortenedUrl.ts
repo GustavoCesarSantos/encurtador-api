@@ -30,7 +30,7 @@ export class ShortenedUrlUseCaseFactory implements IShortenedUrlUseCaseFactory {
 		return new FindShortenedUrl(this.shortUrlRepository, this.manager);
 	}
 
-	public makeupdateShortenedUrl(): UpdateShortenedUrl {
+	public makeUpdateShortenedUrl(): UpdateShortenedUrl {
 		return new UpdateShortenedUrl(this.shortUrlRepository, this.manager);
 	}
 
@@ -38,11 +38,11 @@ export class ShortenedUrlUseCaseFactory implements IShortenedUrlUseCaseFactory {
 		return new GenerateCode(this.manager);
 	}
 
-	public makereturnShortenedUrl(): ReturnShortenedUrl {
+	public makeReturnShortenedUrl(): ReturnShortenedUrl {
 		return new ReturnShortenedUrl(this.manager);
 	}
 
-	public makesaveShortenedUrl(): SaveShortenedUrl {
+	public makeSaveShortenedUrl(): SaveShortenedUrl {
 		return new SaveShortenedUrl(this.shortUrlRepository, this.manager);
 	}
 }

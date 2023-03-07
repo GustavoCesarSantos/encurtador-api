@@ -7,7 +7,7 @@ export class WorkersFactory {
 
 	public makeShortenedUrlCreatedWorker(): ShortenedUrlCreatedWorker {
 		return new ShortenedUrlCreatedWorker(
-			this.shortenedUrlUseCaseFactory.makesaveShortenedUrl(),
+			this.shortenedUrlUseCaseFactory.makeSaveShortenedUrl(),
 		);
 	}
 }

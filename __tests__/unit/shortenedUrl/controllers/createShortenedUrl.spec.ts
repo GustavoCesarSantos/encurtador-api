@@ -43,16 +43,16 @@ class UseCaseFactoryDummy implements IShortenedUrlUseCaseFactory {
 	makeFindShortenedUrl(): IFindShortenedUrl {
 		throw new Error('Method not implemented.');
 	}
-	makeupdateShortenedUrl(): IUpdateShortenedUrl {
+	makeUpdateShortenedUrl(): IUpdateShortenedUrl {
 		throw new Error('Method not implemented.');
 	}
 	makeGenerateCode(): IGenerateCode {
 		return new GenerateCodeDummy();
 	}
-	makereturnShortenedUrl(): IReturnShortenedUrl {
+	makeReturnShortenedUrl(): IReturnShortenedUrl {
 		return new returnShortenedUrlDummy();
 	}
-	makesaveShortenedUrl(): ISaveShortenedUrl {
+	makeSaveShortenedUrl(): ISaveShortenedUrl {
 		return new saveShortenedUrlDummy();
 	}
 }
@@ -64,16 +64,16 @@ class UseCaseFactoryWithErrorDummy implements IShortenedUrlUseCaseFactory {
 	makeFindShortenedUrl(): IFindShortenedUrl {
 		throw new Error('Method not implemented.');
 	}
-	makeupdateShortenedUrl(): IUpdateShortenedUrl {
+	makeUpdateShortenedUrl(): IUpdateShortenedUrl {
 		throw new Error('Method not implemented.');
 	}
 	makeGenerateCode(): IGenerateCode {
 		return new GenerateCodeDummy();
 	}
-	makereturnShortenedUrl(): IReturnShortenedUrl {
+	makeReturnShortenedUrl(): IReturnShortenedUrl {
 		return new returnShortenedUrlDummy();
 	}
-	makesaveShortenedUrl(): ISaveShortenedUrl {
+	makeSaveShortenedUrl(): ISaveShortenedUrl {
 		return new saveShortenedUrlFakie();
 	}
 }

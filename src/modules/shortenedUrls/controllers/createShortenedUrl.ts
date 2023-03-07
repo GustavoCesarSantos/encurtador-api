@@ -36,7 +36,7 @@ export class CreateShortenedUrl implements IController<Request> {
 		this.eventManager = eventManager;
 		this.generateCode = factory.makeGenerateCode();
 		this.queue = queue;
-		this.returnShortenedUrl = factory.makereturnShortenedUrl();
+		this.returnShortenedUrl = factory.makeReturnShortenedUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {

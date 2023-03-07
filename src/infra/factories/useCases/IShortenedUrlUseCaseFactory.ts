@@ -8,8 +8,8 @@ import { IUpdateShortenedUrl } from '@modules/shortenedUrls/useCases/updateShort
 export interface IShortenedUrlUseCaseFactory {
 	makeIncrementHit(): IIncrementHit;
 	makeFindShortenedUrl(): IFindShortenedUrl;
-	makeupdateShortenedUrl(): IUpdateShortenedUrl;
+	makeUpdateShortenedUrl(): IUpdateShortenedUrl;
 	makeGenerateCode(): IGenerateCode;
-	makereturnShortenedUrl(): IReturnShortenedUrl;
-	makesaveShortenedUrl(): ISaveShortenedUrl;
+	makeReturnShortenedUrl(): IReturnShortenedUrl;
+	makeSaveShortenedUrl(): ISaveShortenedUrl;
 }
