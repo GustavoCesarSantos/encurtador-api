@@ -27,6 +27,6 @@ export class ShortenedUrlCreatedWorker {
 		code: string,
 		url: string,
 	): Promise<void> {
-		await this.cache.set(`${code}:shortTerm`, url);
+		await this.cache.setWithExpiration(`${code}:shortTerm`, url, 3600);
 	}
 }
