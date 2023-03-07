@@ -24,6 +24,10 @@ describe('Create short url', () => {
 			CreateShortenedUrl.prototype as any,
 			'sendToShortenedUrlCreationQueue',
 		).mockImplementation();
+		jest.spyOn(
+			CreateShortenedUrl.prototype as any,
+			'createLongTermCache',
+		).mockImplementation();
 	});
 
 	afterAll(async () => {
