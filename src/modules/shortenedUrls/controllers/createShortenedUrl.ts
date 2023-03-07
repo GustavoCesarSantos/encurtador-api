@@ -149,7 +149,7 @@ export class CreateShortenedUrl implements IController<Request> {
 					what: `Salvando em cache o código: ${code} e a url original: ${url}`,
 				},
 			});
-			await this.cache.set(code, url);
+			await this.createLongTermCache(code, url);
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -197,5 +197,12 @@ export class CreateShortenedUrl implements IController<Request> {
 				what: `Dados enviados para a fila de criação de urls encurtadas. Dados: ${data}`,
 			},
 		});
+	}
+
+	private async createLongTermCache(
+		code: string,
+		url: string,
+	): Promise<void> {
+		await this.cache.set(`${code}:longTerm`, url);
 	}
 }
