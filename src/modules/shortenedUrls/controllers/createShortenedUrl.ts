@@ -11,6 +11,7 @@ import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortene
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
 import { QueueName } from '@helpers/queue';
+import { ShortenedUrlCreatedJob } from '@helpers/jobTypes';
 
 type Request = {
 	body: {
@@ -119,20 +120,26 @@ export class CreateShortenedUrl implements IController<Request> {
 					what: `Url encurtada: ${shortenedUrl} criada, utilizando o código: ${code}, url original: ${url}`,
 				},
 			});
-			const jobData = JSON.stringify({ url, code });
+			const job = { url, code };
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
 					where: 'CreateShortenedUrl',
-					what: `Iniciando envio de dados: ${jobData} para a fila de criação de url encurtada.`,
+					what: `Iniciando envio de dados: ${JSON.stringify(
+						job,
+					)} para a fila de criação de url encurtada.`,
 				},
 			});
-			await this.sendToShortenedUrlCreationQueue(jobData);
+			await this.sendToShortenedUrlCreationQueue<ShortenedUrlCreatedJob>(
+				job,
+			);
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
 					where: 'CreateShortenedUrl',
-					what: `Envio com sucesso para a fila de criação de url encurtada. Dados: ${jobData}`,
+					what: `Envio com sucesso para a fila de criação de url encurtada. Dados: ${JSON.stringify(
+						job,
+					)}`,
 				},
 			});
 			this.eventManager.notify({
@@ -172,7 +179,9 @@ export class CreateShortenedUrl implements IController<Request> {
 		}
 	}
 
-	private async sendToShortenedUrlCreationQueue(data: string): Promise<void> {
+	private async sendToShortenedUrlCreationQueue<DataType = any>(
+		data: DataType,
+	): Promise<void> {
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
@@ -180,7 +189,7 @@ export class CreateShortenedUrl implements IController<Request> {
 				what: `Enviando dados para a fila de criação de urls encurtadas. Dados: ${data}`,
 			},
 		});
-		await this.queue.add(QueueName.ShortenedUrlCreated, data);
+		await this.queue.add<DataType>(QueueName.ShortenedUrlCreated, data);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
