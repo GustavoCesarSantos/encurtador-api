@@ -1,4 +1,4 @@
-import { Job, Worker } from 'bullmq';
+import { Worker } from 'bullmq';
 
 import { QueueName } from '@helpers/queue';
 import { ioRedis } from '@infra/db/redis/ioRedisHelper';
@@ -11,7 +11,7 @@ const shortenedUrlCreatedWorker = workerFactory.makeShortenedUrlCreatedWorker();
 
 const worker = new Worker(
 	QueueName.ShortenedUrlCreated,
-	shortenedUrlCreatedWorker.execute,
+	shortenedUrlCreatedWorker.execute.bind(shortenedUrlCreatedWorker),
 	{ connection: ioRedis },
 );
 
