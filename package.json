@@ -1,6 +1,6 @@
 {
 	"name": "shortenerurl-api",
-	"version": "1.18.1",
+	"version": "1.19.0",
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
@@ -14,6 +14,8 @@
 		"build": "rimraf ./dist && tsc -p .",
 		"start": "export NODE_ENV=production && prisma db push && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index.js",
 		"dev": "export NODE_ENV=development && prisma migrate dev && ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/index.ts",
+		"workers:dev": "ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/infra/workers/bullmq/index.ts",
+		"workers:start": "node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/infra/workers/bullmq/index.js",
 		"release": "standard-version",
 		"lint": "eslint . --ext .ts --fix",
 		"prettier": "prettier --config .prettierrc src/*.ts --write",

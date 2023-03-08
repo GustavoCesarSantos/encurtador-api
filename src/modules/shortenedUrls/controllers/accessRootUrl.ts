@@ -215,12 +215,15 @@ export class AccessRootUrl implements IController<Request> {
 		return shortenedUrl.getRootUrl();
 	}
 
-	private async updateCache(code: string, rootUrl: string): Promise<void> {
+	private async updateShortTermCache(
+		code: string,
+		rootUrl: string,
+	): Promise<void> {
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'AccessRootUrl.updateCache',
-				what: `Iniciando atualização da camada de cache. Código ${code} e Url: ${rootUrl}.`,
+				what: `Iniciando atualização da camada de cache de curta duração. Código ${code} e Url: ${rootUrl}.`,
 			},
 		});
 		this.eventManager.notify({
@@ -230,7 +233,7 @@ export class AccessRootUrl implements IController<Request> {
 				what: `Iniciando remoção do chave atual. Chave ${code}.`,
 			},
 		});
-		await this.cache.del(code);
+		await this.cache.del(`${code}:shortTerm`);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
@@ -242,22 +245,22 @@ export class AccessRootUrl implements IController<Request> {
 			eventName: EventNames.info,
 			message: {
 				where: 'AccessRootUrl.updateCache',
-				what: `Iniciando inserção da url original na camada de cache. Código ${code} e Url: ${rootUrl}.`,
+				what: `Iniciando inserção da url original na camada de cache de curta duração. Código ${code} e Url: ${rootUrl}.`,
 			},
 		});
-		await this.cache.set(code, rootUrl);
+		await this.cache.set(`${code}:shortTerm`, rootUrl);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'AccessRootUrl.updateCache',
-				what: `Url original inserida com sucesso na camada de cache. Código ${code} e Url: ${rootUrl}.`,
+				what: `Url original inserida com sucesso na camada de cache de curta duração. Código ${code} e Url: ${rootUrl}.`,
 			},
 		});
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'AccessRootUrl.updateCache',
-				what: `Camada de cache atualizada com sucesso.`,
+				what: `Camada de cache de curta duração atualizada com sucesso.`,
 			},
 		});
 	}
@@ -270,16 +273,31 @@ export class AccessRootUrl implements IController<Request> {
 				what: `Iniciando busca da url original na camada de cache.`,
 			},
 		});
-		const rootUrlCache = await this.getRootUrlFromCache(code);
-		if (rootUrlCache) {
+		const rootUrlFromLongTermCache = await this.getRootUrlFromCache(
+			`${code}:longTerm`,
+		);
+		if (rootUrlFromLongTermCache) {
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
 					where: 'AccessRootUrl.getRootUrl',
-					what: `Retornando url original encontrada na camada de cache. Url: ${rootUrlCache}`,
+					what: `Retornando url original encontrada na camada de cache de longa duração. Url: ${rootUrlFromLongTermCache}`,
 				},
 			});
-			return rootUrlCache;
+			return rootUrlFromLongTermCache;
+		}
+		const rootUrlFromShortTermCache = await this.getRootUrlFromCache(
+			`${code}:shortTerm`,
+		);
+		if (rootUrlFromShortTermCache) {
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'AccessRootUrl.getRootUrl',
+					what: `Retornando url original encontrada na camada de cache de curta duração. Url: ${rootUrlFromShortTermCache}`,
+				},
+			});
+			return rootUrlFromShortTermCache;
 		}
 		this.eventManager.notify({
 			eventName: EventNames.warn,
@@ -320,12 +338,12 @@ export class AccessRootUrl implements IController<Request> {
 				what: `Iniciando atualização da camada de cache. Code: ${code} Url: ${rootUrlDB}.`,
 			},
 		});
-		await this.updateCache(code, rootUrlDB);
+		await this.updateShortTermCache(code, rootUrlDB);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'AccessRootUrl.getRootUrl',
-				what: `Camada de cache atualizada com sucesso. Code: ${code} Url: ${rootUrlDB}.`,
+				what: `Camada de cache de curta duração atualizada com sucesso. Code: ${code} Url: ${rootUrlDB}.`,
 			},
 		});
 		this.eventManager.notify({

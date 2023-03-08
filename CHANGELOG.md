@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.18.1...v1.19.0) (2023-03-08)
+
+
+### Features
+
+* cria fabrica de criação de workers ([31bdc46](https://github.com/GustavoCesarSantos/encurtador-api/commit/31bdc464682cc48268d3e88b90f89d63dff326e8))
+* cria helper para tipo dos jobs ([05ce839](https://github.com/GustavoCesarSantos/encurtador-api/commit/05ce839147f127bdf901fc2278b667842a24ad44))
+* cria index para instanciar workers ([206ab40](https://github.com/GustavoCesarSantos/encurtador-api/commit/206ab402e699b8628a7de0e62ab471e21c8f92eb))
+* cria worker de persistencia da url encurtada ([9c63584](https://github.com/GustavoCesarSantos/encurtador-api/commit/9c63584ccb0b425715bd4e0dcdec40c734b0d764))
+
+
+### Bug Fixes
+
+* corrige instanciação do worker de criação da url encurtada ([5123942](https://github.com/GustavoCesarSantos/encurtador-api/commit/51239422904d4f1543434b6305d8f0454902bfb4))
+
 ### [1.18.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.18.0...v1.18.1) (2023-03-04)
 
 ## [1.18.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.17.2...v1.18.0) (2023-03-04)
