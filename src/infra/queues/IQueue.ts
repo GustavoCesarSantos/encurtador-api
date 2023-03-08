@@ -1,3 +1,3 @@
 export interface IQueue {
-	add(jobName: string, data: any): Promise<any | void>;
+	add<DataType = any>(jobName: string, data: DataType): Promise<any | void>;
 }

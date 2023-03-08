@@ -21,7 +21,8 @@ export class PinoLogger implements ILogger, IListener {
 		}
 		this.logger = pino(this.transport);
 	}
-	update(payload: Payload): void {
+
+	public update(payload: Payload): void {
 		const message: Message = payload.message;
 		if (payload.eventName === EventNames.info) return this.info(message);
 		if (payload.eventName === EventNames.warn) return this.warn(message);

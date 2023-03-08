@@ -31,10 +31,10 @@ class UseCaseFactoryDummy implements IShortenedUrlUseCaseFactory {
 	makeGenerateCode(): IGenerateCode {
 		return new GenerateCode(this.eventManagerDummy);
 	}
-	makereturnShortenedUrl(): IReturnShortenedUrl {
+	makeReturnShortenedUrl(): IReturnShortenedUrl {
 		return new ReturnShortenedUrl(this.eventManagerDummy);
 	}
-	makesaveShortenedUrl(): ISaveShortenedUrl {
+	makeSaveShortenedUrl(): ISaveShortenedUrl {
 		return new SaveShortenedUrl(
 			this.shortUrlRepository,
 			this.eventManagerDummy,
@@ -46,7 +46,7 @@ class UseCaseFactoryDummy implements IShortenedUrlUseCaseFactory {
 	makeIncrementHit(): IIncrementHit {
 		throw new Error('Method not implemented.');
 	}
-	makeupdateShortenedUrl(): IUpdateShortenedUrl {
+	makeUpdateShortenedUrl(): IUpdateShortenedUrl {
 		throw new Error('Method not implemented.');
 	}
 }

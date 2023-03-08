@@ -23,6 +23,7 @@ export class ShortenedUrlControllerFactory {
 
 	constructor() {
 		this.manager.attach(EventNames.info, [this.logger]);
+		this.manager.attach(EventNames.warn, [this.logger]);
 		this.manager.attach(EventNames.error, [this.logger]);
 	}
 

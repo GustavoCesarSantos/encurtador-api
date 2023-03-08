@@ -4,6 +4,13 @@ export class CacheDummy implements ICache {
 	async set(key: string, value: string): Promise<void> {
 		return;
 	}
+	async setWithExpiration(
+		key: string,
+		value: string,
+		expireTime: number,
+	): Promise<void> {
+		return;
+	}
 	async get(key: string): Promise<any> {
 		return;
 	}

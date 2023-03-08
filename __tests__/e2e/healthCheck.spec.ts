@@ -4,6 +4,7 @@ import { ExpressApp } from '@infra/http/express';
 import { RateLimit } from '@infra/middlewares/rate-limit/rateLimit';
 import { HttpResponse } from '@helpers/httpResponse';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { ioRedis } from '@infra/db/redis/ioRedisHelper';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -18,6 +19,10 @@ describe('Health Check url', () => {
 		jest.spyOn(PinoLogger.prototype, 'info').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'warn').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'error').mockImplementation();
+	});
+
+	afterAll(async () => {
+		await ioRedis.quit();
 	});
 
 	test('Should return status code 200 when server is running', async () => {
