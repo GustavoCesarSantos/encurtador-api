@@ -1,8 +1,10 @@
 name: 5Bits API CD
 
 on:
-    push:
-        branches: [main]
+    workflow_run:
+        workflows: ['5Bits API CI']
+        types:
+            - completed
 
 jobs:
     build:
