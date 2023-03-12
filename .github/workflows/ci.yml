@@ -5,9 +5,9 @@ name: 5Bits API CI
 
 on:
     push:
-        branches: [develop]
+        branches: [develop, main]
     pull_request:
-        branches: [main, develop]
+        branches: [develop]
 
 jobs:
     test:
