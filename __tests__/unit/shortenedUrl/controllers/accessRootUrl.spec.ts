@@ -1,5 +1,5 @@
 import { NotFound } from '@helpers/errors/notFound';
-import { IShortenedUrlUseCaseFactory as IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortenedUrlUseCaseFactory';
+import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortenedUrlUseCaseFactory';
 import { AccessRootUrl } from '@modules/shortenedUrls/controllers/accessRootUrl';
 import { ShortenedUrl } from '@modules/shortenedUrls/shortenedUrl';
 import { IFindShortenedUrl } from '@modules/shortenedUrls/useCases/findShortenedUrl';
@@ -27,8 +27,8 @@ class FindShortenedUrlFakie implements IFindShortenedUrl {
 }
 
 class IncrementHitDummy implements IIncrementHit {
-	execute(hit: number): number {
-		return 1;
+	async execute(uuid: string): Promise<void> {
+		return;
 	}
 }
 

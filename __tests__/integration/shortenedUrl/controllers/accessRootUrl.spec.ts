@@ -44,7 +44,10 @@ class UseCaseFactoryDummy implements IShortenedUrlUseCaseFactory {
 		);
 	}
 	makeIncrementHit(): IIncrementHit {
-		return new IncrementHit(this.eventManagerDummy);
+		return new IncrementHit(
+			this.shortUrlRepository,
+			this.eventManagerDummy,
+		);
 	}
 	makeUpdateShortenedUrl(): IUpdateShortenedUrl {
 		return new UpdateShortenedUrl(

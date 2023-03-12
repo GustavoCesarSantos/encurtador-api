@@ -2,6 +2,9 @@ import { IShortenedUrlRepository } from '@infra/db/shortenedUrlRepository';
 import { ShortenedUrl } from '@modules/shortenedUrls/shortenedUrl';
 
 export class ShortenedUrlRepositoryDummy implements IShortenedUrlRepository {
+	async incrementHit(code: string): Promise<void> {
+		return;
+	}
 	async getShortenedUrlOwnedByOwnerId(
 		ownerId: number,
 	): Promise<ShortenedUrl[]> {
