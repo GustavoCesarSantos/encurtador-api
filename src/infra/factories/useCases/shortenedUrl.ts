@@ -23,7 +23,7 @@ export class ShortenedUrlUseCaseFactory implements IShortenedUrlUseCaseFactory {
 	}
 
 	public makeIncrementHit(): IncrementHit {
-		return new IncrementHit(this.manager);
+		return new IncrementHit(this.shortUrlRepository, this.manager);
 	}
 
 	public makeFindShortenedUrl(): FindShortenedUrl {

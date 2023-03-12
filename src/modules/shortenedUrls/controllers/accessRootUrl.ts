@@ -10,6 +10,7 @@ import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortene
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
 import { QueueName } from '@helpers/queue';
+import { IncrementShortenedUrlHitsJob } from '@helpers/jobTypes';
 
 type Request = {
 	params: {
@@ -120,7 +121,11 @@ export class AccessRootUrl implements IController<Request> {
 					what: `Iniciando envio para a fila de atualização de hits da url encurtada.`,
 				},
 			});
-			await this.sendToShortenedUrlHitsUpdatedQueue('1');
+			await this.sendToShortenedUrlHitsUpdatedQueue<IncrementShortenedUrlHitsJob>(
+				{
+					code,
+				},
+			);
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -356,8 +361,8 @@ export class AccessRootUrl implements IController<Request> {
 		return rootUrlDB;
 	}
 
-	private async sendToShortenedUrlHitsUpdatedQueue(
-		data: string,
+	private async sendToShortenedUrlHitsUpdatedQueue<DataType = any>(
+		data: DataType,
 	): Promise<void> {
 		this.eventManager.notify({
 			eventName: EventNames.info,
@@ -366,7 +371,7 @@ export class AccessRootUrl implements IController<Request> {
 				what: 'Iniciando envio de dados para a fila de atualização de hits da url encurtada.',
 			},
 		});
-		await this.queue.add(QueueName.ShortenedUrlHitsUpdated, data);
+		await this.queue.add<DataType>(QueueName.ShortenedUrlHitsUpdated, data);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
