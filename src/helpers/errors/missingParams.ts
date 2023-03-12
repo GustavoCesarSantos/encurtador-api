@@ -5,4 +5,3 @@ export class MissingParams extends Error {
 		Object.setPrototypeOf(this, MissingParams.prototype);
 	}
 }
-//
