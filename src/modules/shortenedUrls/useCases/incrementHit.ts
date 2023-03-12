@@ -1,33 +1,38 @@
 import { EventNames } from '@helpers/eventNames';
+import { IShortenedUrlRepository } from '@infra/db/shortenedUrlRepository';
 import { IEventManager } from '@infra/listeners/eventManager';
 
 export interface IIncrementHit {
-	execute(hit: number): number;
+	execute(uuid: string): Promise<void>;
 }
 
 export class IncrementHit implements IIncrementHit {
+	private readonly shortenedUrlRepository: IShortenedUrlRepository;
 	private readonly eventManager: IEventManager;
 
-	constructor(eventManager: IEventManager) {
+	constructor(
+		shortenedUrlRepository: IShortenedUrlRepository,
+		eventManager: IEventManager,
+	) {
+		this.shortenedUrlRepository = shortenedUrlRepository;
 		this.eventManager = eventManager;
 	}
 
-	execute(hit: number): number {
+	public async execute(uuid: string): Promise<void> {
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'IncrementHit',
-				what: `Iniciando incremento da propriedade hit, valor atual: ${hit}`,
+				what: `Iniciando incremento da propriedade hit.`,
 			},
 		});
-		const newValue = hit + 1;
+		await this.shortenedUrlRepository.incrementHit(uuid);
 		this.eventManager.notify({
 			eventName: EventNames.info,
 			message: {
 				where: 'IncrementHit',
-				what: `Propriedade hit incrementada, valor atual: ${newValue}`,
+				what: `Propriedade hit incrementada.`,
 			},
 		});
-		return newValue;
 	}
 }

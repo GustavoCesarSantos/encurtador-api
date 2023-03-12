@@ -1,6 +1,6 @@
 {
 	"name": "shortenerurl-api",
-	"version": "1.19.0",
+	"version": "1.20.0",
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
@@ -12,8 +12,8 @@
 		"test:cov": "jest --no-cache --runInBand --coverage",
 		"test:staged": "jest --passWithNoTests --findRelatedTests",
 		"build": "rimraf ./dist && tsc -p .",
-		"start": "export NODE_ENV=production && prisma db push && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index.js",
 		"dev": "export NODE_ENV=development && prisma migrate dev && ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/index.ts",
+		"start": "export NODE_ENV=production && prisma migrate deploy && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index.js",
 		"workers:dev": "ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/infra/workers/bullmq/index.ts",
 		"workers:start": "node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/infra/workers/bullmq/index.js",
 		"release": "standard-version",

@@ -63,6 +63,13 @@ export class ShortenedUrlRepositoryWithPrisma
 		});
 	}
 
+	public async incrementHit(code: string): Promise<void> {
+		await this.prisma.shortUrls.update({
+			where: { code },
+			data: { hits: { increment: 1 } },
+		});
+	}
+
 	public async delete(uuid: string): Promise<void> {
 		await this.prisma.shortUrls.delete({ where: { uuid } });
 	}

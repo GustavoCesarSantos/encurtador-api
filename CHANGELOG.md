@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.19.0...v1.20.0) (2023-03-12)
+
+
+### Features
+
+* cria método de incremento de hits na interface de repositório ([b73edef](https://github.com/GustavoCesarSantos/encurtador-api/commit/b73edefe9dfc0298c4c2f1accd35dcd2ae8212df))
+* cria tipagem para a o job de atualização de hits ([e144e38](https://github.com/GustavoCesarSantos/encurtador-api/commit/e144e3835817e80361b070fbc11b328dcb6ab309))
+* cria worker para atualizar hits ([e2ed76c](https://github.com/GustavoCesarSantos/encurtador-api/commit/e2ed76c851b13fa77fcc5a0fe11b2d0b9ca73da9))
+
 ## [1.19.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.18.1...v1.19.0) (2023-03-08)
 
 

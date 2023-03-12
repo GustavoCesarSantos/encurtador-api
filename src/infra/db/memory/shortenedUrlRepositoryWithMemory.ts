@@ -35,6 +35,10 @@ export class ShortenedUrlRepositoryWithMemory
 		throw new Error('Method not implemented.');
 	}
 
+	incrementHit(code: string): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
 	delete(uuid: string): Promise<void> {
 		throw new Error('Method not implemented.');
 	}
