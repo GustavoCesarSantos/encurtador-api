@@ -2,9 +2,9 @@ name: 5Bits API CD
 
 on:
     workflow_run:
-    workflows: ['5Bits API CI']
-    types:
-        - completed
+        workflows: [5Bits API CI]
+        types:
+            - completed
 
 jobs:
     build:
