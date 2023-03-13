@@ -24,6 +24,7 @@ export class RateLimit implements IMiddleware {
 	public async handle(request: Request): Promise<Response> {
 		try {
 			const key = request.ip;
+			if (!key) return HttpResponse.serverError();
 			const record = await this.cache.get(key);
 			const window = variables.rateLimitFixedWindowInMinutes;
 			const limitToken = variables.rateLimitToken;

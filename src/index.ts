@@ -6,9 +6,6 @@ import { ExpressApp } from '@infra/http/express';
 
 const logger = PinoLogger.create();
 const app = new ExpressApp();
-app.setCors();
-app.setDocRoute();
-app.setupRoutes();
 const server = app.listen();
 
 function gracefullShutdown(event: string) {

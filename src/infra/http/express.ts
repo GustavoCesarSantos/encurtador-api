@@ -24,7 +24,22 @@ export class ExpressApp {
 		return this.app;
 	}
 
-	public setCors() {
+	public setupRoutes(): void {
+		const router = Router();
+		routes(router);
+		this.app.use('/v1', router);
+	}
+
+	public listen(): Server {
+		this.setCors();
+		this.setDocRoute();
+		this.setupRoutes();
+		return this.app.listen(this.port, () =>
+			this.logger.info(`Server running in port: ${this.port}`),
+		);
+	}
+
+	private setCors() {
 		const options: cors.CorsOptions = {
 			allowedHeaders: [
 				'Origin',
@@ -41,19 +56,7 @@ export class ExpressApp {
 		this.app.use(cors(options));
 	}
 
-	public setupRoutes(): void {
-		const router = Router();
-		routes(router);
-		this.app.use('/v1', router);
-	}
-
-	public setDocRoute(): void {
+	private setDocRoute(): void {
 		this.app.use('/docs', SwaggerDoc.serve(), SwaggerDoc.setup());
-	}
-
-	public listen(): Server {
-		return this.app.listen(this.port, () =>
-			this.logger.info(`Server running in port: ${this.port}`),
-		);
 	}
 }
