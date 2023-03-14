@@ -13,7 +13,7 @@
 		"test:staged": "jest --passWithNoTests --findRelatedTests",
 		"build": "rimraf ./dist && tsc -p .",
 		"dev": "export NODE_ENV=development && prisma migrate dev && ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/index.ts",
-		"start": "export NODE_ENV=production && prisma generate && prisma migrate deploy && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
+		"start": "export NODE_ENV=production && prisma generate && prisma migrate deploy && node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index.js",
 		"workers:dev": "ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules -r tsconfig-paths/register src/infra/workers/bullmq/index.ts",
 		"workers:start": "node  -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/infra/workers/bullmq/index.js",
 		"release": "standard-version",
