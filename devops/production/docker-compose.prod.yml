@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+    prod_api:
+        environment:
+            - NODE_ENV='production'
+            - DOMAIN_URL=${DOMAIN_URL}
+            - DATABASE_URL=${DATABASE_URL}
+            - PG_USER=${PG_USER}
+            - PG_PASSWORD=${PG_PASSWORD}
+            - CACHE_URL=${CACHE_URL}
+            - REDIS_PASSWORD=${REDIS_PASSWORD}
+            - PORT=${PORT}
+            - RATE_LIMIT_FIXED_WINDOW_IN_MINUTES=${RATE_LIMIT_FIXED_WINDOW_IN_MINUTES}
+            - RATE_LIMIT_TOKEN=${RATE_LIMIT_TOKEN}
+        image: ${DOCKERHUB_USERNAME}/${DOCKERHUB_IMAGE}:latest
+        ports:
+            - ${PORT}:${PORT}
+        command: npm start

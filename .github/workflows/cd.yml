@@ -23,6 +23,6 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                   context: .
-                  file: ./Dockerfile
+                  file: ./devops/production/Dockerfile.prod
                   push: true
                   tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}:latest
