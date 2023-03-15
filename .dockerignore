@@ -1,6 +1,5 @@
 __tests__
 node_modules
-dist
 devops
 coverage
 npm-debug.log
