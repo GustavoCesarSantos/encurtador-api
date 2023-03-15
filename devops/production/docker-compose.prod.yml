@@ -16,4 +16,3 @@ services:
         image: ${DOCKERHUB_USERNAME}/${DOCKERHUB_IMAGE}:latest
         ports:
             - ${PORT}:${PORT}
-        command: npm start
