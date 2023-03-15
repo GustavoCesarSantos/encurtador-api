@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.5](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.4...v1.20.5) (2023-03-15)
+
+
+### Bug Fixes
+
+* corrige action cd ([9b02d1a](https://github.com/GustavoCesarSantos/encurtador-api/commit/9b02d1a79b62cda8a4d076261488cfcb235d6817))
+* corrige action de cd ([b302619](https://github.com/GustavoCesarSantos/encurtador-api/commit/b302619ace1ee08b1ceffdd4a7f1dbea551c633f))
+* corrige action de cd ([39d3f5c](https://github.com/GustavoCesarSantos/encurtador-api/commit/39d3f5ccec399aaa911c2c0639dac599c4c11c59))
+* corrige action de cd ([13eb57b](https://github.com/GustavoCesarSantos/encurtador-api/commit/13eb57bba41dcd01502f950e876f160a3c37a50c))
+* corrige action de cd ([ed3283f](https://github.com/GustavoCesarSantos/encurtador-api/commit/ed3283f1311dadcaf9aca29df5c3f8e69e6f31fc))
+* corrige dockerfile de produção ([3403ede](https://github.com/GustavoCesarSantos/encurtador-api/commit/3403edea6a6b25a6d16862ed526c70d9362de5d9))
+* corrige dokerfile ([9f84fe0](https://github.com/GustavoCesarSantos/encurtador-api/commit/9f84fe0196ce240eb10edf80d5f214c60eb8d5c0))
+* corrige script de start ([9117115](https://github.com/GustavoCesarSantos/encurtador-api/commit/9117115cf328e052f49c1181c03f0181b8d4838d))
+* corrige script start ([3c4acbc](https://github.com/GustavoCesarSantos/encurtador-api/commit/3c4acbcfb998747de965885a06a3cf52075f389a))
+* corrigindo dockerfile ([7321619](https://github.com/GustavoCesarSantos/encurtador-api/commit/73216197560ea9775de03e433edd7aa33a733c60))
+
 ### [1.20.4](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.3...v1.20.4) (2023-03-14)
 
 ### [1.20.3](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.2...v1.20.3) (2023-03-13)
