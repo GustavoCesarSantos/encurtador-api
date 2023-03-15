@@ -25,4 +25,4 @@ jobs:
                   context: .
                   file: ./devops/production/Dockerfile.prod
                   push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}:teste
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}:testeabsurdo
