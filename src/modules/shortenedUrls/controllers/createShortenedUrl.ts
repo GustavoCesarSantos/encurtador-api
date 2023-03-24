@@ -9,6 +9,7 @@ import { IReturnShortenedUrl } from '../useCases/returnShortenedUrl';
 import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortenedUrlUseCaseFactory';
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
+import { ISaveShortenedUrl } from '../useCases/saveShortenedUrl';
 
 type Request = {
 	body: {
@@ -21,6 +22,7 @@ export class CreateShortenedUrl implements IController<Request> {
 	private readonly eventManager: IEventManager;
 	private readonly generateCode: IGenerateCode;
 	private readonly returnShortenedUrl: IReturnShortenedUrl;
+	private readonly saveShortenedUrl: ISaveShortenedUrl;
 
 	constructor(
 		factory: IShortenedUrlUseCaseFactory,
@@ -31,6 +33,7 @@ export class CreateShortenedUrl implements IController<Request> {
 		this.eventManager = eventManager;
 		this.generateCode = factory.makeGenerateCode();
 		this.returnShortenedUrl = factory.makeReturnShortenedUrl();
+		this.saveShortenedUrl = factory.makeSaveShortenedUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {
@@ -127,6 +130,40 @@ export class CreateShortenedUrl implements IController<Request> {
 				message: {
 					where: 'CreateShortenedUrl',
 					what: `Salvo em cache o código: ${code} e a url original: ${url}`,
+				},
+			});
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortenedUrl',
+					what: `Salvando no banco de dados o código: ${code} e a url original: ${url}`,
+				},
+			});
+			const error = await this.saveShortenedUrl.execute(url, code);
+			if (error) {
+				this.eventManager.notify({
+					eventName: EventNames.error,
+					message: {
+						where: 'CreateShortenedUrl',
+						what: `Body invalido: ${JSON.stringify(
+							validationSchema,
+						)}`,
+					},
+				});
+				this.eventManager.notify({
+					eventName: EventNames.error,
+					message: {
+						where: 'CreateShortenedUrl',
+						what: `Erro ao tentar salvar url encurtada na base de dados. Erro: ${error.message}, Cause: ${error.cause}, Stack: ${error.stack}`,
+					},
+				});
+				return HttpResponse.badRequest(error);
+			}
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortenedUrl',
+					what: `Salvo no banco de dados o código: ${code} e a url original: ${url}`,
 				},
 			});
 			this.eventManager.notify({
