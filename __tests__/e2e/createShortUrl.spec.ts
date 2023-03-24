@@ -6,6 +6,7 @@ import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { HttpResponse } from '@helpers/httpResponse';
 import { CreateShortenedUrl } from '@modules/shortenedUrls/controllers/createShortenedUrl';
 import { ioRedis } from '@infra/db/redis/ioRedisHelper';
+import { SaveShortenedUrl } from '@modules/shortenedUrls/useCases/saveShortenedUrl';
 
 const app = new ExpressApp();
 app.setupRoutes();
@@ -20,13 +21,10 @@ describe('Create short url', () => {
 		jest.spyOn(PinoLogger.prototype, 'info').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'warn').mockImplementation();
 		jest.spyOn(PinoLogger.prototype, 'error').mockImplementation();
+		jest.spyOn(SaveShortenedUrl.prototype, 'execute').mockImplementation();
 		jest.spyOn(
 			CreateShortenedUrl.prototype as any,
-			'sendToShortenedUrlCreationQueue',
-		).mockImplementation();
-		jest.spyOn(
-			CreateShortenedUrl.prototype as any,
-			'createLongTermCache',
+			'createShortTermCache',
 		).mockImplementation();
 	});
 
