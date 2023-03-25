@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.5...v1.21.0) (2023-03-25)
+
+
+### Features
+
+* adiciona caso de uso de salvar url encurtada ([3d49fa8](https://github.com/GustavoCesarSantos/encurtador-api/commit/3d49fa8cc7716f9a0abae8eb39b8d58c580e827c))
+
 ### [1.20.5](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.4...v1.20.5) (2023-03-15)
 
 

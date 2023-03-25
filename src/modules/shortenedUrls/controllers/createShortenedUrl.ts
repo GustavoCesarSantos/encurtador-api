@@ -5,13 +5,11 @@ import { ICache } from '@infra/cache/ICache';
 import { IController } from '@shared/IController';
 import { IEventManager } from '@infra/listeners/eventManager';
 import { IGenerateCode } from '../useCases/generateCode';
-import { IQueue } from '@infra/queues/IQueue';
 import { IReturnShortenedUrl } from '../useCases/returnShortenedUrl';
 import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortenedUrlUseCaseFactory';
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
-import { QueueName } from '@helpers/queue';
-import { ShortenedUrlCreatedJob } from '@helpers/jobTypes';
+import { ISaveShortenedUrl } from '../useCases/saveShortenedUrl';
 
 type Request = {
 	body: {
@@ -23,20 +21,19 @@ export class CreateShortenedUrl implements IController<Request> {
 	private readonly cache: ICache;
 	private readonly eventManager: IEventManager;
 	private readonly generateCode: IGenerateCode;
-	private readonly queue: IQueue;
 	private readonly returnShortenedUrl: IReturnShortenedUrl;
+	private readonly saveShortenedUrl: ISaveShortenedUrl;
 
 	constructor(
 		factory: IShortenedUrlUseCaseFactory,
 		eventManager: IEventManager,
 		cache: ICache,
-		queue: IQueue,
 	) {
 		this.cache = cache;
 		this.eventManager = eventManager;
 		this.generateCode = factory.makeGenerateCode();
-		this.queue = queue;
 		this.returnShortenedUrl = factory.makeReturnShortenedUrl();
+		this.saveShortenedUrl = factory.makeSaveShortenedUrl();
 	}
 
 	public async handle(request: Request): Promise<Response> {
@@ -120,28 +117,6 @@ export class CreateShortenedUrl implements IController<Request> {
 					what: `Url encurtada: ${shortenedUrl} criada, utilizando o código: ${code}, url original: ${url}`,
 				},
 			});
-			const job = { url, code };
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'CreateShortenedUrl',
-					what: `Iniciando envio de dados: ${JSON.stringify(
-						job,
-					)} para a fila de criação de url encurtada.`,
-				},
-			});
-			await this.sendToShortenedUrlCreationQueue<ShortenedUrlCreatedJob>(
-				job,
-			);
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'CreateShortenedUrl',
-					what: `Envio com sucesso para a fila de criação de url encurtada. Dados: ${JSON.stringify(
-						job,
-					)}`,
-				},
-			});
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
@@ -149,12 +124,46 @@ export class CreateShortenedUrl implements IController<Request> {
 					what: `Salvando em cache o código: ${code} e a url original: ${url}`,
 				},
 			});
-			await this.createLongTermCache(code, url);
+			await this.createShortTermCache(code, url);
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
 					where: 'CreateShortenedUrl',
 					what: `Salvo em cache o código: ${code} e a url original: ${url}`,
+				},
+			});
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortenedUrl',
+					what: `Salvando no banco de dados o código: ${code} e a url original: ${url}`,
+				},
+			});
+			const error = await this.saveShortenedUrl.execute(url, code);
+			if (error) {
+				this.eventManager.notify({
+					eventName: EventNames.error,
+					message: {
+						where: 'CreateShortenedUrl',
+						what: `Body invalido: ${JSON.stringify(
+							validationSchema,
+						)}`,
+					},
+				});
+				this.eventManager.notify({
+					eventName: EventNames.error,
+					message: {
+						where: 'CreateShortenedUrl',
+						what: `Erro ao tentar salvar url encurtada na base de dados. Erro: ${error.message}, Cause: ${error.cause}, Stack: ${error.stack}`,
+					},
+				});
+				return HttpResponse.badRequest(error);
+			}
+			this.eventManager.notify({
+				eventName: EventNames.info,
+				message: {
+					where: 'CreateShortenedUrl',
+					what: `Salvo no banco de dados o código: ${code} e a url original: ${url}`,
 				},
 			});
 			this.eventManager.notify({
@@ -179,30 +188,10 @@ export class CreateShortenedUrl implements IController<Request> {
 		}
 	}
 
-	private async sendToShortenedUrlCreationQueue<DataType = any>(
-		data: DataType,
-	): Promise<void> {
-		this.eventManager.notify({
-			eventName: EventNames.info,
-			message: {
-				where: 'CreateShortenedUrl.sendToShortenedUrlCreationQueue',
-				what: `Enviando dados para a fila de criação de urls encurtadas. Dados: ${data}`,
-			},
-		});
-		await this.queue.add<DataType>(QueueName.ShortenedUrlCreated, data);
-		this.eventManager.notify({
-			eventName: EventNames.info,
-			message: {
-				where: 'CreateShortenedUrl.sendToShortenedUrlCreationQueue',
-				what: `Dados enviados para a fila de criação de urls encurtadas. Dados: ${data}`,
-			},
-		});
-	}
-
-	private async createLongTermCache(
+	private async createShortTermCache(
 		code: string,
 		url: string,
 	): Promise<void> {
-		await this.cache.set(`${code}:longTerm`, url);
+		await this.cache.setWithExpiration(`${code}:shortTerm`, url, 3600);
 	}
 }
