@@ -9,7 +9,6 @@ import { IUpdateShortenedUrl } from '@modules/shortenedUrls/useCases/updateShort
 import { IController } from '@shared/IController';
 import { CacheDummy } from '../../../testDoubles/dummy/cache';
 import { EventManagerDummy } from '../../../testDoubles/dummy/eventManager';
-import { QueueDummy } from '../../../testDoubles/dummy/queue';
 
 let createShortenedUrl: IController;
 
@@ -82,12 +81,10 @@ const makeSut = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
 	const cacheDummy = new CacheDummy();
-	const queueDummy = new QueueDummy();
 	return new CreateShortenedUrl(
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		queueDummy,
 	);
 };
 
@@ -95,12 +92,10 @@ const makeSutWithError = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryWithErrorDummy();
 	const eventManagerDummy = new EventManagerDummy();
 	const cacheDummy = new CacheDummy();
-	const queueDummy = new QueueDummy();
 	return new CreateShortenedUrl(
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		queueDummy,
 	);
 };
 

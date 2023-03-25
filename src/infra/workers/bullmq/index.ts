@@ -7,15 +7,8 @@ import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 
 const logger = PinoLogger.create();
 const workerFactory = new WorkersFactory();
-const shortenedUrlCreatedWorker = workerFactory.makeShortenedUrlCreatedWorker();
 const incrementShortenedUrlHitsWorker =
 	workerFactory.makeIncrementShortenedUrlHitsWorker();
-
-const shortenedUrlCreated = new Worker(
-	QueueName.ShortenedUrlCreated,
-	shortenedUrlCreatedWorker.execute.bind(shortenedUrlCreatedWorker),
-	{ connection: ioRedis },
-);
 
 const incrementShortenedUrlHits = new Worker(
 	QueueName.ShortenedUrlHitsUpdated,
@@ -24,15 +17,6 @@ const incrementShortenedUrlHits = new Worker(
 	),
 	{ connection: ioRedis },
 );
-
-shortenedUrlCreated.on('failed', job => {
-	if (job) {
-		logger.error({
-			where: 'workers.bullmq.index.shortenedUrlCreated',
-			what: `Job: ${job.id} failed`,
-		});
-	}
-});
 
 incrementShortenedUrlHits.on('failed', job => {
 	if (job) {

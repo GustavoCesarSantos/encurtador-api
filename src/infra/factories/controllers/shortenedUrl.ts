@@ -10,9 +10,6 @@ import { QueueName } from '@helpers/queue';
 
 export class ShortenedUrlControllerFactory {
 	private readonly cache = new CacheWithRedis();
-	private readonly createdQueue = new BullMQQueue(
-		QueueName.ShortenedUrlCreated,
-	);
 	private readonly logger = PinoLogger.create();
 	private readonly manager = new ListenersManager();
 	private readonly updatedQueue = new BullMQQueue(
@@ -41,7 +38,6 @@ export class ShortenedUrlControllerFactory {
 			this.shortenedUrlUseCaseFactory,
 			this.manager,
 			this.cache,
-			this.createdQueue,
 		);
 	}
 }
