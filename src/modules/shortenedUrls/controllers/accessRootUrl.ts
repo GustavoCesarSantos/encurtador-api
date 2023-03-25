@@ -114,25 +114,25 @@ export class AccessRootUrl implements IController<Request> {
 				});
 				return HttpResponse.notFound();
 			}
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'AccessRootUrl',
-					what: `Iniciando envio para a fila de atualização de hits da url encurtada.`,
-				},
-			});
-			await this.sendToShortenedUrlHitsUpdatedQueue<IncrementShortenedUrlHitsJob>(
-				{
-					code,
-				},
-			);
-			this.eventManager.notify({
-				eventName: EventNames.info,
-				message: {
-					where: 'AccessRootUrl',
-					what: `Envio para a fila de atualização de hits da url encurtada feito com sucesso.`,
-				},
-			});
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'AccessRootUrl',
+			// 		what: `Iniciando envio para a fila de atualização de hits da url encurtada.`,
+			// 	},
+			// });
+			// await this.sendToShortenedUrlHitsUpdatedQueue<IncrementShortenedUrlHitsJob>(
+			// 	{
+			// 		code,
+			// 	},
+			// );
+			// this.eventManager.notify({
+			// 	eventName: EventNames.info,
+			// 	message: {
+			// 		where: 'AccessRootUrl',
+			// 		what: `Envio para a fila de atualização de hits da url encurtada feito com sucesso.`,
+			// 	},
+			// });
 			this.eventManager.notify({
 				eventName: EventNames.info,
 				message: {
