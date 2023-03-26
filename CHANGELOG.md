@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.21.2...v1.22.0) (2023-03-26)
+
+
+### Features
+
+* cria helper para conectar ao upstash ([4dea8c4](https://github.com/GustavoCesarSantos/encurtador-api/commit/4dea8c484499b84efe002fa066d110aa84fdfcb3))
+* cria serviço de cache utilizando upstash ([6857c0e](https://github.com/GustavoCesarSantos/encurtador-api/commit/6857c0e518e470a739e990cb8df7cc4dc73b95a4))
+
 ### [1.21.2](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.21.0...v1.21.2) (2023-03-26)
 
 
