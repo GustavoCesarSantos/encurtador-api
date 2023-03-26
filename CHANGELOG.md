@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.2](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.21.0...v1.21.2) (2023-03-26)
+
+
+### Bug Fixes
+
+* adiciona pasta test ao tsconfig ([4290ec1](https://github.com/GustavoCesarSantos/encurtador-api/commit/4290ec1deb6de86aeaeff55a824e7b3fc9b6b5bf))
+
 ### [1.21.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.21.0...v1.21.1) (2023-03-25)
 
 ## [1.21.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.20.5...v1.21.0) (2023-03-25)
