@@ -6,6 +6,8 @@ export const variables = {
 	port: process.env.PORT ?? '3001',
 	nodeEnv: process.env.NODE_ENV ?? 'development',
 	redisUrl: process.env.CACHE_URL ?? 'redis://localhost:6379',
+	upstashUrl: process.env.UPSTASH_REDIS_REST_URL,
+	upstashToken: process.env.UPSTASH_REDIS_REST_TOKEN,
 	rateLimitFixedWindowInMinutes: Number(
 		process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES ?? 90,
 	),
