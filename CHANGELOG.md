@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.22.0...v1.22.1) (2023-05-06)
+
 ## [1.22.0](https://github.com/GustavoCesarSantos/encurtador-api/compare/v1.21.2...v1.22.0) (2023-03-26)
 
 
