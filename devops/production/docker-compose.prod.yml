@@ -14,5 +14,14 @@ services:
             - RATE_LIMIT_FIXED_WINDOW_IN_MINUTES=${RATE_LIMIT_FIXED_WINDOW_IN_MINUTES}
             - RATE_LIMIT_TOKEN=${RATE_LIMIT_TOKEN}
         image: ${DOCKERHUB_USERNAME}/${DOCKERHUB_IMAGE}:latest
+        expose:
+            - ${PORT}
+
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ../nginx-conf/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
-            - ${PORT}:${PORT}
+            - '80:80'
+        depends_on:
+            - prod_api
