@@ -55,12 +55,10 @@ const makeSut = () => {
 	const useCaseFactoryDummy = new UseCaseFactoryDummy();
 	const eventManagerDummy = new EventManagerDummy();
 	const cacheDummy = new CacheDummy();
-	const queueDummy = new QueueDummy();
 	return new CreateShortenedUrl(
 		useCaseFactoryDummy,
 		eventManagerDummy,
 		cacheDummy,
-		queueDummy,
 	);
 };
 

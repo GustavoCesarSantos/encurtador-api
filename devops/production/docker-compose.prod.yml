@@ -6,10 +6,10 @@ services:
             - NODE_ENV='production'
             - DOMAIN_URL=${DOMAIN_URL}
             - DATABASE_URL=${DATABASE_URL}
-            - PG_USER=${PG_USER}
-            - PG_PASSWORD=${PG_PASSWORD}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
             - CACHE_URL=${CACHE_URL}
-            - REDIS_PASSWORD=${REDIS_PASSWORD}
+            - CACHE_PASSWORD=${CACHE_PASSWORD}
             - PORT=${PORT}
             - RATE_LIMIT_FIXED_WINDOW_IN_MINUTES=${RATE_LIMIT_FIXED_WINDOW_IN_MINUTES}
             - RATE_LIMIT_TOKEN=${RATE_LIMIT_TOKEN}
