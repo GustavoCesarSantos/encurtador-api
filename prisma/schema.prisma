@@ -4,27 +4,32 @@ generator client {
 }
 
 datasource db {
-  provider             = "mysql"
+  provider             = "postgresql"
   url                  = env("DATABASE_URL")
-  relationMode = "prisma"
 }
 
-model ShortUrls {
-  id        Int      @id @default(autoincrement())
-  uuid      String
-  url       String   @db.VarChar(255)
-  code      String   @db.VarChar(5)
-  hits      Int?
-  createdat DateTime @default(now()) @db.Timestamp(6)
-  ownerid   Int
-  Owners    Owners   @relation(fields: [ownerid], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  @@unique(fields: [code], name: "Code")
-  @@unique(fields: [uuid], name: "UUID")
+model Users {
+    id Int @id @default(autoincrement())
+    name String
+    email String @unique
+    active Boolean @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime?
+    removedAt DateTime?
+    ShortenedUrls ShortenedUrls[]
+
 }
 
-model Owners {
-  id        Int         @id @default(autoincrement())
-  email     String      @db.VarChar(255)
-  createdat DateTime @default(now()) @db.Timestamp(6)
-  ShortUrls ShortUrls[]
+model ShortenedUrls {
+    id Int @id @default(autoincrement())
+    Owner Users @relation(fields: [ownerId], references: [id])
+    ownerId Int
+    originalUrl String
+    code String @db.VarChar(5) @unique
+    customCode String? @db.VarChar(25)
+    qrCode String?
+    accessCounter Int @default(0)
+    createdAt DateTime @default(now())
+    updatedAt DateTime?
+    removedAt DateTime?
 }

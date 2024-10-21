@@ -10,7 +10,6 @@ import { IShortenedUrlUseCaseFactory } from '@infra/factories/useCases/IShortene
 import { MissingParams } from '@helpers/errors/missingParams';
 import { Response } from '@shared/response';
 import { QueueName } from '@helpers/queue';
-import { IncrementShortenedUrlHitsJob } from '@helpers/jobTypes';
 
 type Request = {
 	params: {
