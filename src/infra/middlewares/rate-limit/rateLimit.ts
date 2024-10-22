@@ -1,8 +1,8 @@
-import { HttpResponse } from '@helpers/httpResponse';
 import { ICache } from '@infra/cache/ICache';
-import { IMiddleware } from '@shared/IMiddleware';
+import { variables } from '@shared/envs';
+import { HttpResponse } from '@shared/httpResponse';
+import { IMiddleware } from '@shared/interfaces/IMiddleware';
 import { Response } from '@shared/response';
-import { variables } from '@helpers/envs';
 
 type Request = {
 	ip: string;

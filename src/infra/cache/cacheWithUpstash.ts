@@ -1,7 +1,7 @@
-import { redis } from '@infra/db/redis/upstashHelper';
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 
 import { ICache } from './ICache';
+import { redis } from '@infra/db/redis/upstashClient';
 
 export class CacheWithUpstash implements ICache {
 	private readonly redisClient;

@@ -1,12 +1,12 @@
 import express, { Express, Router } from 'express';
 import { Logger } from 'pino';
 import cors from 'cors';
+import { Server } from 'node:http';
 
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
 import { routes } from '@infra/routes';
-import { Server } from 'node:http';
 import { SwaggerDoc } from '@infra/doc/swaggerDoc';
-import { variables } from '@helpers/envs';
+import { variables } from '@shared/envs';
 
 export class ExpressApp {
 	private readonly app: Express;

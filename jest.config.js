@@ -11,7 +11,6 @@ module.exports = {
 		'@/__tests__/(.*)': '<rootDir>/__tests__/$1',
 		'@modules/(.*)': '<rootDir>/src/modules/$1',
 		'@infra/(.*)': '<rootDir>/src/infra/$1',
-		'@helpers/(.*)': '<rootDir>/src/helpers/$1',
 		'@utils/(.*)': '<rootDir>/src/utils/$1',
 		'@shared/(.*)': '<rootDir>/src/shared/$1',
 	},

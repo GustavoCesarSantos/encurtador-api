@@ -1,9 +1,9 @@
 import pino, { Logger } from 'pino';
 
-import { EventNames } from '@helpers/eventNames';
 import { IListener, Payload } from '../IListener';
 import { ILogger, Message } from './ILogger';
-import { variables } from '@helpers/envs';
+import { variables } from '@shared/envs';
+import { EventNames } from '@shared/eventNames';
 
 export class PinoLogger implements ILogger, IListener {
 	private transport: any = {};
