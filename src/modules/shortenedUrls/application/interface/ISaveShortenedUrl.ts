@@ -1,3 +1,5 @@
+import { ShortenUrlInput } from '@modules/shortenedUrls/presentation/dtos/shortenUrlRequest';
+
 export interface ISaveShortenedUrl {
-	execute(url: string, code: string): Promise<void | Error>;
+	execute(data: ShortenUrlRequest): Promise<void | Error>;
 }

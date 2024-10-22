@@ -1,11 +1,11 @@
 import { IController } from '@shared/interfaces/IController';
 import { IGenerateCode } from '../application/interface/IGenerateCode';
 import { Response } from '@shared/response';
-import { Guard } from '@utils/guard';
 import { HttpResponse } from '@shared/httpResponse';
-import { MissingParams } from '@shared/errors/missingParams';
 import { IUseCaseFactory } from '../utils/factory/useCase/IUseCaseFactory';
 import { ISaveShortenedUrl } from '../application/interface/ISaveShortenedUrl';
+import { ShortenUrlInput } from './dtos/shortenUrlInput';
+import { ShortenUrlOutput } from './dtos/shortenUrlOutput';
 
 type Request = {
 	body: {
@@ -24,18 +24,23 @@ export class ShortenUrl implements IController<Request> {
 
 	public async handle(request: Request): Promise<Response> {
 		try {
-			const { url } = request.body;
-			const validationSchema = [{ propName: 'Url', value: url }];
-			const result = Guard.againstEmptyOrUndefined(validationSchema);
-			if (!result.isSuccess) {
-				return HttpResponse.badRequest(
-					new MissingParams(`${result.isError}`),
-				);
-			}
+			const ownerId = 1;
 			const code = this.generateCode.execute();
-			const error = await this.saveShortenedUrl.execute(url, code);
-			if (error) return HttpResponse.badRequest(error);
-			return HttpResponse.created({ code });
+			const input = ShortenUrlInput.safeParse({
+				...request.body,
+				ownerId,
+				code,
+			});
+			if (!input.success) {
+				return HttpResponse.badRequest(input.error);
+			}
+			const saveError = await this.saveShortenedUrl.execute(input.data);
+			if (saveError) return HttpResponse.badRequest(saveError);
+			const output = ShortenUrlOutput.safeParse({
+				code,
+			});
+			if (!output.success) return HttpResponse.serverError();
+			return HttpResponse.created(output.data);
 		} catch (error: unknown) {
 			return HttpResponse.serverError();
 		}

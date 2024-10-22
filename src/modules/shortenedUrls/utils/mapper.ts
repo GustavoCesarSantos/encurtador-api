@@ -30,7 +30,9 @@ export class Mapper implements IMapper<ShortenedUrl> {
 
 	public toUpdate(
 		entity: ShortenedUrl,
-	): Partial<Omit<Model, 'id' | 'createdAt' | 'removedAt'>> {
+	): Partial<
+		Omit<Model, 'id' | 'accessCounter' | 'createdAt' | 'removedAt'>
+	> {
 		entity.setUpdateDate();
 		return {
 			ownerId: entity.getOwnerId(),
@@ -38,7 +40,6 @@ export class Mapper implements IMapper<ShortenedUrl> {
 			code: entity.getCode(),
 			customCode: entity.getCustomCode(),
 			qrCode: entity.getQrCode(),
-			accessCounter: entity.getAccessCounter(),
 			updatedAt: entity.getUpdatedDate(),
 		};
 	}

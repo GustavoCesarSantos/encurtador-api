@@ -30,15 +30,23 @@ export class ShortenedUrl {
 		this.code = props.code;
 		this.customCode = props.customCode ?? '';
 		this.qrCode = props.qrCode ?? '';
-		this.accessCounter = props.accessCounter ?? 0;
+		this.accessCounter = props.accessCounter;
 	}
 
 	public static create(props: Constructor) {
-		const result = Guard.againstEmptyOrUndefined([
+		const result = Guard.againstNaNOrUndefined([
+			{ propName: 'Owner ID', value: props.ownerId },
+			{ propName: 'Access counter', value: props.accessCounter },
+		]);
+		const result2 = Guard.againstEmptyOrUndefined([
 			{ propName: 'Original url', value: props.originalUrl },
 			{ propName: 'Code', value: props.code },
 		]);
-		if (!result.isSuccess) return new MissingParams(`${result.isError}`);
+		if (!result.isSuccess || !result2.isSuccess) {
+			return new MissingParams(
+				`${[...result.isError, ...result2.isError]}`,
+			);
+		}
 		return new ShortenedUrl(props);
 	}
 
