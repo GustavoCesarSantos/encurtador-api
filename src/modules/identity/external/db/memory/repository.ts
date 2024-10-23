@@ -12,6 +12,10 @@ export class Repository implements IRepository {
 		return this.shortenedUrls;
 	}
 
+	public async findByEmail(email: string): Promise<User | undefined> {
+		return await this.shortenedUrls.find(item => item.getEmail() === email);
+	}
+
 	public async findById(id: number): Promise<User | undefined> {
 		return await this.shortenedUrls.find(item => item.getId() === id);
 	}

@@ -11,6 +11,10 @@ type Request = {
 	body: {
 		url: string;
 	};
+	user: {
+		id: number;
+		email: string;
+	};
 };
 
 export class ShortenUrl implements IController<Request> {
@@ -24,7 +28,7 @@ export class ShortenUrl implements IController<Request> {
 
 	public async handle(request: Request): Promise<Response> {
 		try {
-			const ownerId = 1;
+			const ownerId = Number(request.user.id);
 			const code = this.generateCode.execute();
 			const input = ShortenUrlInput.safeParse({
 				...request.body,

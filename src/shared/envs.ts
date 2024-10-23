@@ -13,4 +13,5 @@ export const variables = {
 	),
 	rateLimitToken: Number(process.env.RATE_LIMIT_TOKEN ?? 1000),
 	password_hash_salt: Number(process.env.PASSWORD_HASH_SALT ?? 10),
+	jwtSecret: process.env.JWT_SECRETE ?? 'teste',
 };

@@ -2,6 +2,33 @@ import { Response } from '@shared/response';
 import { NotFound } from './errors/notFound';
 
 export class HttpResponse {
+	static badRequest(error: Error): Response {
+		return {
+			status: 400,
+			body: {
+				message: error.message,
+			},
+		};
+	}
+
+	static created(body: object): Response {
+		return {
+			status: 201,
+			body,
+		};
+	}
+
+	static notFound(resource?: string): Response {
+		const error = new NotFound();
+		return {
+			status: 404,
+			body: {
+				message: error.message,
+				resource,
+			},
+		};
+	}
+
 	static ok(): Response {
 		return {
 			status: 200,
@@ -16,28 +43,11 @@ export class HttpResponse {
 		};
 	}
 
-	static created(body: object): Response {
+	static unauthorized(): Response {
 		return {
-			status: 201,
-			body,
-		};
-	}
-
-	static badRequest(error: Error): Response {
-		return {
-			status: 400,
+			status: 401,
 			body: {
-				message: error.message,
-			},
-		};
-	}
-
-	static notFound(): Response {
-		const error = new NotFound();
-		return {
-			status: 404,
-			body: {
-				message: error.message,
+				message: 'Unauthorized',
 			},
 		};
 	}

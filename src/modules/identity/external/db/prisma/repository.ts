@@ -21,6 +21,14 @@ export class Repository implements IRepository {
 		return items.map(item => this.mapper.toDomain(item));
 	}
 
+	public async findByEmail(email: string): Promise<User | undefined> {
+		const item = await this.prisma.users.findFirst({
+			where: { email },
+		});
+		if (!item) return undefined;
+		return this.mapper.toDomain(item);
+	}
+
 	public async findById(id: number): Promise<User | undefined> {
 		const item = await this.prisma.users.findFirst({
 			where: { id },

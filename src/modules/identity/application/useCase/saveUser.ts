@@ -15,7 +15,7 @@ export class SaveUser implements ISaveUser {
 		if (userOrError instanceof Error) {
 			return userOrError;
 		}
-		userOrError.setHashPassword(userOrError.getPassword());
+		await userOrError.setHashPassword(userOrError.getPassword());
 		await this.repository.save(userOrError);
 	}
 }
