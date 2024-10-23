@@ -5,6 +5,7 @@ import { IFindShortenedUrl } from '@modules/shortenedUrls/application/interface/
 import { IUseCaseFactory } from '@modules/shortenedUrls/utils/factory/useCase/IUseCaseFactory';
 import { AccessOriginalUrlInput } from '../dtos/accessOriginalUrlInput';
 import { AccessOriginalUrlOutput } from '../dtos/accessOriginalUrlOutput';
+import { IIncrementAccessCounter } from '@modules/shortenedUrls/application/interface/IIncrementAccessCounter';
 
 type Request = {
 	params: {
@@ -14,9 +15,11 @@ type Request = {
 
 export class AccessOriginalUrl implements IController<Request> {
 	private readonly findShortenedUrl: IFindShortenedUrl;
+	private readonly incrementAccessCounter: IIncrementAccessCounter;
 
 	constructor(factory: IUseCaseFactory) {
 		this.findShortenedUrl = factory.makeFindShortenedUrl();
+		this.incrementAccessCounter = factory.makeIncrementAccessCounter();
 	}
 
 	public async handle(request: Request): Promise<Response> {
@@ -33,6 +36,7 @@ export class AccessOriginalUrl implements IController<Request> {
 				originalUrl: shortenedUrl.getOriginalUrl(),
 			});
 			if (!output.success) return HttpResponse.serverError();
+			await this.incrementAccessCounter.execute(input.data.code);
 			return HttpResponse.okWithBody(output.data);
 		} catch (error: unknown) {
 			return HttpResponse.serverError();

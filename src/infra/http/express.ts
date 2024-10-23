@@ -4,9 +4,10 @@ import cors from 'cors';
 import { Server } from 'node:http';
 
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
-import { routes } from '@infra/routes';
+import { routes } from '@infra/http/routes';
 import { SwaggerDoc } from '@infra/doc/swaggerDoc';
 import { variables } from '@shared/envs';
+import { rateLimit } from '@infra/factories/middlewares/rateLimit';
 
 export class ExpressApp {
 	private readonly app: Express;
@@ -27,7 +28,7 @@ export class ExpressApp {
 	public setupRoutes(): void {
 		const router = Router();
 		routes(router);
-		this.app.use('/v1', router);
+		this.app.use('/v1', rateLimit, router);
 	}
 
 	public listen(): Server {

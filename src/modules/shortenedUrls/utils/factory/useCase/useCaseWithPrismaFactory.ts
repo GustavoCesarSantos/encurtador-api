@@ -4,6 +4,7 @@ import { FindShortenedUrl } from '@modules/shortenedUrls/application/useCase/fin
 import { GenerateCode } from '@modules/shortenedUrls/application/useCase/generateCode';
 import { SaveShortenedUrl } from '@modules/shortenedUrls/application/useCase/saveShortenedUrl';
 import { Repository } from '@modules/shortenedUrls/external/db/prisma/repository';
+import { IncrementAccessCounter } from '@modules/shortenedUrls/application/useCase/incrementAccessCounter';
 
 export class UseCaseWithPrismaFactory implements IUseCaseFactory {
 	private readonly repository: IRepository = new Repository();
@@ -14,6 +15,10 @@ export class UseCaseWithPrismaFactory implements IUseCaseFactory {
 
 	public makeGenerateCode(): GenerateCode {
 		return new GenerateCode();
+	}
+
+	public makeIncrementAccessCounter(): IncrementAccessCounter {
+		return new IncrementAccessCounter(this.repository);
 	}
 
 	public makeSaveShortenedUrl(): SaveShortenedUrl {

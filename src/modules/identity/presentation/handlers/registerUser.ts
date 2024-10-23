@@ -28,7 +28,7 @@ export class RegisterUser implements IController<Request> {
 			}
 			const saveError = await this.saveUser.execute(input.data);
 			if (saveError) return HttpResponse.badRequest(saveError);
-			return HttpResponse.ok();
+			return HttpResponse.created({ status: 'success' });
 		} catch (error: unknown) {
 			return HttpResponse.serverError();
 		}

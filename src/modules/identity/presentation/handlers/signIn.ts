@@ -6,6 +6,7 @@ import { ICreateAccessToken } from '@modules/identity/application/interface/ICre
 import { IFindUserByEmail } from '@modules/identity/application/interface/IFindUserByEmail';
 import { IUseCaseFactory } from '@modules/identity/utils/factory/useCase/IUseCaseFactory';
 import { SignInInput } from '../dtos/signInInput';
+import { SignInOutput } from '../dtos/signInOutput';
 
 type Request = {
 	body: {
@@ -47,6 +48,8 @@ export class SignIn implements IController<Request> {
 				);
 			}
 			const result = await this.createAccessToken.execute(user);
+			const output = SignInOutput.safeParse(result);
+			if (!output.success) return HttpResponse.serverError();
 			return HttpResponse.okWithBody({ ...result });
 		} catch (error: unknown) {
 			return HttpResponse.serverError();
