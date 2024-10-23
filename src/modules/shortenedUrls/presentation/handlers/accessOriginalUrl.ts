@@ -1,10 +1,10 @@
 import { Response } from '@shared/response';
 import { HttpResponse } from '@shared/httpResponse';
 import { IController } from '@shared/interfaces/IController';
-import { IUseCaseFactory } from '../utils/factory/useCase/IUseCaseFactory';
-import { IFindShortenedUrl } from '../application/interface/IFindShortenedUrl';
-import { AccessOriginalUrlInput } from './dtos/accessOriginalUrlInput';
-import { AccessOriginalUrlOutput } from './dtos/accessOriginalUrlOutput';
+import { IFindShortenedUrl } from '@modules/shortenedUrls/application/interface/IFindShortenedUrl';
+import { IUseCaseFactory } from '@modules/shortenedUrls/utils/factory/useCase/IUseCaseFactory';
+import { AccessOriginalUrlInput } from '../dtos/accessOriginalUrlInput';
+import { AccessOriginalUrlOutput } from '../dtos/accessOriginalUrlOutput';
 
 type Request = {
 	params: {

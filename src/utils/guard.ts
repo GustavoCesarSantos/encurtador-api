@@ -59,4 +59,11 @@ export class Guard {
 		if (props.length > 0) return { isSuccess: false, isError: props };
 		return { isSuccess: true, isError: [] };
 	}
+
+	static againstInvalidEmail(email: string): Result {
+		const regexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const isValid = regexPattern.test(email);
+		if (!isValid) return { isSuccess: false, isError: ['Email'] };
+		return { isSuccess: true, isError: [] };
+	}
 }

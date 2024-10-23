@@ -12,4 +12,5 @@ export const variables = {
 		process.env.RATE_LIMIT_FIXED_WINDOW_IN_MINUTES ?? 90,
 	),
 	rateLimitToken: Number(process.env.RATE_LIMIT_TOKEN ?? 1000),
+	password_hash_salt: Number(process.env.PASSWORD_HASH_SALT ?? 10),
 };

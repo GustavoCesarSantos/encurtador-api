@@ -1,7 +1,7 @@
 import { ShortenedUrl } from '@modules/shortenedUrls/domain/shortenedUrl';
 import { IRepository } from '@modules/shortenedUrls/external/db/IRepository';
+import { ShortenUrlInput } from '@modules/shortenedUrls/presentation/dtos/shortenUrlInput';
 import { ISaveShortenedUrl } from '../interface/ISaveShortenedUrl';
-import { ShortenUrlInput } from '@modules/shortenedUrls/presentation/dtos/shortenUrlRequest';
 
 export class SaveShortenedUrl implements ISaveShortenedUrl {
 	private readonly repository: IRepository;
@@ -10,7 +10,7 @@ export class SaveShortenedUrl implements ISaveShortenedUrl {
 		this.repository = repository;
 	}
 
-	async execute(data: ShortenUrlRequest): Promise<void | Error> {
+	async execute(data: ShortenUrlInput): Promise<void | Error> {
 		const shortenedUrlOrError = ShortenedUrl.create({
 			...data,
 			accessCounter: 0,

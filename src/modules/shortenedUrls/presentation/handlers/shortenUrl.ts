@@ -1,11 +1,11 @@
 import { IController } from '@shared/interfaces/IController';
-import { IGenerateCode } from '../application/interface/IGenerateCode';
 import { Response } from '@shared/response';
 import { HttpResponse } from '@shared/httpResponse';
-import { IUseCaseFactory } from '../utils/factory/useCase/IUseCaseFactory';
-import { ISaveShortenedUrl } from '../application/interface/ISaveShortenedUrl';
-import { ShortenUrlInput } from './dtos/shortenUrlInput';
-import { ShortenUrlOutput } from './dtos/shortenUrlOutput';
+import { IGenerateCode } from '@modules/shortenedUrls/application/interface/IGenerateCode';
+import { ISaveShortenedUrl } from '@modules/shortenedUrls/application/interface/ISaveShortenedUrl';
+import { IUseCaseFactory } from '@modules/shortenedUrls/utils/factory/useCase/IUseCaseFactory';
+import { ShortenUrlInput } from '../dtos/shortenUrlInput';
+import { ShortenUrlOutput } from '../dtos/shortenUrlOutput';
 
 type Request = {
 	body: {

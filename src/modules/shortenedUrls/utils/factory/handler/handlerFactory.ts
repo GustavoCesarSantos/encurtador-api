@@ -1,7 +1,7 @@
-import { ShortenUrl } from '@modules/shortenedUrls/presentation/shortenUrl';
+import { AccessOriginalUrl } from '@modules/shortenedUrls/presentation/handlers/accessOriginalUrl';
 import { IUseCaseFactory } from '../useCase/IUseCaseFactory';
 import { UseCaseWithPrismaFactory } from '../useCase/useCaseWithPrismaFactory';
-import { AccessOriginalUrl } from '@modules/shortenedUrls/presentation/accessOriginalUrl';
+import { ShortenUrl } from '@modules/shortenedUrls/presentation/handlers/shortenUrl';
 
 export class HandlerFactory {
 	private readonly userCase: IUseCaseFactory = new UseCaseWithPrismaFactory();
