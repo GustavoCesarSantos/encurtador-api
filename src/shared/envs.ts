@@ -13,5 +13,12 @@ export const variables = {
 	),
 	rateLimitToken: Number(process.env.RATE_LIMIT_TOKEN ?? 1000),
 	password_hash_salt: Number(process.env.PASSWORD_HASH_SALT ?? 10),
-	jwtSecret: process.env.JWT_SECRETE ?? 'teste',
+	accessTokenSecret: process.env.ACCESS_TOKEN_SECRET ?? 'teste',
+	refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET ?? 'teste',
+	accessTokenAlgorithm: process.env.ACCESS_TOKEN_ALGORITHM ?? 'HS256',
+	refreshTokenAlgorithm: process.env.REFRESH_TOKEN_ALGORITHM ?? 'HS256',
+	accessTokenExpirationTime:
+		process.env.ACCESS_TOKEN_EXPIRATION_TIME ?? '15m',
+	refreshTokenExpirationTime:
+		process.env.REFRESH_TOKEN_EXPIRATION_TIME ?? '7d',
 };

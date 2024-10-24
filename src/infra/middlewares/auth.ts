@@ -1,3 +1,4 @@
+import { IRepository } from '@modules/identity/external/db/IRepository';
 import { variables } from '@shared/envs';
 import { HttpResponse } from '@shared/httpResponse';
 import { IMiddleware } from '@shared/interfaces/IMiddleware';
@@ -13,6 +14,12 @@ type Request = {
 };
 
 export class Authenticate implements IMiddleware {
+	private readonly repository: IRepository;
+
+	constructor(repository: IRepository) {
+		this.repository = repository;
+	}
+
 	public async handle(request: Request): Promise<Response> {
 		try {
 			const authHeader = request.headers.authorization;
@@ -22,11 +29,13 @@ export class Authenticate implements IMiddleware {
 			const token = authHeader.split(' ')[1];
 			const decodedToken = verify(
 				token,
-				variables.jwtSecret,
+				variables.accessTokenSecret,
 			) as TokenPayload;
 			if (!decodedToken) {
 				return HttpResponse.unauthorized();
 			}
+			const user = await this.repository.findById(decodedToken.id);
+			if (!user) return HttpResponse.unauthorized();
 			request.user = decodedToken;
 			return HttpResponse.ok();
 		} catch (error) {
