@@ -15,8 +15,6 @@ export const variables = {
 	password_hash_salt: Number(process.env.PASSWORD_HASH_SALT ?? 10),
 	accessTokenSecret: process.env.ACCESS_TOKEN_SECRET ?? 'teste',
 	refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET ?? 'teste',
-	accessTokenAlgorithm: process.env.ACCESS_TOKEN_ALGORITHM ?? 'HS256',
-	refreshTokenAlgorithm: process.env.REFRESH_TOKEN_ALGORITHM ?? 'HS256',
 	accessTokenExpirationTime:
 		process.env.ACCESS_TOKEN_EXPIRATION_TIME ?? '15m',
 	refreshTokenExpirationTime:

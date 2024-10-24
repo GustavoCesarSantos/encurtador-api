@@ -9,7 +9,7 @@ export class CreateAccessToken implements ICreateAccessToken {
 		const payload = { id: user.getId(), email: user.getEmail() };
 		return {
 			accessToken: sign(payload, variables.accessTokenSecret, {
-				algorithm: variables.accessTokenAlgorithm,
+				algorithm: 'HS256',
 				expiresIn: variables.accessTokenExpirationTime,
 			}),
 		};
