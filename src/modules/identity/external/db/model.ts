@@ -4,6 +4,7 @@ export type Model = {
 	email: string;
 	password: string;
 	active: boolean;
+	authTokenVersion: number;
 	createdAt: Date;
 	updatedAt: Date | null;
 	removedAt: Date | null;

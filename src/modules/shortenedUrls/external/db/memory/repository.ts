@@ -13,7 +13,7 @@ export class Repository implements IRepository {
 	}
 
 	public async findById(id: number): Promise<ShortenedUrl | undefined> {
-		return await this.shortenedUrls.find(item => item.getId() === id);
+		return this.shortenedUrls.find(item => item.getId() === id);
 	}
 
 	async findByCode(code: string): Promise<ShortenedUrl | undefined> {

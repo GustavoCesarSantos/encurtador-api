@@ -13,11 +13,15 @@ export class Repository implements IRepository {
 	}
 
 	public async findByEmail(email: string): Promise<User | undefined> {
-		return await this.shortenedUrls.find(item => item.getEmail() === email);
+		return this.shortenedUrls.find(item => item.getEmail() === email);
 	}
 
 	public async findById(id: number): Promise<User | undefined> {
-		return await this.shortenedUrls.find(item => item.getId() === id);
+		return this.shortenedUrls.find(item => item.getId() === id);
+	}
+
+	public async incrementAuthTokenVersion(userId: number): Promise<void> {
+		throw new Error('Method not implemented.');
 	}
 
 	public async save(entity: User): Promise<void> {

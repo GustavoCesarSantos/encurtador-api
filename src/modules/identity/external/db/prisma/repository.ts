@@ -37,6 +37,13 @@ export class Repository implements IRepository {
 		return this.mapper.toDomain(item);
 	}
 
+	public async incrementAuthTokenVersion(userId: number): Promise<void> {
+		await this.prisma.users.update({
+			where: { id: userId },
+			data: { authTokenVersion: { increment: 1 } },
+		});
+	}
+
 	public async save(entity: User): Promise<void> {
 		const data = this.mapper.toPersistence(entity);
 		await this.prisma.users.create({ data });

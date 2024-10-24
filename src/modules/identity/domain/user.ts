@@ -10,6 +10,7 @@ type Constructor = {
 	email: string;
 	password: string;
 	active?: boolean;
+	authTokenVersion?: number;
 };
 
 export class User {
@@ -18,6 +19,7 @@ export class User {
 	private readonly email: string;
 	private password: string;
 	private readonly active: boolean;
+	private authTokenVersion: number;
 	private createdAt!: Date;
 	private updatedAt!: Date;
 	private removedAt!: Date;
@@ -28,6 +30,7 @@ export class User {
 		this.email = props.email;
 		this.password = props.password;
 		this.active = props.active ?? true;
+		this.authTokenVersion = props.authTokenVersion ?? 0;
 	}
 
 	public static create(props: Constructor) {
@@ -48,6 +51,11 @@ export class User {
 	public getActive(): boolean {
 		const active = this.active;
 		return active;
+	}
+
+	public getAuthTokenVersion(): number {
+		const authTokenVersion = this.authTokenVersion;
+		return authTokenVersion;
 	}
 
 	public getCreatedDate(): Date {
@@ -78,6 +86,10 @@ export class User {
 	public getUpdatedDate(): Date {
 		const updatedAt = this.updatedAt;
 		return updatedAt;
+	}
+
+	public incrementAuthTokenVersion(): void {
+		this.authTokenVersion++;
 	}
 
 	public setCreateDate(): void {

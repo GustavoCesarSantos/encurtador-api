@@ -3,14 +3,14 @@ import { variables } from '@shared/envs';
 import { HttpResponse } from '@shared/httpResponse';
 import { IMiddleware } from '@shared/interfaces/IMiddleware';
 import { Response } from '@shared/response';
-import { TokenPayload } from '@shared/tokenPayload';
+import { AccessTokenPayload } from '@shared/tokenPayload';
 import { verify } from 'jsonwebtoken';
 
 type Request = {
 	headers: {
 		authorization: string;
 	};
-	user: TokenPayload;
+	user: AccessTokenPayload;
 };
 
 export class Authenticate implements IMiddleware {
@@ -30,12 +30,16 @@ export class Authenticate implements IMiddleware {
 			const decodedToken = verify(
 				token,
 				variables.accessTokenSecret,
-			) as TokenPayload;
+			) as AccessTokenPayload;
 			if (!decodedToken) {
 				return HttpResponse.unauthorized();
 			}
 			const user = await this.repository.findById(decodedToken.id);
 			if (!user) return HttpResponse.unauthorized();
+			if (!user.getActive()) return HttpResponse.unauthorized();
+			if (user.getAuthTokenVersion() !== decodedToken.version) {
+				return HttpResponse.unauthorized();
+			}
 			request.user = decodedToken;
 			return HttpResponse.ok();
 		} catch (error) {

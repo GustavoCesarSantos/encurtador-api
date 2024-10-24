@@ -18,13 +18,16 @@ export class Mapper implements IMapper<User> {
 			email: entity.getEmail(),
 			password: entity.getPassword(),
 			active: entity.getActive(),
+			authTokenVersion: entity.getAuthTokenVersion(),
 			createdAt: entity.getCreatedDate(),
 		};
 	}
 
 	public toUpdate(
 		entity: User,
-	): Partial<Omit<Model, 'id' | 'createdAt' | 'removedAt'>> {
+	): Partial<
+		Omit<Model, 'id' | 'authTokenVersion' | 'createdAt' | 'removedAt'>
+	> {
 		entity.setUpdateDate();
 		return {
 			name: entity.getName(),

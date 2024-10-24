@@ -7,6 +7,7 @@ import { IFindUserByEmail } from '@modules/identity/application/interface/IFindU
 import { IUseCaseFactory } from '@modules/identity/utils/factory/useCase/IUseCaseFactory';
 import { SignInInput } from '../dtos/signInInput';
 import { SignInOutput } from '../dtos/signInOutput';
+import { ICreateRefreshToken } from '@modules/identity/application/interface/ICreateRefreshToken';
 
 type Request = {
 	body: {
@@ -18,11 +19,13 @@ type Request = {
 export class SignIn implements IController<Request> {
 	private readonly comparePassword: IComparePassword;
 	private readonly createAccessToken: ICreateAccessToken;
+	private readonly createRefreshToken: ICreateRefreshToken;
 	private readonly findUserByEmail: IFindUserByEmail;
 
 	constructor(factory: IUseCaseFactory) {
 		this.comparePassword = factory.makeComparePassword();
 		this.createAccessToken = factory.makeCreateAccessToken();
+		this.createRefreshToken = factory.makeCreateRefreshToken();
 		this.findUserByEmail = factory.makeFindUserByEmail();
 	}
 
@@ -47,10 +50,16 @@ export class SignIn implements IController<Request> {
 					new Error('Invalid Credentials'),
 				);
 			}
-			const result = await this.createAccessToken.execute(user);
-			const output = SignInOutput.safeParse(result);
+			const { accessToken } = await this.createAccessToken.execute(user);
+			const { refreshToken } = await this.createRefreshToken.execute(
+				user,
+			);
+			const output = SignInOutput.safeParse({
+				accessToken,
+				refreshToken,
+			});
 			if (!output.success) return HttpResponse.serverError();
-			return HttpResponse.okWithBody({ ...result });
+			return HttpResponse.okWithBody(output.data);
 		} catch (error: unknown) {
 			return HttpResponse.serverError();
 		}

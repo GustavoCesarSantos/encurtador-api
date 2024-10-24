@@ -1,7 +1,7 @@
-import { TokenPayload } from '@shared/tokenPayload';
+import { AccessTokenPayload } from '@shared/tokenPayload';
 
 declare namespace Express {
 	export interface Request {
-		user: TokenPayload;
+		user: AccessTokenPayload;
 	}
 }

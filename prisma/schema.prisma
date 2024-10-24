@@ -17,6 +17,7 @@ model Users {
     createdAt DateTime @default(now())
     updatedAt DateTime?
     removedAt DateTime?
+    authTokenVersion Int @default(0)
     ShortenedUrls ShortenedUrls[]
 }
 

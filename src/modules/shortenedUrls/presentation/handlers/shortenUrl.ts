@@ -6,13 +6,13 @@ import { ISaveShortenedUrl } from '@modules/shortenedUrls/application/interface/
 import { IUseCaseFactory } from '@modules/shortenedUrls/utils/factory/useCase/IUseCaseFactory';
 import { ShortenUrlInput } from '../dtos/shortenUrlInput';
 import { ShortenUrlOutput } from '../dtos/shortenUrlOutput';
-import { TokenPayload } from '@shared/tokenPayload';
+import { AccessTokenPayload } from '@shared/tokenPayload';
 
 type Request = {
 	body: {
 		url: string;
 	};
-	user: TokenPayload;
+	user: AccessTokenPayload;
 };
 
 export class ShortenUrl implements IController<Request> {

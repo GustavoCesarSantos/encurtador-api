@@ -5,6 +5,9 @@ import { SaveUser } from '@modules/identity/application/useCase/saveUser';
 import { ComparePassword } from '@modules/identity/application/useCase/comparePassword';
 import { CreateAccessToken } from '@modules/identity/application/useCase/createAccessToken';
 import { FindUserByEmail } from '@modules/identity/application/useCase/findUserByEmail';
+import { CreateRefreshToken } from '@modules/identity/application/useCase/createRefreshToken';
+import { DecodeRefreshToken } from '@modules/identity/application/useCase/decodeRefreshToken';
+import { IncrementAuthTokenVersion } from '@modules/identity/application/useCase/incrementAuthTokenVersion';
 
 export class UseCaseWithMemoryFactory implements IUseCaseFactory {
 	private readonly repository: IRepository = new Repository();
@@ -17,8 +20,20 @@ export class UseCaseWithMemoryFactory implements IUseCaseFactory {
 		return new CreateAccessToken();
 	}
 
+	public makeCreateRefreshToken(): CreateRefreshToken {
+		return new CreateRefreshToken();
+	}
+
+	public makeDecodeRefreshToken(): DecodeRefreshToken {
+		return new DecodeRefreshToken();
+	}
+
 	public makeFindUserByEmail(): FindUserByEmail {
 		return new FindUserByEmail(this.repository);
+	}
+
+	public makeIncrementAuthTokenVersion(): IncrementAuthTokenVersion {
+		return new IncrementAuthTokenVersion(this.repository);
 	}
 
 	public makeSaveUser(): SaveUser {
