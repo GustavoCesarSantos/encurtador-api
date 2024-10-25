@@ -45,13 +45,16 @@ export class ExpressApp {
 			allowedHeaders: [
 				'Origin',
 				'X-Requested-With',
+				'Accept',
 				'Content-Type',
 				'Accept',
 				'X-Access-Token',
+				'Authorization',
 			],
 			credentials: true,
 			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-			origin: variables.domainUrl,
+			origin:
+				variables.nodeEnv === 'production' ? variables.domainUrl : '*',
 			preflightContinue: false,
 		};
 		this.app.use(cors(options));

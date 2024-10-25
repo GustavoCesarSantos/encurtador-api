@@ -15,7 +15,7 @@ export class CreateRefreshToken implements ICreateRefreshToken {
 		return {
 			refreshToken: sign(payload, variables.refreshTokenSecret, {
 				algorithm: 'HS256',
-				expiresIn: variables.accessTokenExpirationTime,
+				expiresIn: variables.refreshTokenExpirationTime,
 			}),
 		};
 	}
