@@ -13,7 +13,7 @@ export class CreateRefreshToken implements ICreateRefreshToken {
 			version: user.getAuthTokenVersion(),
 		};
 		return {
-			refreshToken: sign(payload, variables.accessTokenSecret, {
+			refreshToken: sign(payload, variables.refreshTokenSecret, {
 				algorithm: 'HS256',
 				expiresIn: variables.accessTokenExpirationTime,
 			}),

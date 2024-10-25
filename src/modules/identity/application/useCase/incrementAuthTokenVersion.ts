@@ -8,7 +8,7 @@ export class IncrementAuthTokenVersion implements IIncrementAuthTokenVersion {
 		this.repository = repository;
 	}
 
-	async execute(userId: number): Promise<void> {
-		await this.repository.incrementAuthTokenVersion(userId);
+	async execute(userId: number): Promise<number> {
+		return await this.repository.incrementAuthTokenVersion(userId);
 	}
 }

@@ -43,6 +43,15 @@ export class HttpResponse {
 		};
 	}
 
+	static toManyRequests(): Response {
+		return {
+			status: 429,
+			body: {
+				message: 'Too Many Requests',
+			},
+		};
+	}
+
 	static unauthorized(): Response {
 		return {
 			status: 401,

@@ -37,11 +37,12 @@ export class Repository implements IRepository {
 		return this.mapper.toDomain(item);
 	}
 
-	public async incrementAuthTokenVersion(userId: number): Promise<void> {
-		await this.prisma.users.update({
+	public async incrementAuthTokenVersion(userId: number): Promise<number> {
+		const result = await this.prisma.users.update({
 			where: { id: userId },
-			data: { authTokenVersion: { increment: 1 } },
+			data: { authTokenVersion: { increment: 1 }, updatedAt: new Date() },
 		});
+		return result.authTokenVersion;
 	}
 
 	public async save(entity: User): Promise<void> {

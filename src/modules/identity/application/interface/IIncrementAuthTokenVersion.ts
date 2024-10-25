@@ -1,3 +1,3 @@
 export interface IIncrementAuthTokenVersion {
-	execute(userId: number): Promise<void>;
+	execute(userId: number): Promise<number>;
 }

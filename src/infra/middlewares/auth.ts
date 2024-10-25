@@ -43,7 +43,7 @@ export class Authenticate implements IMiddleware {
 			request.user = decodedToken;
 			return HttpResponse.ok();
 		} catch (error) {
-			return HttpResponse.serverError();
+			return HttpResponse.unauthorized();
 		}
 	}
 }

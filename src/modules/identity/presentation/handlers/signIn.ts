@@ -8,6 +8,7 @@ import { IUseCaseFactory } from '@modules/identity/utils/factory/useCase/IUseCas
 import { SignInInput } from '../dtos/signInInput';
 import { SignInOutput } from '../dtos/signInOutput';
 import { ICreateRefreshToken } from '@modules/identity/application/interface/ICreateRefreshToken';
+import { IIncrementAuthTokenVersion } from '@modules/identity/application/interface/IIncrementAuthTokenVersion';
 
 type Request = {
 	body: {
@@ -21,12 +22,15 @@ export class SignIn implements IController<Request> {
 	private readonly createAccessToken: ICreateAccessToken;
 	private readonly createRefreshToken: ICreateRefreshToken;
 	private readonly findUserByEmail: IFindUserByEmail;
+	private readonly incrementAuthTokenVersion: IIncrementAuthTokenVersion;
 
 	constructor(factory: IUseCaseFactory) {
 		this.comparePassword = factory.makeComparePassword();
 		this.createAccessToken = factory.makeCreateAccessToken();
 		this.createRefreshToken = factory.makeCreateRefreshToken();
 		this.findUserByEmail = factory.makeFindUserByEmail();
+		this.incrementAuthTokenVersion =
+			factory.makeIncrementAuthTokenVersion();
 	}
 
 	public async handle(request: Request): Promise<Response> {
@@ -50,6 +54,10 @@ export class SignIn implements IController<Request> {
 					new Error('Invalid Credentials'),
 				);
 			}
+			const newVersion = await this.incrementAuthTokenVersion.execute(
+				user.getId(),
+			);
+			user.setAuthTokenVersion(newVersion);
 			const { accessToken } = await this.createAccessToken.execute(user);
 			const { refreshToken } = await this.createRefreshToken.execute(
 				user,

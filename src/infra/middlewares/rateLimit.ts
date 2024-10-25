@@ -39,10 +39,10 @@ export class RateLimit implements IMiddleware {
 				return HttpResponse.ok();
 			}
 			if (now < new Date(data.nextTimestampAllowed)) {
-				return HttpResponse.badRequest(new Error('Request Denied'));
+				return HttpResponse.toManyRequests();
 			}
 			if (data.token < 0) {
-				return HttpResponse.badRequest(new Error('Request Denied'));
+				return HttpResponse.toManyRequests();
 			}
 			data.token--;
 			data.nextTimestampAllowed = this.getNextRequestTimestampAllowed(

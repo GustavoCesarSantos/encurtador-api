@@ -3,5 +3,5 @@ import { IBaseRepository } from '@shared/db/IBaseRepository';
 
 export interface IRepository extends IBaseRepository<User> {
 	findByEmail(email: string): Promise<User | undefined>;
-	incrementAuthTokenVersion(userId: number): Promise<void>;
+	incrementAuthTokenVersion(userId: number): Promise<number>;
 }

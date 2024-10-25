@@ -20,7 +20,7 @@ export class Repository implements IRepository {
 		return this.shortenedUrls.find(item => item.getId() === id);
 	}
 
-	public async incrementAuthTokenVersion(userId: number): Promise<void> {
+	public async incrementAuthTokenVersion(userId: number): Promise<number> {
 		throw new Error('Method not implemented.');
 	}
 

@@ -47,7 +47,7 @@ export class Repository implements IRepository {
 	public async incrementAccess(code: string): Promise<void> {
 		await this.prisma.shortenedUrls.update({
 			where: { code },
-			data: { accessCounter: { increment: 1 } },
+			data: { accessCounter: { increment: 1 }, updatedAt: new Date() },
 		});
 	}
 

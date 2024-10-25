@@ -88,8 +88,8 @@ export class User {
 		return updatedAt;
 	}
 
-	public incrementAuthTokenVersion(): void {
-		this.authTokenVersion++;
+	public setAuthTokenVersion(newVersion: number): void {
+		this.authTokenVersion = newVersion;
 	}
 
 	public setCreateDate(): void {
