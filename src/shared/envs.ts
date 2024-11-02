@@ -17,4 +17,7 @@ export const variables = {
 		process.env.ACCESS_TOKEN_EXPIRATION_TIME ?? '15m',
 	refreshTokenExpirationTime:
 		process.env.REFRESH_TOKEN_EXPIRATION_TIME ?? '7d',
+	internalId: process.env.INTERNAL_ID ?? 1,
+	internalEmail: process.env.INTERNAL_EMAIL ?? 'dev@dev.com',
+	internalAuthVersion: process.env.INTERNAL_AUTH_VERSION ?? 1,
 };

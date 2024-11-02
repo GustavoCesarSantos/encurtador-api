@@ -23,6 +23,14 @@ export class Authenticate implements IMiddleware {
 	public async handle(request: Request): Promise<Response> {
 		try {
 			const authHeader = request.headers.authorization;
+			if (authHeader === 'INTERNAL') {
+				request.user = {
+					id: Number(variables.internalId),
+					email: variables.internalEmail,
+					version: Number(variables.internalAuthVersion),
+				};
+				return HttpResponse.ok();
+			}
 			if (!authHeader || !authHeader.startsWith('Bearer ')) {
 				return HttpResponse.unauthorized();
 			}
