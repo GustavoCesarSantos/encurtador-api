@@ -43,6 +43,15 @@ export class HttpResponse {
 		};
 	}
 
+	static serverError(): Response {
+		return {
+			status: 500,
+			body: {
+				message: 'Internal Server Error',
+			},
+		};
+	}
+
 	static toManyRequests(): Response {
 		return {
 			status: 429,
@@ -57,15 +66,6 @@ export class HttpResponse {
 			status: 401,
 			body: {
 				message: 'Unauthorized',
-			},
-		};
-	}
-
-	static serverError(): Response {
-		return {
-			status: 500,
-			body: {
-				message: 'Internal Server Error',
 			},
 		};
 	}

@@ -23,7 +23,11 @@ export class Authenticate implements IMiddleware {
 	public async handle(request: Request): Promise<Response> {
 		try {
 			const authHeader = request.headers.authorization;
-			if (authHeader === 'INTERNAL') {
+			if (!authHeader || !authHeader.startsWith('Bearer ')) {
+				return HttpResponse.unauthorized();
+			}
+			const token = authHeader.split(' ')[1];
+			if (token === 'INTERNAL') {
 				request.user = {
 					id: Number(variables.internalId),
 					email: variables.internalEmail,
@@ -31,10 +35,6 @@ export class Authenticate implements IMiddleware {
 				};
 				return HttpResponse.ok();
 			}
-			if (!authHeader || !authHeader.startsWith('Bearer ')) {
-				return HttpResponse.unauthorized();
-			}
-			const token = authHeader.split(' ')[1];
 			const decodedToken = verify(
 				token,
 				variables.accessTokenSecret,
