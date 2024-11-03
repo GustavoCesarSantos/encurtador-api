@@ -5,9 +5,14 @@ import { GenerateCode } from '@modules/shortenedUrls/application/useCase/generat
 import { SaveShortenedUrl } from '@modules/shortenedUrls/application/useCase/saveShortenedUrl';
 import { Repository } from '@modules/shortenedUrls/external/db/prisma/repository';
 import { IncrementAccessCounter } from '@modules/shortenedUrls/application/useCase/incrementAccessCounter';
+import { FindAllShortenedUrls } from '@modules/shortenedUrls/application/useCase/findAllShortenedUrls';
 
 export class UseCaseWithPrismaFactory implements IUseCaseFactory {
 	private readonly repository: IRepository = new Repository();
+
+	public makeFindAllShortenedUrls(): FindAllShortenedUrls {
+		return new FindAllShortenedUrls(this.repository);
+	}
 
 	public makeFindShortenedUrl(): FindShortenedUrl {
 		return new FindShortenedUrl(this.repository);
