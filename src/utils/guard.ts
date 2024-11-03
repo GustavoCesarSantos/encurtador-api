@@ -1,6 +1,6 @@
 type propsList = {
 	propName: string;
-	value: string | undefined | null;
+	value: string | number | undefined | null;
 };
 
 type Result = {
@@ -30,6 +30,40 @@ export class Guard {
 			[],
 		);
 		if (props.length > 0) return { isSuccess: false, isError: props };
+		return { isSuccess: true, isError: [] };
+	}
+
+	static againstNaNOrUndefined(propsList: propsList[]): Result {
+		const props: string[] = propsList.reduce(
+			(acc: string[], cur: propsList) => {
+				switch (true) {
+					case cur.value === undefined:
+						acc.push(cur.propName);
+						break;
+					case cur.value === null:
+						acc.push(cur.propName);
+						break;
+					case typeof cur.value !== 'number':
+						acc.push(cur.propName);
+						break;
+					case isNaN(cur.value as number):
+						acc.push(cur.propName);
+						break;
+					default:
+						break;
+				}
+				return acc;
+			},
+			[],
+		);
+		if (props.length > 0) return { isSuccess: false, isError: props };
+		return { isSuccess: true, isError: [] };
+	}
+
+	static againstInvalidEmail(email: string): Result {
+		const regexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const isValid = regexPattern.test(email);
+		if (!isValid) return { isSuccess: false, isError: ['Email'] };
 		return { isSuccess: true, isError: [] };
 	}
 }

@@ -1,12 +1,13 @@
 import express, { Express, Router } from 'express';
 import { Logger } from 'pino';
 import cors from 'cors';
+import { Server } from 'node:http';
 
 import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
-import { routes } from '@infra/routes';
-import { Server } from 'node:http';
+import { routes } from '@infra/http/routes';
 import { SwaggerDoc } from '@infra/doc/swaggerDoc';
-import { variables } from '@helpers/envs';
+import { variables } from '@shared/envs';
+import { rateLimit } from '@infra/factories/middlewares/rateLimit';
 
 export class ExpressApp {
 	private readonly app: Express;
@@ -27,7 +28,7 @@ export class ExpressApp {
 	public setupRoutes(): void {
 		const router = Router();
 		routes(router);
-		this.app.use('/v1', router);
+		this.app.use('/v1', rateLimit, router);
 	}
 
 	public listen(): Server {
@@ -44,13 +45,16 @@ export class ExpressApp {
 			allowedHeaders: [
 				'Origin',
 				'X-Requested-With',
+				'Accept',
 				'Content-Type',
 				'Accept',
 				'X-Access-Token',
+				'Authorization',
 			],
 			credentials: true,
 			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-			origin: variables.domainUrl,
+			origin:
+				variables.nodeEnv === 'production' ? variables.domainUrl : '*',
 			preflightContinue: false,
 		};
 		this.app.use(cors(options));

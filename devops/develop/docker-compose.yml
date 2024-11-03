@@ -24,7 +24,7 @@ services:
         ports:
             - '3306:3306'
     cache_redis:
-        image: redis:7.0.5
+        image: redis
         restart: always
         command: redis-server --requirepass ${CACHE_PASSWORD}
         volumes:
