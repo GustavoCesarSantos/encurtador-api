@@ -54,7 +54,9 @@ export class ExpressApp {
 			credentials: true,
 			methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
 			origin:
-				variables.nodeEnv === 'production' ? variables.domainUrl : '*',
+				variables.nodeEnv === 'production'
+					? variables.domainUrl.split(',')
+					: '*',
 			preflightContinue: false,
 		};
 		this.app.use(cors(options));
