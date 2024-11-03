@@ -22,7 +22,7 @@ export class Repository implements IRepository {
 		);
 	}
 
-	public async findByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
+	public async findAllByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
 		return this.shortenedUrls.filter(
 			shortenedUrl => shortenedUrl.getOwnerId() === ownerId,
 		);

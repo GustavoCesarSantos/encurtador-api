@@ -8,6 +8,11 @@ const controllerFactory = new HandlerFactory();
 
 export const shortenedUrl = (router: Router): void => {
 	router.get(
+		'/shortenedUrls',
+		auth,
+		adaptRoute(controllerFactory.makeListAllUserUrls()),
+	);
+	router.get(
 		'/shortenedUrls/:code',
 		adaptRoute(controllerFactory.makeAccessOriginalUrl()),
 	);

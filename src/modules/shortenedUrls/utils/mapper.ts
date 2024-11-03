@@ -6,6 +6,7 @@ export class Mapper implements IMapper<ShortenedUrl> {
 	public toDomain(model: Model): ShortenedUrl {
 		const shortenedUrlOrError = ShortenedUrl.create({
 			...model,
+			lastAccess: model.lastAccess ?? undefined,
 			customCode: model.customCode ?? undefined,
 			qrCode: model.qrCode ?? undefined,
 		});
@@ -15,7 +16,7 @@ export class Mapper implements IMapper<ShortenedUrl> {
 
 	public toPersistence(
 		entity: ShortenedUrl,
-	): Omit<Model, 'id' | 'updatedAt' | 'removedAt'> {
+	): Omit<Model, 'id' | 'lastAccess' | 'updatedAt' | 'removedAt'> {
 		entity.setCreateDate();
 		return {
 			ownerId: entity.getOwnerId(),
@@ -31,7 +32,10 @@ export class Mapper implements IMapper<ShortenedUrl> {
 	public toUpdate(
 		entity: ShortenedUrl,
 	): Partial<
-		Omit<Model, 'id' | 'accessCounter' | 'createdAt' | 'removedAt'>
+		Omit<
+			Model,
+			'id' | 'accessCounter' | 'lastAccess' | 'createdAt' | 'removedAt'
+		>
 	> {
 		entity.setUpdateDate();
 		return {

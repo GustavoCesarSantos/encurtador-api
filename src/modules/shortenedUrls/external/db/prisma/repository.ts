@@ -38,7 +38,7 @@ export class Repository implements IRepository {
 		return this.mapper.toDomain(item);
 	}
 
-	public async findByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
+	public async findAllByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
 		const items: Model[] = await this.prisma.shortenedUrls.findMany({
 			where: { ownerId },
 		});
@@ -48,7 +48,11 @@ export class Repository implements IRepository {
 	public async incrementAccess(code: string): Promise<void> {
 		await this.prisma.shortenedUrls.update({
 			where: { code },
-			data: { accessCounter: { increment: 1 }, updatedAt: new Date() },
+			data: {
+				accessCounter: { increment: 1 },
+				lastAccess: new Date(),
+				updatedAt: new Date(),
+			},
 		});
 	}
 
