@@ -2,6 +2,7 @@ import { IRepository } from '../IRepository';
 import { ShortenedUrl } from '@modules/shortenedUrls/domain/shortenedUrl';
 import { prisma } from '@infra/db/prisma/prismaClient';
 import { Mapper } from '@modules/shortenedUrls/utils/mapper';
+import { Model } from '../model';
 
 export class Repository implements IRepository {
 	private readonly prisma;
@@ -17,7 +18,7 @@ export class Repository implements IRepository {
 	}
 
 	public async findAll(): Promise<ShortenedUrl[]> {
-		const items = await this.prisma.shortenedUrls.findMany();
+		const items: Model[] = await this.prisma.shortenedUrls.findMany();
 		return items.map(item => this.mapper.toDomain(item));
 	}
 
@@ -38,7 +39,7 @@ export class Repository implements IRepository {
 	}
 
 	public async findByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
-		const items = await this.prisma.shortenedUrls.findMany({
+		const items: Model[] = await this.prisma.shortenedUrls.findMany({
 			where: { ownerId },
 		});
 		return items.map(item => this.mapper.toDomain(item));

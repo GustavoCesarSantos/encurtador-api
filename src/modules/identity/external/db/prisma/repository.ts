@@ -2,6 +2,7 @@ import { IRepository } from '../IRepository';
 import { prisma } from '@infra/db/prisma/prismaClient';
 import { User } from '@modules/identity/domain/user';
 import { Mapper } from '@modules/identity/utils/mapper';
+import { Model } from '../model';
 
 export class Repository implements IRepository {
 	private readonly prisma;
@@ -17,7 +18,7 @@ export class Repository implements IRepository {
 	}
 
 	public async findAll(): Promise<User[]> {
-		const items = await this.prisma.users.findMany();
+		const items: Model[] = await this.prisma.users.findMany();
 		return items.map(item => this.mapper.toDomain(item));
 	}
 
