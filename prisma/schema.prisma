@@ -30,7 +30,16 @@ model ShortenedUrls {
     customCode String? @db.VarChar(25)
     qrCode String?
     accessCounter Int @default(0)
+    lastAccess DateTime?
     createdAt DateTime @default(now())
     updatedAt DateTime?
     removedAt DateTime?
+}
+
+model BugReports {
+  id Int @id @default(autoincrement())
+  email String
+  description String
+  status String @default("awaiting correction")
+  createdAt DateTime @default(now())
 }

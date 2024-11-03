@@ -9,6 +9,7 @@ export const ListAllUserUrlsOutput = z
 			qrCode: z.string().optional(),
 			accessCounter: z.number().int(),
 			createdAt: z.string().date(),
+			lastAccess: z.string().date().optional(),
 		}),
 	)
 	.transform(val => {
@@ -20,6 +21,7 @@ export const ListAllUserUrlsOutput = z
 				qrCode: item.qrCode,
 				access: item.accessCounter,
 				createdAt: item.createdAt,
+				lastAccess: item.lastAccess,
 			};
 		});
 	});
