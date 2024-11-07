@@ -6,9 +6,12 @@ export class Mapper implements IMapper<ShortenedUrl> {
 	public toDomain(model: Model): ShortenedUrl {
 		const shortenedUrlOrError = ShortenedUrl.create({
 			...model,
-			lastAccess: model.lastAccess ?? undefined,
 			customCode: model.customCode ?? undefined,
 			qrCode: model.qrCode ?? undefined,
+			lastAccess: model.lastAccess ?? undefined,
+			createdAt: model.createdAt ?? undefined,
+			updatedAt: model.updatedAt ?? undefined,
+			removedAt: model.removedAt ?? undefined,
 		});
 		if (shortenedUrlOrError instanceof Error) throw shortenedUrlOrError;
 		return shortenedUrlOrError;
