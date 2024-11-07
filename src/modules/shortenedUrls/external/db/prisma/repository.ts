@@ -41,6 +41,7 @@ export class Repository implements IRepository {
 	public async findAllByOwnerId(ownerId: number): Promise<ShortenedUrl[]> {
 		const items: Model[] = await this.prisma.shortenedUrls.findMany({
 			where: { ownerId },
+			orderBy: { createdAt: 'desc' },
 		});
 		return items.map(item => this.mapper.toDomain(item));
 	}

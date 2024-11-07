@@ -10,6 +10,9 @@ type Constructor = {
 	qrCode?: string;
 	accessCounter: number;
 	lastAccess?: Date;
+	createdAt?: Date;
+	updatedAt?: Date;
+	removedAt?: Date;
 };
 
 export class ShortenedUrl {
@@ -21,9 +24,9 @@ export class ShortenedUrl {
 	private readonly qrCode?: string;
 	private readonly accessCounter: number;
 	private readonly lastAccess?: Date;
-	private createdAt!: Date;
-	private updatedAt!: Date;
-	private removedAt!: Date;
+	private createdAt: Date;
+	private updatedAt?: Date;
+	private removedAt?: Date;
 
 	private constructor(props: Constructor) {
 		this.id = props.id ?? 0;
@@ -34,6 +37,9 @@ export class ShortenedUrl {
 		this.qrCode = props.qrCode ?? '';
 		this.accessCounter = props.accessCounter;
 		this.lastAccess = props.lastAccess;
+		this.createdAt = props.createdAt ?? new Date();
+		this.updatedAt = props.updatedAt;
+		this.removedAt = props.removedAt;
 	}
 
 	public static create(props: Constructor) {
@@ -98,12 +104,12 @@ export class ShortenedUrl {
 		return qrCode;
 	}
 
-	public getUpdatedDate(): Date {
+	public getUpdatedDate(): Date | undefined {
 		const updatedAt = this.updatedAt;
 		return updatedAt;
 	}
 
-	public getRemovedDate(): Date {
+	public getRemovedDate(): Date | undefined {
 		const removedAt = this.removedAt;
 		return removedAt;
 	}
