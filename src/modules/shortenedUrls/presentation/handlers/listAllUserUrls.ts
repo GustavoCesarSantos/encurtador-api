@@ -30,12 +30,11 @@ export class ListAllUserUrls implements IController<Request> {
 			const urls = await this.findAllShortenedUrls.execute(
 				input.data.ownerId,
 			);
-			// const output = ListAllUserUrlsOutput.safeParse({
-			// 	urls,
-			// });
-			// if (!output.success) return HttpResponse.serverError();
-			// return HttpResponse.okWithBody(output.data);
-			return HttpResponse.okWithBody(urls);
+			const output = ListAllUserUrlsOutput.safeParse(urls);
+			if (!output.success) {
+				return HttpResponse.serverError();
+			}
+			return HttpResponse.okWithBody(output.data);
 		} catch (error: unknown) {
 			return HttpResponse.serverError();
 		}
