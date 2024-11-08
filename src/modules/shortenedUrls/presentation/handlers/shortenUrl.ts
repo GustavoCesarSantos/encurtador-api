@@ -7,6 +7,7 @@ import { IUseCaseFactory } from '@modules/shortenedUrls/utils/factory/useCase/IU
 import { ShortenUrlInput } from '../dtos/shortenUrlInput';
 import { ShortenUrlOutput } from '../dtos/shortenUrlOutput';
 import { AccessTokenPayload } from '@shared/tokenPayload';
+import { ILogger } from '@infra/loggers/ILogger';
 
 type Request = {
 	body: {
@@ -16,10 +17,12 @@ type Request = {
 };
 
 export class ShortenUrl implements IController<Request> {
+	private readonly logger: ILogger;
 	private readonly generateCode: IGenerateCode;
 	private readonly saveShortenedUrl: ISaveShortenedUrl;
 
-	constructor(factory: IUseCaseFactory) {
+	constructor(logger: ILogger, factory: IUseCaseFactory) {
+		this.logger = logger;
 		this.generateCode = factory.makeGenerateCode();
 		this.saveShortenedUrl = factory.makeSaveShortenedUrl();
 	}
@@ -34,16 +37,36 @@ export class ShortenUrl implements IController<Request> {
 				code,
 			});
 			if (!input.success) {
+				this.logger.error({
+					where: 'ShortenUrl.handle(34)',
+					what: input.error.message,
+				});
 				return HttpResponse.badRequest(input.error);
 			}
 			const saveError = await this.saveShortenedUrl.execute(input.data);
-			if (saveError) return HttpResponse.badRequest(saveError);
+			if (saveError) {
+				this.logger.error({
+					where: 'ShortenUrl.handle(46)',
+					what: saveError.message,
+				});
+				return HttpResponse.badRequest(saveError);
+			}
 			const output = ShortenUrlOutput.safeParse({
 				code,
 			});
-			if (!output.success) return HttpResponse.serverError();
+			if (!output.success) {
+				this.logger.error({
+					where: 'ShortenUrl.handle(54)',
+					what: output.error.message,
+				});
+				return HttpResponse.serverError();
+			}
 			return HttpResponse.created(output.data);
 		} catch (error: unknown) {
+			this.logger.error({
+				where: 'ShortenUrl.handle.catch',
+				what: (error as Error).message,
+			});
 			return HttpResponse.serverError();
 		}
 	}

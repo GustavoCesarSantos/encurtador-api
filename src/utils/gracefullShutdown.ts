@@ -1,4 +1,4 @@
-import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { PinoLogger } from '@infra/loggers/pinoLogger';
 
 const logger = PinoLogger.create();
 

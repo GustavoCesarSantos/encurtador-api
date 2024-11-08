@@ -9,6 +9,7 @@ import { SignInInput } from '../dtos/signInInput';
 import { SignInOutput } from '../dtos/signInOutput';
 import { ICreateRefreshToken } from '@modules/identity/application/interface/ICreateRefreshToken';
 import { IIncrementAuthTokenVersion } from '@modules/identity/application/interface/IIncrementAuthTokenVersion';
+import { ILogger } from '@infra/loggers/ILogger';
 
 type Request = {
 	body: {
@@ -18,13 +19,15 @@ type Request = {
 };
 
 export class SignIn implements IController<Request> {
+	private readonly logger: ILogger;
 	private readonly comparePassword: IComparePassword;
 	private readonly createAccessToken: ICreateAccessToken;
 	private readonly createRefreshToken: ICreateRefreshToken;
 	private readonly findUserByEmail: IFindUserByEmail;
 	private readonly incrementAuthTokenVersion: IIncrementAuthTokenVersion;
 
-	constructor(factory: IUseCaseFactory) {
+	constructor(logger: ILogger, factory: IUseCaseFactory) {
+		this.logger = logger;
 		this.comparePassword = factory.makeComparePassword();
 		this.createAccessToken = factory.makeCreateAccessToken();
 		this.createRefreshToken = factory.makeCreateRefreshToken();
@@ -37,10 +40,18 @@ export class SignIn implements IController<Request> {
 		try {
 			const input = SignInInput.safeParse(request.body);
 			if (!input.success) {
+				this.logger.error({
+					where: 'SignIn.handle(40)',
+					what: input.error.message,
+				});
 				return HttpResponse.badRequest(input.error);
 			}
 			const user = await this.findUserByEmail.execute(input.data.email);
 			if (!user) {
+				this.logger.error({
+					where: 'SignIn.handle(48)',
+					what: `User not found using: ${input.data.email}`,
+				});
 				return HttpResponse.badRequest(
 					new Error('Invalid Credentials'),
 				);
@@ -50,6 +61,10 @@ export class SignIn implements IController<Request> {
 				user.getPassword(),
 			);
 			if (!validPassword) {
+				this.logger.error({
+					where: 'SignIn.handle(58)',
+					what: 'Invalid password',
+				});
 				return HttpResponse.badRequest(
 					new Error('Invalid Credentials'),
 				);
@@ -66,9 +81,19 @@ export class SignIn implements IController<Request> {
 				accessToken,
 				refreshToken,
 			});
-			if (!output.success) return HttpResponse.serverError();
+			if (!output.success) {
+				this.logger.error({
+					where: 'SignIn.handle(79)',
+					what: output.error.message,
+				});
+				return HttpResponse.serverError();
+			}
 			return HttpResponse.okWithBody(output.data);
 		} catch (error: unknown) {
+			this.logger.error({
+				where: 'SignIn.handle.catch',
+				what: (error as Error).message,
+			});
 			return HttpResponse.serverError();
 		}
 	}

@@ -1,6 +1,6 @@
 import pino, { Logger } from 'pino';
 
-import { IListener, Payload } from '../IListener';
+import { IListener, Payload } from '../listeners/IListener';
 import { ILogger, Message } from './ILogger';
 import { variables } from '@shared/envs';
 import { EventNames } from '@shared/eventNames';
