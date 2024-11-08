@@ -8,8 +8,8 @@ export const ListAllUserUrlsOutput = z
 			customCode: z.string().optional(),
 			qrCode: z.string().optional(),
 			accessCounter: z.number().int(),
-			createdAt: z.string().date(),
-			lastAccess: z.string().date().optional(),
+			createdAt: z.date(),
+			lastAccess: z.date().optional(),
 		}),
 	)
 	.transform(val => {
