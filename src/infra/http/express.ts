@@ -3,7 +3,7 @@ import { Logger } from 'pino';
 import cors from 'cors';
 import { Server } from 'node:http';
 
-import { PinoLogger } from '@infra/listeners/loggers/pinoLogger';
+import { PinoLogger } from '@infra/loggers/pinoLogger';
 import { routes } from '@infra/http/routes';
 import { SwaggerDoc } from '@infra/doc/swaggerDoc';
 import { variables } from '@shared/envs';
